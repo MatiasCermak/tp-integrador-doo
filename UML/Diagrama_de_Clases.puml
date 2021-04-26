@@ -148,6 +148,7 @@ class Ficha{
     - vehiculo: vehiculo
     - conformidad: bool
     - motConformidad: String
+    - etapa: String
 
     + Ficha(List<Detalle> listaDetalles, List<String> listaActividades, 
             Turno turno, Cliente cliente, Vehiculo vehiculo, bool conformidad,String motConformidad)
@@ -159,8 +160,11 @@ class Ficha{
     + getConformidad(): bool
     + getMotivos(): String
 
+    + addDetalle(Detalle detalle)
     + setListaActividades(List<String> listaActividades)
+    + addActividad(String actividad)
     + setConformidad(bool Conformidad, String motConformidad)
+    + setEtapa(String etapa)
 }
 
 class Vehículo{
