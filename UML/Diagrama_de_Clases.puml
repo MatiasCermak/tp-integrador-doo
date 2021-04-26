@@ -1,0 +1,239 @@
+@startuml Clases
+class CompañíaSeguros {
+	- nombre: String
+    
+    + CompañíaSeguros(String)
+    + setNombre(String)
+    + getNombre(): String
+}
+
+class Turno{
+    - cliente: Cliente
+    - fecha: Date
+    - hora: int
+    - estado: bool
+    - asistencia: int
+
+    + Turno(Date fecha,int hora)
+    + setCliente(Cliente)
+    + setEstado(bool)
+    + setAsistencia(int)
+    + getFecha(): Date
+    + getHora: int
+    + getEstado(): bool
+    + getAsistencia(): int
+}
+
+class Detalle{
+    - material: Material
+    - cantidad: int
+
+    + Detalle(Material material, int cantidad)
+    + getSubtotal(): int
+    + getMaterial(): Material
+    + getCantidad(): int
+}
+
+class Agenda{
+    - horaInicio: int
+    - horaFin: int
+    - turnos: List<Turno>
+
+    + Agenda()
+    + Inicializar()
+    + setHoraI(int)
+    + setHoraF(int)
+    + getTurnos(): List<Turno>
+    + getRangoHorario(): int, int
+    + agendarTurno(Turno turno, Cliente cliente, Vehículo vehículo)
+    + registrarAsistencia(Turno turno)
+}
+
+class Persona{
+    # nombre: String
+    # apellido: String
+    # dniTipo: String
+    # dniNumero: int
+
+    + Persona()
+    + Persona(String nombre, String apellido, 
+        String dniTipo, int dniNum)
+    + getNombre(): String
+    + getApellido(): String
+    + getDNITipo(): String
+    + getDNINum(): int
+    + setNombreCompleto(String nombre, String apellido)
+    + setDNI(String tipo, int numero)
+}
+
+class Mecánico{
+    - especialidad: String
+    - costoHora: float
+    - agenda: Agenda
+
+    + Mecánico(String nombre, String apellido, 
+        String dniTipo, int dniNum, String, rol, Float salario)
+    + setEspecialidad(String especialidad)
+    + setCosto(float costoHora)
+    + inicializarAgenda()
+    + getAgenda(): Agenda
+}
+
+class EncargadoRecepción{
+
+    + EncargadoRepepción(String nombre, String apellido, 
+        String dniTipo, int dniNum, String, rol, Float salario)
+    + getMecanicos(): List<Mecánico>
+    + addMecánico(Mecánico mecanico)
+    + agendarTurno(Cliente cliente, Vehículo vehículo, 
+        String especialidad): Turno
+    + confirmarAsistencia(Date fecha, int hora, Cliente cliente,
+        Mecánico mecanico)
+    + cancelarTurno(Date fecha, int hora, Cliente cliente,
+        Mecánico mecanico)
+    + generarComprobanteTurno()
+    + imprimirFichaMecánica(Date fecha, int hora, Cliente cliente,
+        Mecánico mecanico)
+    + registrarCliente()
+    + generarReporteDiario(Mecánico mecanico)
+}
+
+class EmpleadoAdministración{
+    
+    + EmpleadoAdministración(String nombre, String apellido, 
+        String dniTipo, int dniNum, String, rol, Float salario)
+    + generarInformeMensual(CompañíaSeguros compañía)
+    + generarFactura(CompañíaSeguros compañía)
+}
+
+class Material{
+    - nombre: String
+    - tipo: String
+    - precio: float
+    - medida: String
+
+    + Material(String nombre, float precio, 
+        String tipo, String medida)
+    + setNombre(String nombre)
+    + setPrecio(float precio)
+    + getNombre(): String
+    + getPrecio(): float
+    + setMedida(String medida)
+    + getMedida(): string
+    + setTipo(String)
+    + getTipo(): String
+}
+
+class Factura{
+    - NCseguro: CompañíaSeguros
+    - listaServicios: List<String>
+    - costoTotal: float
+    - pagoRealizado: float
+
+    + Factura(CompañíaSeguros NCseguro, List<String> listaServicios, 
+            float costoTotal, float pagoRealizado)
+    + getNCseguro() : CompañíaSeguros
+    + getServicios(): List<string>
+    + getCostoTotal() : float
+    + getPagoRealizado() : float
+    + setListaServicios(List<String> listaServicios)
+    + setDeuda(float costoTotal, float pagoRealizado)
+}
+
+class Ficha{
+    - listaDetalles: List<Detalle>
+    - listaActividades: List<String>
+    - turno: Turno
+    - cliente: Cliente
+    - vehiculo: vehiculo
+    - conformidad: bool
+    - motConformidad: String
+
+    + Ficha(List<Detalle> listaDetalles, List<String> listaActividades, 
+            Turno turno, Cliente cliente, Vehiculo vehiculo, bool conformidad,String motConformidad)
+    + getListaDetalles(): List<Detalles>
+    + getListaActividades(): List<String>
+    + getTurno(): Turno
+    + getCliente(): Cliente
+    + getVehiculo(): vehiculo
+    + getConformidad(): bool
+    + getMotivos(): String
+
+    + setListaActividades(List<String> listaActividades)
+    + setConformidad(bool Conformidad, String motConformidad)
+}
+
+class Vehículo{
+    - seguro: CompañíaSeguros
+    - NPoliza: int
+    - marca: String
+    - modelo: String
+    - matricula: String
+
+    + Vehiculo(CompañíaSeguros seguro, int NPoliza, String marca,
+            String modelo, String matricula)
+    + getNPoliza(): int
+    + getMarca(): String
+    + getModelo(): String
+    + getMatricula(): String
+    + setDatos(CompañíaSeguros seguro, String marca,
+            String modelo, String matricula)  
+}
+
+class Cliente{
+    - listaVehiculos: List<Vehículo>
+
+    + Cliente(String nombre, String apellido, 
+        String dniTipo, int dniNum, List<Vehiculo> listaVehiculos)
+    + getListaVehiculos(): Lista<Vehiculos>
+    + agregarVehiculo(Vehiculo vehiculo)
+}
+
+class Empleado{
+    - rol: String
+    - salario: float
+
+    + Empleado(String nombre, String apellido, 
+        String dniTipo, int dniNum, String, rol, Float salario)
+    + getRol(): String
+    + getSalario(): float
+    + setDatosEmp(String rol, float Salario)
+}
+
+Class Gerente{
+
+    + Gerente (String nombre, String apellido, 
+        String dniTipo, int dniNum, String, rol, Float salario)
+    + controlInforme(Mecanico mecanico, Ficha fMecanica)
+}
+
+class EncargadoTaller{
+
+    + EncargadoTaller(String nombre, String apellido, 
+        String dniTipo, int dniNum, String, rol, Float salario)
+    + Registrar(Ficha fMecanica)
+    + modificarRegistro(Ficha fMecanica)
+
+}
+
+Empleado --|> Persona
+Cliente --|> Persona
+Mecánico -up-|> Empleado
+Gerente -up-|> Empleado
+EncargadoRecepción -up-|> Empleado
+EmpleadoAdministración --|> Empleado
+EncargadoTaller --|> Empleado
+Cliente "1" --> "0-n" Turno
+Material "1" --> "0-n" Detalle
+Turno "1-n" ---> "1" Agenda
+Agenda "1" --> "1" Mecánico
+Detalle "1-n" --* "1" Ficha
+Mecánico "1" --> "1" Ficha
+Cliente "1" --> "1" Ficha
+Vehículo "1" --> "1" Ficha
+Turno "1" --> "1" Ficha
+CompañíaSeguros "1" --> "0-n" Vehículo
+CompañíaSeguros "1" --> "0-n" Factura
+Vehículo "0-n" --> "1" Cliente
+
+@enduml
