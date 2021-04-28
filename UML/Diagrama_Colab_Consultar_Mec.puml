@@ -1,0 +1,18 @@
+@startuml Diagrama Colaboracion Consultar Mecanico
+
+allow_mixing
+actor :EncargadoRecepcion: as encRec
+boundary "VistaConsultarMecanico" as view
+control "ControladorConsultarMecanico" as ctrl
+collections "Mecanico" as col
+object "Mecanico" as mec
+object "Agenda" as age
+encRec->view : 1.opcionConsultarMecanicos()
+view->ctrl : 2.consultarMecanico()
+ctrl->ctrl : 3.consultaMecanico()
+ctrl-up->col : 4.getMecanico()
+ctrl -down-> mec : 5.getAgenda(): Agenda\n6.getEspecialidad(): String
+mec -left-> age : 7.getTurnos(): Lista<Turno>\n8.getRangoHorario(): int, int
+view<-ctrl : 9.mostrarMecanicos()
+
+@enduml
