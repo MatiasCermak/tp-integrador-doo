@@ -12,7 +12,7 @@ view->ctrl : 2.consultarMecanico()
 ctrl->ctrl : 3.consultaMecanico()
 ctrl-up->col : 4.getMecanico()
 ctrl -down-> mec : 5.getAgenda(): Agenda\n6.getEspecialidad(): String
-mec -left-> age : 7.getTurnos(): Lista<Turno>\n8.getRangoHorario(): int, int
-view<-ctrl : 9.mostrarMecanicos()
+mec -left-> age : 7.getTurnos(): Lista<Turno>\n8.getRangoHorario(): int, int\n9.getNombre(): String\n10.getApellido(): String
+view<-ctrl : 11.mostrarMecanicos()
 
 @enduml
