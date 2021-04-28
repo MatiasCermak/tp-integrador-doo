@@ -78,6 +78,8 @@ class Mecánico{
     + setCosto(float costoHora)
     + inicializarAgenda()
     + getAgenda(): Agenda
+    + getCosto(): float
+    + getEspecialidad(): String
 }
 
 class EncargadoRecepción{
@@ -172,6 +174,7 @@ class Ficha{
     + setConformidad(bool Conformidad, String motConformidad)
     + setEtapa(String etapa)
 }
+note left of Ficha : motConformidad hace referencia al motivo de la no conformidad del cliente con el servicio
 
 class Vehículo{
     - seguro: CompañíaSeguros
@@ -245,6 +248,6 @@ Turno "1" --> "1" Ficha
 CompañíaSeguros "1" --> "0-n" Vehículo
 CompañíaSeguros "1" --> "0-n" Factura
 Vehículo "0-n" --> "1" Cliente
-EncargadoRecepción "1" o-- "0-n" Cliente
-EncargadoRecepción "1" o-- "0-n" Mecánico
+EncargadoRecepción "1" <-- "0-n" Cliente
+EncargadoRecepción "1" <-- "0-n" Mecánico
 @enduml
