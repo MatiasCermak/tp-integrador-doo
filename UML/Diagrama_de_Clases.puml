@@ -19,7 +19,7 @@ class Turno{
     + setEstado(bool)
     + setAsistencia(int)
     + getFecha(): Date
-    + getHora: int
+    + getHora(): int
     + getEstado(): bool
     + getAsistencia(): int
 }
