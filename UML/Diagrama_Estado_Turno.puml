@@ -1,0 +1,24 @@
+@startuml Turno
+
+[*] --> CreadoVacío : new()
+state existeCliente <<choice>>
+state clienteAsiste <<choice>>
+state nuevoCliente {
+    [*] --> ClienteCargado : new()
+    ClienteCargado --> [*]
+}
+
+CreadoVacío --> existeCliente : asignarTurno()
+existeCliente --> DatosCompletos : [existeCliente == true]
+existeCliente --> nuevoCliente : [existeCliente == false]
+nuevoCliente --> DatosCompletos : selectNewCliente()
+DatosCompletos --> TurnoConfirmado : confirmarTurno()
+TurnoConfirmado --> clienteAsiste : confirmarAsistencia()
+clienteAsiste --> AsistenciaConfirmada : [clienteAsiste == true]
+clienteAsiste --> TurnoCancelado : [clienteAsiste == false]
+AsistenciaConfirmada --> [*]
+TurnoCancelado -->[*]
+
+
+
+@enduml

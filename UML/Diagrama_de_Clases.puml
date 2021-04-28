@@ -23,6 +23,7 @@ class Turno{
     + getEstado(): bool
     + getAsistencia(): int
 }
+note right of Turno : El atributo estado indica turno libre u ocupado
 
 class Detalle{
     - material: Material
@@ -123,6 +124,7 @@ class Material{
     + setTipo(String)
     + getTipo(): String
 }
+note top of Material : Esta clase se utiliza tanto para insumos y repuestos
 
 class Factura{
     - NCseguro: CompañíaSeguros
