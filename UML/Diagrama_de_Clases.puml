@@ -81,11 +81,15 @@ class Mecánico{
 }
 
 class EncargadoRecepción{
+    -Mecanicos: list<Mecánico>
+    -Clientes: list<Cliente>
 
-    + EncargadoRepepción(String nombre, String apellido, 
+    + EncargadoRecepción(String nombre, String apellido, 
         String dniTipo, int dniNum, String, rol, Float salario)
     + getMecanicos(): List<Mecánico>
     + addMecánico(Mecánico mecanico)
+    + getClientes(): List<Cliente>
+    + addCliente(Cliente cliente)
     + agendarTurno(Cliente cliente, Vehículo vehículo, 
         String especialidad): Turno
     + confirmarAsistencia(Date fecha, int hora, Cliente cliente,
@@ -223,7 +227,7 @@ class EncargadoTaller{
 }
 
 Empleado --|> Persona
-Cliente --|> Persona
+Cliente -up-|> Persona
 Mecánico -up-|> Empleado
 Gerente -up-|> Empleado
 EncargadoRecepción -up-|> Empleado
@@ -241,5 +245,6 @@ Turno "1" --> "1" Ficha
 CompañíaSeguros "1" --> "0-n" Vehículo
 CompañíaSeguros "1" --> "0-n" Factura
 Vehículo "0-n" --> "1" Cliente
-
+EncargadoRecepción "1" o-- "0-n" Cliente
+EncargadoRecepción "1" o-- "0-n" Mecánico
 @enduml

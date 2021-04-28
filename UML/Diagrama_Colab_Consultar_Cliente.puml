@@ -1,0 +1,16 @@
+@startuml Diagrama Colaboracion Consultar Cliente
+allow_mixing
+actor :EncargadoRecepcion: as encRec
+boundary "VistaConsultarCliente" as view
+control "ControladorConsultarCliente" as ctrl
+collections "Cliente" as col
+object "Cliente" as cli
+object "Vehiculo" as veh
+encRec->view : 1.opcionConsultarClientes()
+view->ctrl : 2.consultarClientes()
+ctrl->ctrl : 3.consultaClientes()
+ctrl-up->col : 4.getClientes()
+ctrl -down-> cli : 5.getNombre(): String\n6.getApellido(): String\n7.getDNITipo(): String\n8.getDNINum(): int\n9.getListaVehiculos(): Lista<Vehiculos>
+cli -left-> veh : 10.getNPoliza(): int\n11.getMarca(): String\n12.getModelo(): String\n13.getMatricula(): String 
+view<-ctrl : 14.mostrarClientes()
+@enduml
