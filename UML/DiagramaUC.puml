@@ -39,6 +39,7 @@ encTal --> UC9
 encTal --> UC10
 gerOps --> UC11 
 admin --> UC12
+UC16 .left.>UC4 : <<includes>>
 
 UC8 ---> gerOps
 UC8 ---> encTal  
