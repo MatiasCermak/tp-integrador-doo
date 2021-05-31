@@ -26,11 +26,11 @@ UC3 .up.> UC1 : <<extends>>
 UC4 .up.> UC6 : <<extends>>
 UC16 .up.> UC6 : <<extends>>
 UC15 .up.> UC14 : <<extends>>
-UC2 .up.> UC13 : <<includes>>
-UC6 .up.> UC1 : <<includes>>
-UC5 .up.> UC15 : <<includes>> 
-UC13 .up.> UC1 : <<includes>>
-UC16 .left.>UC4 : <<includes>>
+UC13 <.up. UC2 : <<includes>>
+UC6 <.up. UC1 : <<includes>>
+UC5 <.up. UC15 : <<includes>> 
+UC2 <.up. UC1 : <<includes>>
+UC16 <.left.UC4 : <<includes>>
 
 encRec --> UC1
 encRec --> UC7
@@ -40,10 +40,5 @@ encTal --> UC9
 encTal --> UC10
 gerOps --> UC11 
 admin --> UC12
-
-UC8 ---> gerOps
-UC8 ---> encTal  
-UC8 --> encRec
-UC8 ---> admin
 
 @enduml

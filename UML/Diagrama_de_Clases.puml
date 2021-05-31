@@ -200,6 +200,7 @@ class Cliente{
         String dniTipo, int dniNum, List<Vehiculo> listaVehiculos)
     + getListaVehiculos(): Lista<Vehiculos>
     + agregarVehiculo(Vehiculo vehiculo)
+    + getVehiculo(String matricula): Vehiculo
 }
 
 class Empleado{

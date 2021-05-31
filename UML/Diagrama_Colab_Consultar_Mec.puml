@@ -1,18 +1,13 @@
 @startuml Diagrama Colaboracion Consultar Mecanico
 
 allow_mixing
-actor :EncargadoRecepcion: as encRec
-boundary "VistaConsultarMecanico" as view
-control "ControladorConsultarMecanico" as ctrl
-collections "Mecanico" as col
-object "Mecanico" as mec
-object "Agenda" as age
-encRec->view : 1.opcionConsultarMecanicos()
-view->ctrl : 2.consultarMecanico()
-ctrl->ctrl : 3.consultaMecanico()
-ctrl-up->col : 4.getMecanico()
-ctrl -down-> mec : 5.getAgenda(): Agenda\n6.getEspecialidad(): String
-mec -left-> age : 7.getTurnos(): Lista<Turno>\n8.getRangoHorario(): int, int\n9.getNombre(): String\n10.getApellido(): String
-view<-ctrl : 11.mostrarMecanicos()
+control "Sistema" as sist
+control "ControladorMecanico" as ctrl
+collections ":Mecanico" as col
+
+sist -right-> ctrl : 1.getMecanicos(string especialización)
+ctrl --> ctrl : 2.getMecanicos(string especialización)
+ctrl -up-> col : 3.getMecanicos(string especialización)
+ctrl -left-> sist : 4. listarMecanicos()
 
 @enduml
