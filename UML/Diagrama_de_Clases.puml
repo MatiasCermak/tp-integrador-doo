@@ -1,52 +1,347 @@
-@startuml Clases
-class CompañíaSeguros {
+.@startuml Clases
+
+interface Vista{
+    
+    + setControlador(Controlador cont)
+}
+
+interface Controlador{
+    + eventListener()
+}
+
+interface Modelo{
+}
+
+interface MVCFactory{
+    +crearVista() : Vista
+    +crearModelo() : Modelo
+    +crearControlador() : Controlador
+}
+
+class MVCFactoryConsultarClientes{
+    +crearVista() : Vista
+    +crearModelo() : Modelo
+    +crearControlador() : Controlador
+}
+
+class MVCFactoryConfirmarTurnos{
+    +crearVista() : Vista
+    +crearModelo() : Modelo
+    +crearControlador() : Controlador
+}
+
+class MVCFactoryRegistrarClientes{
+    +crearVista() : Vista
+    +crearModelo() : Modelo
+    +crearControlador() : Controlador
+}
+
+class MVCFactoryRegistrarVehiculos{
+    +crearVista() : Vista
+    +crearModelo() : Modelo
+    +crearControlador() : Controlador
+}
+
+class MVCFactoryRegistrarTurnos{
+    +crearVista() : Vista
+    +crearModelo() : Modelo
+    +crearControlador() : Controlador
+}
+
+class MVCFactoryCrearFichas{
+    +crearVista() : Vista
+    +crearModelo(int tipo) : Modelo
+    +crearControlador() : Controlador
+}
+
+class MVCFactorySeleccionarMateriales{
+    +crearVista() : Vista
+    +crearModelo() : Modelo
+    +crearControlador() : Controlador
+}
+
+interface ClientesDAO{ 
+}
+
+interface TurnosDAO{
+}
+
+interface VehiculoDAO{
+}
+
+interface MaterialDAO{
+}
+
+interface MecánicoDAO{
+}
+
+interface AgendaDAO{
+}
+
+interface FichaDAO{
+}
+
+interface DetalleDAO{
+}
+
+interface CompañíaSegurosDAO{
+}
+
+class MTurnos{
+    - turno: TurnoDAO
+}
+
+class MCliente{
+    - cliente: ClienteDAO
+}
+
+class MVehiculo{
+    - vehiculo: VehiculoDAO
+}
+
+class MMaterial{
+    - material: MaterialDAO
+}
+
+class MFicha{
+    - ficha: FichaDao
+}
+
+class MMecánico{
+    - mecánico: MecanicoDAO
+}
+
+class MAgenda{
+    - agenda: AgendaDAO
+}
+
+class MDetalle{
+    - detalle: DetalleDAO
+}
+
+class MCompañíaSeguros{
+    - compañíaseguros: CompañíaSegurosDAO
+}
+
+class VistaConsultaCliente{
+    - List<ClienteDTO> clientes
+    - JTable tablaClientes
+    - JButton nuevo
+    - JButton seleccionar 
+    - JButton cancelar
+
+
+    + getClientes() : List<ClienteDTO> clientes
+    + setClientes(List<ClienteDTO> clientes)
+    + actualizarVista(List<ClienteDTO> clientes)
+}
+
+class VistaConfirmarTurnos{
+    - JTable tablaTurnos
+    - JButton confirmar
+    - JButton cancelarTurno
+    - JButton cancelarAccion
+    - JLabel confAsist
+
+    + getTurnos() : List<TurnosDTO> turnos
+    + setTurnos(List<TurnosDTO> turnos)
+    + actualizarVista(List<TurnosDTO> turnos)
+}
+
+class VistaRegistrarClientes{
+    - JButton siguiente
+    - JButton cancelar
+    - JLabel labelnombre
+    - JLabel labelapellido
+    - JLabel labeldni
+    - JLabel labeltipo
+    - JTextField textnombre
+    - JTextField textapellido
+    - JTextField textdni
+    - JComboBox comboboxtipo
+
+    + actualizarVista()
+}
+
+class VistaRegistrarVehiculos{
+    - JButton registrar
+    - JButton cancelar
+    - JLabel labelmatricula
+    - JLabel labelnropoliza
+    - JLabel labelmodelo
+    - JLabel labelmarca
+    - JLabel labelcompseg
+    - JTextField textmatricula
+    - JTextField textnropoliza
+    - JTextField textmodelo
+    - JComboBox comboboxcompseg
+    - JComboBox comboboxmarca
+
+    + actualizarVista()
+}
+
+class VistaRegistrarTurnos{
+    - JButton registrar
+    - JButton cancelar
+    - JButton examinar
+    - JButton nuevo
+    - JButton calendario
+    - JLabel labelcliente
+    - JLabel labelvehiculo
+    - JLabel labelespecialidad
+    - JLabel labelfecha
+    - JLabel labelmecanico
+    - JTextField textcliente
+    - JTextField textfecha
+    - JComboBox comboboxvehiculo
+    - JComboBox comboboxmecanico
+
+    + actualizarVista()
+}
+
+class VistaCrearFichas{
+    - JButton examinar
+    - JButton anadirmat
+    - JTextField textturno
+    - JList listactividades
+    - JTable materiales
+
+    + actualizarVista()
+}
+
+class VistaSeleccionarMateriales{
+    - JTable tablaMateriales
+    - JButton confirmar
+    - JButton cancelarAccion
+    - JLabel selecMat
+
+    + getMateriales() : List<MaterialesDTO> materiales
+    + setMateriales(List<MaterialesDTO> materiales)
+    + actualizarVista(List<MaterialesDTO> materiales)
+}
+
+class ControladorClientes{
+    + getClientes(): List<ClienteDTO>
+    + addCliente(ClienteDTO cliente)
+    + filterClientes(string params) : List<ClienteDTO>
+}
+
+class ClientesDAOImpl{
+    + getClientes(string filtros): List<ClienteDTO>
+    + insertCliente(ClienteDTO cliente)
+    + deleteCliente(ClienteDTO cliente)
+    + updateCliente(ClienteDTO cliente)
+}
+
+class TurnosDAOImpl{
+    + getTurnos(string filtros): List<TurnoDTO>
+    + insertTurno(TurnoDTO turno)
+    + deleteTurno(TurnoDTO turno)
+    + updateTurno(TurnoDTO turno)
+}
+
+class VehiculoDAOImpl{
+    + getVehiculos(ClienteDTO cliente): List<VehiculoDTO>
+    + insertVehiculo(VehiculoDTO vehiculo)
+    + deleteVehiculo(VehiculoDTO vehiculo)
+    + updateVehiculo(VehiculoDTO vehiculo)
+}
+
+class MaterialDAOImpl{
+    + getMaterial(): List<MaterialDTO>
+    + insertMaterial(MaterialDTO material)
+    + deleteMaterial(MaterialDTO material)
+    + updateMaterial(MaterialDTO material)
+}
+
+class MecánicoDAOImpl{
+    + getMecánico(): List<MecánicoDTO>
+    + insertMecánico(MecánicoDTO mecánico)
+    + deleteMecánico(MecánicoDTO mecánico)
+    + updateMecánico(MecánicoDTO mecánico)
+}
+
+class AgendaDAOImpl{
+    + getAgenda(): List<AgendaDTO>
+    + insertAgenda(AgendaDTO agenda)
+    + deleteAgenda(AgendaDTO agenda)
+    + updateAgenda(AgendaDTO agenda)
+}
+
+class DetalleDAOImpl{
+    + getDetalle(): List<DetalleDTO>
+    + insertDetalle(DetalleDTO detalle)
+    + deleteDetalle(DetalleDTO detalle)
+    + updateDetalle(DetalleDTO detalle)
+}
+
+class FichaDAOImpl{
+    + getFicha(): List<FichaDTO>
+    + insertFicha(FichaDTO ficha)
+    + deleteFicha(FichaDTO ficha)
+    + updateFicha(FichaDTO ficha)
+}
+
+class CompañíaSegurosDAOImpl{
+    + getCompañíaSeguros(): List<CompañíaSegurosDTO>
+    + insertCompañíaSeguros(CompañíaSegurosDTO compañíaSeguros)
+    + deleteCompañíaSeguros(CompañíaSegurosDTO compañíaSeguros)
+    + updateCompañíaSeguros(CompañíaSegurosDTO compañíaSeguros)
+}
+
+
+class CompañíaSegurosDTO {
 	- nombre: String
     
-    + CompañíaSeguros(String)
+    + CompañíaSegurosDTO(String)
     + setNombre(String)
     + getNombre(): String
 }
 
-class Turno{
-    - cliente: Cliente
+class TurnoDTO{
+    - cliente: ClienteDTO
+    - vehiculo: VehiculoDTO
     - fecha: Date
     - hora: int
     - estado: bool
     - asistencia: int
 
-    + Turno(Date fecha,int hora)
-    + setCliente(Cliente)
+    + TurnoDTO(Date fecha,int hora)
+    + setCliente(ClienteDTO)
+    + setVehiculo(VehiculoDTO)
     + setEstado(bool)
     + setAsistencia(int)
     + getFecha(): Date
     + getHora(): int
     + getEstado(): bool
     + getAsistencia(): int
+    + getCliente(): ClienteDTO
+    + getVehiculo(): VehiculoDTO
 }
-note right of Turno : El atributo estado indica turno libre u ocupado
+note right of TurnoDTO : El atributo estado indica turno libre u ocupado
 
-class Detalle{
+class DetalleDTO{
     - material: Material
     - cantidad: int
 
-    + Detalle(Material material, int cantidad)
+    + DetalleDTO(Material material, int cantidad)
     + getSubtotal(): int
     + getMaterial(): Material
     + getCantidad(): int
 }
 
-class Agenda{
+class AgendaDTO{
     - horaInicio: int
     - horaFin: int
     - turnos: List<Turno>
 
-    + Agenda()
+    + AgendaDTO()
     + Inicializar()
     + setHoraI(int)
     + setHoraF(int)
     + getTurnos(): List<Turno>
     + getRangoHorario(): int, int
-    + agendarTurno(Turno turno, Cliente cliente, Vehículo vehículo)
+    + agendarTurno(Turno turno)
     + registrarAsistencia(Turno turno)
 }
 
@@ -67,59 +362,57 @@ class Persona{
     + setDNI(String tipo, int numero)
 }
 
-class Mecánico{
+class MecánicoDTO{
     - especialidad: String
     - costoHora: float
-    - agenda: Agenda
+    - agenda: AgendaDTO
 
-    + Mecánico(String nombre, String apellido, 
+    + MecánicoDTO(String nombre, String apellido, 
         String dniTipo, int dniNum, String, rol, Float salario)
     + setEspecialidad(String especialidad)
     + setCosto(float costoHora)
     + inicializarAgenda()
-    + getAgenda(): Agenda
+    + getAgenda(): AgendaDTO
     + getCosto(): float
     + getEspecialidad(): String
 }
 
 class EncargadoRecepción{
-    -Mecanicos: list<Mecánico>
+    -Mecanicos: list<MecánicoDTO>
     -Clientes: list<Cliente>
 
     + EncargadoRecepción(String nombre, String apellido, 
         String dniTipo, int dniNum, String, rol, Float salario)
-    + getMecanicos(): List<Mecánico>
-    + addMecánico(Mecánico mecanico)
-    + getClientes(): List<Cliente>
-    + addCliente(Cliente cliente)
+    + getMecanicos(): List<MecánicoDTO>
+    + addMecánicoDTO(MecánicoDTO mecanico)
     + agendarTurno(Cliente cliente, Vehículo vehículo, 
         String especialidad): Turno
     + confirmarAsistencia(Date fecha, int hora, Cliente cliente,
-        Mecánico mecanico)
+        MecánicoDTO mecanico)
     + cancelarTurno(Date fecha, int hora, Cliente cliente,
-        Mecánico mecanico)
+        MecánicoDTO mecanico)
     + generarComprobanteTurno()
     + imprimirFichaMecánica(Date fecha, int hora, Cliente cliente,
-        Mecánico mecanico)
+        MecánicoDTO mecanico)
     + registrarCliente()
-    + generarReporteDiario(Mecánico mecanico)
+    + generarReporteDiario(MecánicoDTO mecanico)
 }
 
 class EmpleadoAdministración{
     
     + EmpleadoAdministración(String nombre, String apellido, 
         String dniTipo, int dniNum, String, rol, Float salario)
-    + generarInformeMensual(CompañíaSeguros compañía)
-    + generarFactura(CompañíaSeguros compañía)
+    + generarInformeMensual(CompañíaSegurosDTO compañía)
+    + generarFactura(CompañíaSegurosDTO compañía)
 }
 
-class Material{
+class MaterialDTO{
     - nombre: String
     - tipo: String
     - precio: float
     - medida: String
 
-    + Material(String nombre, float precio, 
+    + MaterialDTO(String nombre, float precio, 
         String tipo, String medida)
     + setNombre(String nombre)
     + setPrecio(float precio)
@@ -130,17 +423,17 @@ class Material{
     + setTipo(String)
     + getTipo(): String
 }
-note top of Material : Esta clase se utiliza tanto para insumos y repuestos
+note right of MaterialDTO : Esta clase se utiliza tanto para insumos y repuestos
 
-class Factura{
-    - NCseguro: CompañíaSeguros
+class FacturaDTO{
+    - NCseguro: CompañíaSegurosDTO
     - listaServicios: List<String>
     - costoTotal: float
     - pagoRealizado: float
 
-    + Factura(CompañíaSeguros NCseguro, List<String> listaServicios, 
+    + Factura(CompañíaSegurosDTO NCseguro, List<String> listaServicios, 
             float costoTotal, float pagoRealizado)
-    + getNCseguro() : CompañíaSeguros
+    + getNCseguro() : CompañíaSegurosDTO
     + getServicios(): List<string>
     + getCostoTotal() : float
     + getPagoRealizado() : float
@@ -148,23 +441,19 @@ class Factura{
     + setDeuda(float costoTotal, float pagoRealizado)
 }
 
-class Ficha{
+class FichaDTO{
     - listaDetalles: List<Detalle>
     - listaActividades: List<String>
     - turno: Turno
-    - cliente: Cliente
-    - vehiculo: vehiculo
     - conformidad: bool
     - motConformidad: String
     - etapa: String
 
-    + Ficha(List<Detalle> listaDetalles, List<String> listaActividades, 
-            Turno turno, Cliente cliente, Vehiculo vehiculo, bool conformidad,String motConformidad)
+    + FichaDTO(List<Detalle> listaDetalles, List<String> listaActividades, 
+            Turno turno, Cliente cliente, VehiculoDTO vehiculo, bool conformidad,String motConformidad)
     + getListaDetalles(): List<Detalles>
     + getListaActividades(): List<String>
     + getTurno(): Turno
-    + getCliente(): Cliente
-    + getVehiculo(): vehiculo
     + getConformidad(): bool
     + getMotivos(): String
 
@@ -174,81 +463,128 @@ class Ficha{
     + setConformidad(bool Conformidad, String motConformidad)
     + setEtapa(String etapa)
 }
-note left of Ficha : motConformidad hace referencia al motivo de la no conformidad del cliente con el servicio
+note left of FichaDTO : motConformidad hace referencia al motivo de la no conformidad del cliente con el servicio
 
-class Vehículo{
-    - seguro: CompañíaSeguros
+class VehiculoDTO{
+    - seguro: CompañíaSegurosDTO
     - NPoliza: int
     - marca: String
     - modelo: String
     - matricula: String
 
-    + Vehiculo(CompañíaSeguros seguro, int NPoliza, String marca,
+    + VehiculoDTO(CompañíaSegurosDTO seguro, int NPoliza, String marca,
             String modelo, String matricula)
     + getNPoliza(): int
     + getMarca(): String
     + getModelo(): String
     + getMatricula(): String
-    + setDatos(CompañíaSeguros seguro, String marca,
+    + setDatos(CompañíaSegurosDTO seguro, String marca,
             String modelo, String matricula)  
 }
 
-class Cliente{
-    - listaVehiculos: List<Vehículo>
+class ClienteDTO{
+    - listaVehiculos: List<VehiculoDTO>
 
     + Cliente(String nombre, String apellido, 
-        String dniTipo, int dniNum, List<Vehiculo> listaVehiculos)
-    + getListaVehiculos(): Lista<Vehiculos>
-    + agregarVehiculo(Vehiculo vehiculo)
-    + getVehiculo(String matricula): Vehiculo
-}
-
-class Empleado{
-    - rol: String
-    - salario: float
-
-    + Empleado(String nombre, String apellido, 
-        String dniTipo, int dniNum, String, rol, Float salario)
-    + getRol(): String
-    + getSalario(): float
-    + setDatosEmp(String rol, float Salario)
-}
-
-Class Gerente{
-
-    + Gerente (String nombre, String apellido, 
-        String dniTipo, int dniNum, String, rol, Float salario)
-    + controlInforme(Mecanico mecanico, Ficha fMecanica)
-}
-
-class EncargadoTaller{
-
-    + EncargadoTaller(String nombre, String apellido, 
-        String dniTipo, int dniNum, String, rol, Float salario)
-    + Registrar(Ficha fMecanica)
-    + modificarRegistro(Ficha fMecanica)
-
+        String dniTipo, int dniNum, List<VehiculoDTO> listaVehiculos)
+    + getListaVehiculos(): Lista<VehiculoDTO>
+    + agregarVehiculo(VehiculoDTO vehiculo)
+    + getVehiculo(String matricula): VehiculoDTO
 }
 
 Empleado --|> Persona
-Cliente -up-|> Persona
-Mecánico -up-|> Empleado
-Gerente -up-|> Empleado
-EncargadoRecepción -up-|> Empleado
-EmpleadoAdministración --|> Empleado
-EncargadoTaller --|> Empleado
-Cliente "1" --> "0-n" Turno
-Material "1" --> "0-n" Detalle
-Turno "1-n" ---> "1" Agenda
-Agenda "1" --> "1" Mecánico
-Detalle "1-n" --* "1" Ficha
-Mecánico "1" --> "1" Ficha
-Cliente "1" --> "1" Ficha
-Vehículo "1" --> "1" Ficha
-Turno "1" --> "1" Ficha
-CompañíaSeguros "1" --> "0-n" Vehículo
-CompañíaSeguros "1" --> "0-n" Factura
-Vehículo "0-n" --> "1" Cliente
-EncargadoRecepción "1" <-- "0-n" Cliente
-EncargadoRecepción "1" <-- "0-n" Mecánico
+ClienteDTO -up-|> Persona
+MecánicoDTO -up-|> Empleado
+ClienteDTO "1" --> "0-n" TurnoDTO
+MaterialDTO "1" --> "0-n" DetalleDAO
+TurnoDTO "1-n" ---> "1" AgendaDTO
+AgendaDTO "1" --> "1" MecánicoDTO
+DetalleDAO "1-n" --* "1" FichaDTO
+MecánicoDTO "1" --> "1" FichaDTO
+TurnoDTO "1" --> "1" FichaDTO
+CompañíaSegurosDTO "1" --> "0-n" VehiculoDTO
+CompañíaSegurosDTO "1" --> "0-n" FacturaDTO
+VehiculoDTO "0-n" --> "1" ClienteDTO
+
+
+VistaConsultaCliente <- ControladorClientes
+MCliente <- ControladorClientes
+VistaConsultaCliente --|> Vista
+ControladorClientes --|> Controlador
+
+MCliente -up-|> Modelo
+MCliente --> ClientesDAOImpl
+ClientesDAOImpl --|> ClientesDAO
+ClienteDTO --> ClientesDAOImpl
+
+MTurnos -up-|> Modelo
+MTurnos --> TurnosDAOImpl
+TurnosDAOImpl --|> TurnosDAO
+TurnoDTO <.. TurnosDAOImpl : <<instancia>>
+
+MVehiculo -up-|> Modelo
+MVehiculo --> VehiculoDAOImpl
+VehiculoDAOImpl --|> VehiculoDAO
+VehiculoDTO <.. VehiculoDAOImpl : <<instancia>>
+
+MMaterial -up-|> Modelo
+MMaterial --> MaterialDAOImpl
+MaterialDAOImpl --|> MaterialDAO
+MaterialDTO <.. MaterialDAOImpl : <<instancia>>
+
+MMecánico -up-|> Modelo
+MMecánico --> MecánicoDAOImpl
+MecánicoDAOImpl --|> MecánicoDAO
+MecánicoDTO <.. MecánicoDAOImpl : <<instancia>>
+
+MFicha -up-|> Modelo
+MFicha --> FichaDAOImpl
+FichaDAOImpl --|> FichaDAO
+FichaDTO <.. FichaDAOImpl : <<instancia>>
+
+MAgenda -up-|> Modelo
+MAgenda --> AgendaDAOImpl
+AgendaDAOImpl --|> AgendaDAO
+AgendaDTO <.. AgendaDAOImpl : <<instancia>>
+
+MFactura -up-|> Modelo
+MFactura --> FacturaDAOImpl
+FacturaDAOImpl --|> FacturaDAO
+FacturaDTO <.. FacturaDAOImpl : <<instancia>>
+
+MDetalle -up-|> Modelo
+MDetalle --> DetalleDAOImpl
+DetalleDAOImpl --|> DetalleDAO
+DetalleDTO <.. DetalleDAOImpl : <<instancia>>
+
+MCompañíaSeguros -up-|> Modelo
+MCompañíaSeguros --> CompañíaSegurosDAOImpl
+CompañíaSegurosDAOImpl --|> CompañíaSegurosDAO
+CompañíaSegurosDTO <.. CompañíaSegurosDAOImpl : <<instancia>>
+
+MVCFactory <|-down- MVCFactoryConsultarClientes
+MVCFactory <|-down- MVCFactoryConfirmarTurnos
+MVCFactory <|-down- MVCFactoryRegistrarClientes
+MVCFactory <|-down- MVCFactoryRegistrarVehiculos
+MVCFactory <|-down- MVCFactoryRegistrarTurnos
+MVCFactory <|-down- MVCFactoryCrearFichas
+MVCFactory <|-down- MVCFactorySeleccionarMateriales
+
+MVCFactoryConsultarClientes <.. VistaConsultaCliente : <<instancia>>
+MVCFactoryConsultarClientes <.. MCliente : <<instancia>>
+MVCFactoryConsultarClientes <.. ControladorClientes : <<instancia>>
+
+MVCFactoryConfirmarTurnos <.down. VistaConfirmarTurnos : <<instancia>>
+MVCFactoryRegistrarVehiculos <.down. VistaRegistrarVehiculos : <<instancia>>
+MVCFactoryRegistrarTurnos <.down.. VistaRegistrarTurnos : <<instancia>>
+MVCFactoryRegistrarClientes <.down. VistaRegistrarClientes : <<instancia>>
+MVCFactoryCrearFichas <.down. VistaCrearFichas : <<instancia>> 
+MVCFactorySeleccionarMateriales <.down. VistaSeleccionarMateriales : <<instancia>>
+
+VistaConfirmarTurnos -up-|> Vista
+VistaRegistrarVehiculos -up-|> Vista
+VistaRegistrarTurnos -up-|> Vista
+VistaRegistrarClientes -up-|> Vista
+VistaCrearFichas -up-|> Vista
+VistaSeleccionarMateriales -up-|> Vista
 @enduml
