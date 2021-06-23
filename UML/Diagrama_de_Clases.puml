@@ -1,4 +1,4 @@
-.@startuml Clases
+@startuml Clases
 
 package ubp.doo.tp.factory{
 
@@ -46,6 +46,18 @@ package ubp.doo.tp.factory{
 
     class MVCFactorySeleccionarMateriales{
         +crearVista() : Vista
+        +crearModelo(int tipo) : Modelo
+        +crearControlador() : Controlador
+    }
+
+    class MVCFactoryCrearUsuario{
+        +crearVista() : Vista
+        +crearModelo() : Modelo
+        +crearControlador() : Controlador
+    }
+
+    class MVCFactoryEliminarUsuario{
+        +crearVista() : Vista
         +crearModelo() : Modelo
         +crearControlador() : Controlador
     }
@@ -87,6 +99,24 @@ package ubp.doo.tp.DAO{
     }
 
     interface EspecialidadDAO{
+    }
+
+    abstract class FabricaDAO{
+        createClienteDAO() : ClientesDAO
+        createTurnoDAO() : TurnoDAO
+        createVehiculoDAO() : VehiculoDAO
+        createMaterialDAO() : MaterialDAO
+        createMecánicoDAO() : MecánicoDAO
+        createAgendaDAO() : AgendaDAO
+        createFichaDAO() : FichaDAO
+        createDetalleDAO() : DetalleDAO
+        createCompañíaSegurosDAO() : CompañíaSegurosDAO
+        createFacturaDAO() : FacturaDAO
+        createUsuarioDAO() : UsuarioDAO
+        createEspecialidadDAO() : EspecialidadDAO
+    }
+
+    class SqlFabricaDAO{
     }
 
     class ClientesDAOImpl{
@@ -742,6 +772,8 @@ CompañíaSegurosDTO "1" <-up- "0-n" VehiculoDTO
 CompañíaSegurosDTO "1" <-up- "0-n" FacturaDTO
 VehiculoDTO "0-n" <-up- "1" ClienteDTO
 
+SqlFabricaDAO --|> FabricaDAO
+
 MCliente <- ControladorClientesTurnos
 MVehiculo <- ControladorClientesTurnos
 MCompañíaSeguros <- ControladorClientesTurnos
@@ -773,61 +805,73 @@ ControladorTurnos --|> Controlador
 MCliente --|> Modelo
 MCliente -> ClientesDAOImpl
 ClientesDAOImpl --|> ClientesDAO
+ClientesDAO <.. SqlFabricaDAO
 ClienteDTO <.. ClientesDAOImpl 
 
 MTurnos --|> Modelo
 MTurnos --> TurnosDAOImpl
 TurnosDAOImpl --|> TurnosDAO
+TurnosDAO <.. SqlFabricaDAO
 TurnoDTO <.. TurnosDAOImpl 
 
 MVehiculo --|> Modelo
 MVehiculo --> VehiculoDAOImpl
 VehiculoDAOImpl --|> VehiculoDAO
+VehiculoDAO <.. SqlFabricaDAO
 VehiculoDTO <.. VehiculoDAOImpl 
 
 MMaterial --|> Modelo
 MMaterial --> MaterialDAOImpl
 MaterialDAOImpl --|> MaterialDAO
+MaterialDAO <.. SqlFabricaDAO
 MaterialDTO <.. MaterialDAOImpl 
 
 MMecánico --|> Modelo
 MMecánico --> MecánicoDAOImpl
 MecánicoDAOImpl --|> MecánicoDAO
+MecánicoDAO <.. SqlFabricaDAO
 MecánicoDTO <.. MecánicoDAOImpl 
 
 MFicha --|> Modelo
 MFicha --> FichaDAOImpl
 FichaDAOImpl --|> FichaDAO
+FichaDAO <.. SqlFabricaDAO
 FichaDTO <.. FichaDAOImpl 
 
 MAgenda --|> Modelo
 MAgenda --> AgendaDAOImpl
 AgendaDAOImpl --|> AgendaDAO
+AgendaDAO <.. SqlFabricaDAO
 AgendaDTO <.. AgendaDAOImpl 
 
 MFactura --|> Modelo
 MFactura --> FacturaDAOImpl
 FacturaDAOImpl --|> FacturaDAO
+FacturaDAO <.. SqlFabricaDAO
 FacturaDTO <.. FacturaDAOImpl 
 
 MDetalle --|> Modelo
 MDetalle --> DetalleDAOImpl
 DetalleDAOImpl --|> DetalleDAO
+DetalleDAO <.. SqlFabricaDAO
 DetalleDTO <.. DetalleDAOImpl 
 
 MCompañíaSeguros --|> Modelo
 MCompañíaSeguros --> CompañíaSegurosDAOImpl
 CompañíaSegurosDAOImpl --|> CompañíaSegurosDAO
+CompañíaSegurosDAO <.. SqlFabricaDAO
 CompañíaSegurosDTO <.. CompañíaSegurosDAOImpl 
 
 MUsuario --|> Modelo
 MUsuario --> UsuarioDAOImpl
 UsuarioDAOImpl --|> UsuarioDAO
+UsuarioDAO <.. SqlFabricaDAO
 UsuarioDTO <.. UsuarioDAOImpl
 
 MEspecialidad --|> Modelo
 MEspecialidad --> EspecialidadDAOImpl
 EspecialidadDAOImpl --|> EspecialidadDAO
+EspecialidadDAO <.. SqlFabricaDAO
 EspecialidadDTO <.. EspecialidadDAOImpl
 
 
@@ -838,6 +882,8 @@ MVCFactory <|-down- MVCFactoryRegistrarVehiculos
 MVCFactory <|-down- MVCFactoryRegistrarTurnos
 MVCFactory <|-down- MVCFactoryCrearFichas
 MVCFactory <|-down- MVCFactorySeleccionarMateriales
+MVCFactory <|-down- MVCFactoryCrearUsuario
+MVCFactory <|-down- MVCFactoryEliminarUsuario
 
 MVCFactoryConsultarClientes <.. MCliente
 MVCFactoryConsultarClientes <.. MVehiculo
@@ -845,7 +891,7 @@ MVCFactoryConsultarClientes <.. MCompañíaSeguros
 MVCFactoryConsultarClientes <.. MMecánico
 MVCFactoryConsultarClientes <.. MAgenda
 MVCFactoryConsultarClientes <.. MTurnos
-MVCFactory<.. MEspecialidad
+MVCFactoryConsultarClientes <.. MEspecialidad
 
 MVCFactoryRegistrarClientes <.. MCliente
 MVCFactoryRegistrarClientes <.. MVehiculo
