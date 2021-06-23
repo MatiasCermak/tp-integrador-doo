@@ -87,6 +87,9 @@ interface DetalleDAO{
 interface CompañíaSegurosDAO{
 }
 
+interface FacturaDAO{
+}
+
 class MTurnos{
     - turno: TurnoDAO
 }
@@ -221,6 +224,10 @@ class VistaSeleccionarMateriales{
 }
 
 class ControladorClientes{
+    - modeloCliente: MCliente
+    - modeloVehiculo: MVehiculo
+
+    + ControladorClientes(Modelo modelocliente, Modelo modelovehiculo, Vista vista)
     + getClientes(): List<ClienteDTO>
     + addCliente(ClienteDTO cliente)
     + filterClientes(string params) : List<ClienteDTO>
@@ -377,35 +384,6 @@ class MecánicoDTO{
     + getEspecialidad(): String
 }
 
-class EncargadoRecepción{
-    -Mecanicos: list<MecánicoDTO>
-    -Clientes: list<Cliente>
-
-    + EncargadoRecepción(String nombre, String apellido, 
-        String dniTipo, int dniNum, String, rol, Float salario)
-    + getMecanicos(): List<MecánicoDTO>
-    + addMecánicoDTO(MecánicoDTO mecanico)
-    + agendarTurno(Cliente cliente, Vehículo vehículo, 
-        String especialidad): Turno
-    + confirmarAsistencia(Date fecha, int hora, Cliente cliente,
-        MecánicoDTO mecanico)
-    + cancelarTurno(Date fecha, int hora, Cliente cliente,
-        MecánicoDTO mecanico)
-    + generarComprobanteTurno()
-    + imprimirFichaMecánica(Date fecha, int hora, Cliente cliente,
-        MecánicoDTO mecanico)
-    + registrarCliente()
-    + generarReporteDiario(MecánicoDTO mecanico)
-}
-
-class EmpleadoAdministración{
-    
-    + EmpleadoAdministración(String nombre, String apellido, 
-        String dniTipo, int dniNum, String, rol, Float salario)
-    + generarInformeMensual(CompañíaSegurosDTO compañía)
-    + generarFactura(CompañíaSegurosDTO compañía)
-}
-
 class MaterialDTO{
     - nombre: String
     - tipo: String
@@ -492,6 +470,17 @@ class ClienteDTO{
     + getVehiculo(String matricula): VehiculoDTO
 }
 
+class Empleado{
+    - rol: String
+    - salario: float
+
+    + Empleado(String nombre, String apellido, 
+        String dniTipo, int dniNum, String, rol, Float salario)
+    + getRol(): String
+    + getSalario(): float
+    + setDatosEmp(String rol, float Salario)
+}
+
 Empleado --|> Persona
 ClienteDTO -up-|> Persona
 MecánicoDTO -up-|> Empleado
@@ -509,55 +498,56 @@ VehiculoDTO "0-n" --> "1" ClienteDTO
 
 VistaConsultaCliente <- ControladorClientes
 MCliente <- ControladorClientes
+MVehiculo <- ControladorClientes 
 VistaConsultaCliente --|> Vista
 ControladorClientes --|> Controlador
 
-MCliente -up-|> Modelo
-MCliente --> ClientesDAOImpl
-ClientesDAOImpl --|> ClientesDAO
-ClienteDTO --> ClientesDAOImpl
+MCliente --|> Modelo
+MCliente -> ClientesDAOImpl
+ClientesDAOImpl -|> ClientesDAO
+ClienteDTO <.. ClientesDAOImpl : <<instancia>>
 
-MTurnos -up-|> Modelo
+MTurnos --|> Modelo
 MTurnos --> TurnosDAOImpl
 TurnosDAOImpl --|> TurnosDAO
 TurnoDTO <.. TurnosDAOImpl : <<instancia>>
 
-MVehiculo -up-|> Modelo
+MVehiculo --|> Modelo
 MVehiculo --> VehiculoDAOImpl
 VehiculoDAOImpl --|> VehiculoDAO
 VehiculoDTO <.. VehiculoDAOImpl : <<instancia>>
 
-MMaterial -up-|> Modelo
+MMaterial --|> Modelo
 MMaterial --> MaterialDAOImpl
 MaterialDAOImpl --|> MaterialDAO
 MaterialDTO <.. MaterialDAOImpl : <<instancia>>
 
-MMecánico -up-|> Modelo
+MMecánico --|> Modelo
 MMecánico --> MecánicoDAOImpl
 MecánicoDAOImpl --|> MecánicoDAO
 MecánicoDTO <.. MecánicoDAOImpl : <<instancia>>
 
-MFicha -up-|> Modelo
+MFicha --|> Modelo
 MFicha --> FichaDAOImpl
 FichaDAOImpl --|> FichaDAO
 FichaDTO <.. FichaDAOImpl : <<instancia>>
 
-MAgenda -up-|> Modelo
+MAgenda --|> Modelo
 MAgenda --> AgendaDAOImpl
 AgendaDAOImpl --|> AgendaDAO
 AgendaDTO <.. AgendaDAOImpl : <<instancia>>
 
-MFactura -up-|> Modelo
+MFactura --|> Modelo
 MFactura --> FacturaDAOImpl
 FacturaDAOImpl --|> FacturaDAO
 FacturaDTO <.. FacturaDAOImpl : <<instancia>>
 
-MDetalle -up-|> Modelo
+MDetalle --|> Modelo
 MDetalle --> DetalleDAOImpl
 DetalleDAOImpl --|> DetalleDAO
 DetalleDTO <.. DetalleDAOImpl : <<instancia>>
 
-MCompañíaSeguros -up-|> Modelo
+MCompañíaSeguros --|> Modelo
 MCompañíaSeguros --> CompañíaSegurosDAOImpl
 CompañíaSegurosDAOImpl --|> CompañíaSegurosDAO
 CompañíaSegurosDTO <.. CompañíaSegurosDAOImpl : <<instancia>>
