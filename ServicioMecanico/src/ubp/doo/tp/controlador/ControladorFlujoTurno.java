@@ -70,7 +70,7 @@ public class ControladorFlujoTurno extends Controlador {
                     modeloTabla.fireTableDataChanged();
                     listadoClientes = ((Cliente)this.MODELO).listarClientes();
                     for (ClienteDTO cli : listadoClientes){
-                        modeloTabla.addRow(new Object[]{cli.getNombre(), cli.getDniNumero(),cli.getDniNumero()});
+                        modeloTabla.addRow(new Object[]{cli.getNombre(), cli.getDniNumero(),cli.getDniTipo()});
                     }
                     break;
                 case NUEVOCLI:
@@ -89,7 +89,7 @@ public class ControladorFlujoTurno extends Controlador {
                     filtro = (String)((SelClienteFr)this.VISTASELCLI).getFiltro();
                     listadoClientes = ((Cliente)this.MODELO).listarClientes(filtro);
                     for (ClienteDTO cli : listadoClientes){
-                        modeloTabla.addRow(new Object[]{cli.getNombre(), cli.getDniNumero(),cli.getDniNumero(),false});
+                        modeloTabla.addRow(new Object[]{cli.getNombre(), cli.getDniNumero(),cli.getDniTipo()});
                     }
                     break;
                 case CANCELSELCLI:
