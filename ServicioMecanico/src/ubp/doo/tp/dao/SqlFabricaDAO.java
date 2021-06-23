@@ -1,0 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ubp.doo.tp.dao;
+
+/**
+ *
+ * @author tomas
+ */
+public class SqlFabricaDAO extends FabricaDAO {
+    
+    @Override
+    public ClienteDAO getClienteDao(){
+        return new ClienteDAOImplSql();
+    }
+    
+}
