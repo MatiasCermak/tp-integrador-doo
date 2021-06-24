@@ -461,7 +461,7 @@ package ubp.doo.tp.Controladores{
         + eventListener()
     }
 
-    class ControladorClientesTurnos{
+    class ControladorFlujoTurno{
         - modeloCliente: Modelo
         - modeloVehiculo: Modelo
         - modeloCompañíaSeguros: Modelo
@@ -469,10 +469,11 @@ package ubp.doo.tp.Controladores{
         - modeloTurnos: Modelo
         - modeloMecanico: Modelo
         - modeloEspecialidad: Modelo
-        - vistaActual: Vista
+        - vistaActual1: Vista
+        - vistaActual2: Vista 
 
 
-        + ControladorClientesTurnos(Modelo modelocliente, modelovehiculo, modeloespecialidad, Vista vista)
+        + ControladorFlujoTurno(Modelo modelocliente, modelovehiculo, modeloespecialidad, Vista vista)
         + getClientes(): List<ClienteDTO>
         + addCliente(ClienteDTO cliente)
         + filterClientes(string params) : List<ClienteDTO>
@@ -774,13 +775,13 @@ VehiculoDTO "0-n" <-up- "1" ClienteDTO
 
 SqlFabricaDAO --|> FabricaDAO
 
-MCliente <- ControladorClientesTurnos
-MVehiculo <- ControladorClientesTurnos
-MCompañíaSeguros <- ControladorClientesTurnos
-MAgenda <- ControladorClientesTurnos
-MTurnos <- ControladorClientesTurnos  
-MMecánico <- ControladorClientesTurnos
-MEspecialidad <- ControladorClientesTurnos
+MCliente <- ControladorFlujoTurno
+MVehiculo <- ControladorFlujoTurno
+MCompañíaSeguros <- ControladorFlujoTurno
+MAgenda <- ControladorFlujoTurno
+MTurnos <- ControladorFlujoTurno  
+MMecánico <- ControladorFlujoTurno
+MEspecialidad <- ControladorFlujoTurno
 
 MCliente <- ControladorFichas
 MVehiculo <- ControladorFichas
@@ -799,7 +800,7 @@ MTurnos <- ControladorTurnos
 MEspecialidad <- ControladorTurnos  
 
 ControladorFichas --|> Controlador 
-ControladorClientesTurnos --|> Controlador
+ControladorFlujoTurno --|> Controlador
 ControladorTurnos --|> Controlador
 
 MCliente --|> Modelo
@@ -956,20 +957,20 @@ MVCFactoryRegistrarClientes <.down. VistaRegistrarClientes
 MVCFactoryCrearFichas <.down. VistaCrearFichas  
 MVCFactorySeleccionarMateriales <.down. VistaSeleccionarMateriales 
 
-MVCFactoryConsultarClientes <.. ControladorClientesTurnos
-MVCFactoryRegistrarClientes <.. ControladorClientesTurnos
-MVCFactoryRegistrarVehiculos <.. ControladorClientesTurnos
-MVCFactoryRegistrarTurnos <.. ControladorClientesTurnos
+MVCFactoryConsultarClientes <.. ControladorFlujoTurno
+MVCFactoryRegistrarClientes <.. ControladorFlujoTurno
+MVCFactoryRegistrarVehiculos <.. ControladorFlujoTurno
+MVCFactoryRegistrarTurnos <.. ControladorFlujoTurno
 
 MVCFactoryCrearFichas <.. ControladorFichas 
 MVCFactorySeleccionarMateriales <.. ControladorFichas
 
 MVCFactoryConfirmarTurnos <.. ControladorTurnos
 
-VistaConsultaClientes <-- ControladorClientesTurnos
-VistaRegistrarClientes <-- ControladorClientesTurnos
-VistaRegistrarVehiculos <-- ControladorClientesTurnos
-VistaRegistrarTurnos <-- ControladorClientesTurnos
+VistaConsultaClientes <-- ControladorFlujoTurno
+VistaRegistrarClientes <-- ControladorFlujoTurno
+VistaRegistrarVehiculos <-- ControladorFlujoTurno
+VistaRegistrarTurnos <-- ControladorFlujoTurno
 
 VistaConfirmarTurnos <-- ControladorTurnos
 
@@ -990,7 +991,5 @@ VistaMenuAdministracion -down-|> Vista
 VistaRegistrarUsuario -down-|> Vista
 VistaEliminarUsuario -down-|> Vista 
 VistaLogin -down-|> Vista
-
- 
 
 @enduml
