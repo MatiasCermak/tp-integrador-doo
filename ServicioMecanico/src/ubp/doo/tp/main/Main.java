@@ -6,9 +6,9 @@
 package ubp.doo.tp.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import ubp.doo.tp.controlador.ControladorFlujoTurno;
+import ubp.doo.tp.controlador.ControladorFlujoTurnos;
 import ubp.doo.tp.controlador.Controlador;
-import ubp.doo.tp.modelo.Cliente;
+import ubp.doo.tp.modelo.MCliente;
 import ubp.doo.tp.modelo.Modelo;
 import ubp.doo.tp.vista.SelClienteFr;
 import javax.swing.SwingUtilities;
@@ -37,13 +37,13 @@ public class Main {
                     System.err.println("Failed to initialize LaF");
                 }
                 
-                Modelo modelo = new Cliente();
+                Modelo modelo = new MCliente();
                 
                 InterfazVista vistaSelCli = SelClienteFr.getInstancia();
                 
                 InterfazVista vistaRegCli = RegClienteFr.getInstancia();
                 
-                Controlador control = new ControladorFlujoTurno(vistaSelCli,vistaRegCli,modelo);
+                Controlador control = new ControladorFlujoTurnos(vistaSelCli,vistaRegCli,modelo);
                 
                 vistaSelCli.setControlador(control);
                 

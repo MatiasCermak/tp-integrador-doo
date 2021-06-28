@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author tomas
  */
-public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaRegCli{
+public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaRegCliente{
 
     private static final long serialVersionUID = 1L;
     

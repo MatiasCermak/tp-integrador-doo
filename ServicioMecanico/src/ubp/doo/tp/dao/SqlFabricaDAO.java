@@ -16,4 +16,9 @@ public class SqlFabricaDAO extends FabricaDAO {
         return new ClienteDAOImplSql();
     }
     
+    @Override
+    public AgendaDAO getAgendaDao(){
+        return new AgendaDAOImplSql();
+    }
+    
 }

@@ -1,0 +1,13 @@
+@startuml Turno
+ 
+[*] --> CreadoVacío : new()
+state clienteAsiste <<choice>>
+ 
+CreadoVacío --> Registrado : selectCliente()
+Registrado -left-> Confirmado : confirmarTurno()
+Confirmado --> clienteAsiste : confirmarAsistencia()
+clienteAsiste -left-> Atendido : [clienteAsiste == true]
+clienteAsiste -right-> Cancelado : [clienteAsiste == false]
+Atendido --> [*]
+Cancelado -->[*]
+@enduml
