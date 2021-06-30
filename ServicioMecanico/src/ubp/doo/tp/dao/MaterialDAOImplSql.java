@@ -9,6 +9,6 @@ package ubp.doo.tp.dao;
  *
  * @author tomas
  */
-public class MaterialDAOImplSql {
+public class MaterialDAOImplSql implements MaterialDAO {
     
 }

@@ -9,6 +9,6 @@ package ubp.doo.tp.dao;
  *
  * @author tomas
  */
-public class MecanicoDAOImplSql {
+public class MecanicoDAOImplSql implements MecanicoDAO {
     
 }

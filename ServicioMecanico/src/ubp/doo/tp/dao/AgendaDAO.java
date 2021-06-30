@@ -5,10 +5,15 @@
  */
 package ubp.doo.tp.dao;
 
+import ubp.doo.tp.dto.AgendaDTO;
 /**
  *
  * @author tomas
  */
 public interface AgendaDAO {
+    
+    AgendaDTO leerAgenda(String especialidad);
+    
+    boolean insertarAgenda(AgendaDTO agenda);
     
 }

@@ -9,6 +9,6 @@ package ubp.doo.tp.dao;
  *
  * @author tomas
  */
-public class FichaDAOImplSql {
+public class FichaDAOImplSql implements FichaDAO {
     
 }

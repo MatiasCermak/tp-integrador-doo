@@ -9,6 +9,6 @@ package ubp.doo.tp.dao;
  *
  * @author tomas
  */
-public class EmpleadoDAOImplSql {
+public class EmpleadoDAOImplSql implements EmpleadoDAO {
     
 }

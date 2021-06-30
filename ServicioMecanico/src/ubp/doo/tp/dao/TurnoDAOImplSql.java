@@ -9,6 +9,6 @@ package ubp.doo.tp.dao;
  *
  * @author tomas
  */
-public class TurnoDAOImplSql {
+public class TurnoDAOImplSql implements TurnoDAO {
     
 }

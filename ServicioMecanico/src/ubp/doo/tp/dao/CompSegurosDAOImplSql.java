@@ -9,6 +9,6 @@ package ubp.doo.tp.dao;
  *
  * @author tomas
  */
-public class CompSegurosDAOImplSql {
+public class CompSegurosDAOImplSql implements CompSegurosDAO{
     
 }

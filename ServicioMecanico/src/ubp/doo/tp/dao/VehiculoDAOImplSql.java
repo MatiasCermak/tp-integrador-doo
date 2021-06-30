@@ -9,6 +9,6 @@ package ubp.doo.tp.dao;
  *
  * @author tomas
  */
-public class VehiculoDAOImplSql {
+public class VehiculoDAOImplSql implements VehiculoDAO {
     
 }
