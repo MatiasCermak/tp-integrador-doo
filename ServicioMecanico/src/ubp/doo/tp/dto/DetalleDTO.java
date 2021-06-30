@@ -11,4 +11,31 @@ package ubp.doo.tp.dto;
  */
 public class DetalleDTO {
     
+    private MaterialDTO material;
+    
+    private int cantidad;
+
+    public DetalleDTO() {
+    }
+
+    public DetalleDTO(MaterialDTO material, int cantidad) {
+        this.material = material;
+        this.cantidad = cantidad;
+    }
+
+    public MaterialDTO getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(MaterialDTO material) {
+        this.material = material;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
 }

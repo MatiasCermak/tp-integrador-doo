@@ -11,4 +11,54 @@ package ubp.doo.tp.dto;
  */
 public class MaterialDTO {
     
+    private String nombre;
+    
+    private String tipo;
+    
+    private float precio;
+    
+    private String medida;
+
+    public MaterialDTO() {
+    }
+
+    public MaterialDTO(String nombre, String tipo, float precio, String medida) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.precio = precio;
+        this.medida = medida;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public String getMedida() {
+        return medida;
+    }
+
+    public void setMedida(String medida) {
+        this.medida = medida;
+    }
+    
 }
