@@ -25,7 +25,7 @@ public class SeleccionarClienteTest {
         
         Modelo mod = new MCliente();
         clienteEsperado.setDniNumero(12345687);
-        clienteEsperado.setDniTipo("DNI");
+        clienteEsperado.setDniTipo(1);
         clienteEsperado.setNombre("Armando Barreda");
         
         cliente=((MCliente)mod).buscarCliente("DNI",12345687);

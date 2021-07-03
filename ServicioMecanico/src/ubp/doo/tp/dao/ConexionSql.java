@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author chino
  */
 public class ConexionSql {
-    private static final String URL = "jdbc:sqlite:./clientes.db";
+    private static final String URL = "jdbc:sqlite:./sistema.db";
     private Connection connection = null;
     private static ConexionSql instancia = null;
     

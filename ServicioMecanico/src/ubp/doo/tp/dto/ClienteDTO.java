@@ -16,7 +16,7 @@ public class ClienteDTO extends Persona {
         this.listaVehiculo = new ArrayList<VehiculoDTO>();
     }
 
-    public ClienteDTO(String nombre, String dniTipo, int dniNumero) {
+    public ClienteDTO(String nombre, int dniTipo, int dniNumero) {
         super(nombre, dniTipo, dniNumero);
     }
 

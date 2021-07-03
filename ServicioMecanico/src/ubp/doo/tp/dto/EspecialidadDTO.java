@@ -12,12 +12,23 @@ package ubp.doo.tp.dto;
 public class EspecialidadDTO {
     
     private String nombre;
+    
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public EspecialidadDTO() {
     }
 
-    public EspecialidadDTO(String nombre) {
+    public EspecialidadDTO(String nombre, int id) {
         this.nombre = nombre;
+        this.id = id;
     }
 
     public String getNombre() {

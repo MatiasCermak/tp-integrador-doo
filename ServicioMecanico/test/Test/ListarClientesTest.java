@@ -23,7 +23,7 @@ public class ListarClientesTest {
         ClienteDTO cliente = new ClienteDTO();
         Modelo mod = new MCliente();
         cliente.setDniNumero(40000005);
-        cliente.setDniTipo("dni");
+        cliente.setDniTipo(1);
         cliente.setNombre("juan cho");
         
         List<ClienteDTO>result=((MCliente)mod).listarClientes("juan cho");

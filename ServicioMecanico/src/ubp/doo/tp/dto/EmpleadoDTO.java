@@ -22,7 +22,7 @@ public class EmpleadoDTO extends Persona{
     public EmpleadoDTO() {
     }
 
-    public EmpleadoDTO(float salario, String rol, UsuarioDTO usuario, String nombre, String dniTipo, int dniNumero) {
+    public EmpleadoDTO(float salario, String rol, UsuarioDTO usuario, String nombre, int dniTipo, int dniNumero) {
         super(nombre, dniTipo, dniNumero);
         this.salario = salario;
         this.rol = rol;

@@ -19,11 +19,11 @@ public abstract class Persona {
         this.nombre = nombre;
     }
 
-    public String getDniTipo() {
+    public int getDniTipo() {
         return dniTipo;
     }
 
-    public void setDniTipo(String dniTipo) {
+    public void setDniTipo(int dniTipo) {
         this.dniTipo = dniTipo;
     }
 
@@ -38,14 +38,14 @@ public abstract class Persona {
     public Persona() {
     }
 
-    public Persona(String nombre, String dniTipo, int dniNumero) {
+    public Persona(String nombre, int dniTipo, int dniNumero) {
         this.nombre = nombre;
         this.dniTipo = dniTipo;
         this.dniNumero = dniNumero;
     }
     
     private String nombre;
-    private String dniTipo;
+    private int dniTipo;
     private int dniNumero;
     
     

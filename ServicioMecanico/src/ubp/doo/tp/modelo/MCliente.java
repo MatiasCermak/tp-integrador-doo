@@ -55,6 +55,10 @@ public class MCliente extends Modelo {
         return clienteDao.borrarCliente(cliente);
     }
     
+    public List<String> listadoDniTipos(){
+        return clienteDao.listarTiposDNI();
+    }
+    
     @Override
     protected void finalize() throws Throwable {
         clienteDao.cerrarConexion();

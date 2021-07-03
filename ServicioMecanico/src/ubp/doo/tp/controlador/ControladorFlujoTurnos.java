@@ -41,9 +41,10 @@ public class ControladorFlujoTurnos extends Controlador {
         boolean resultado = false;
         String nombre;
         int dni;
-        String tipo_dni;
+        int tipo_dni;
         ClienteDTO cliente;
         List<ClienteDTO> listadoClientes;
+        List<String> tipos;
         try {
             switch (InterfazVista.Operacion.valueOf(e.getActionCommand())){
                 case NUEVOVEHI:
@@ -54,7 +55,7 @@ public class ControladorFlujoTurnos extends Controlador {
                     }
                     else {
                         cliente = new ClienteDTO(((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText()+" "+((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText(),
-                                   ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().getSelectedItem().toString() ,Integer.valueOf(((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()));
+                                   ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().getSelectedIndex() ,Integer.valueOf(((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()));
                         ((MCliente)this.MODELO).insertarCliente(cliente);
                         System.out.println(cliente.getNombre());
                         JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"El siguiente formulario corresponderá a la carga de vehículo","Flujo de sistema",JOptionPane.INFORMATION_MESSAGE);
@@ -71,6 +72,12 @@ public class ControladorFlujoTurnos extends Controlador {
                     listadoClientes = ((MCliente)this.MODELO).listarClientes();
                     for (ClienteDTO cli : listadoClientes){
                         modeloTabla.addRow(new Object[]{cli.getNombre(), cli.getDniNumero(),cli.getDniTipo()});
+                    }
+                    break;
+                case CARGARREGCLI:
+                     tipos = ((MCliente)this.MODELO).listadoDniTipos();
+                    for (String tipo : tipos){
+                        ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().addItem(tipo);
                     }
                     break;
                 case NUEVOCLI:

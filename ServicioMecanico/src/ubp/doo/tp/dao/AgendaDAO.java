@@ -12,8 +12,8 @@ import ubp.doo.tp.dto.AgendaDTO;
  */
 public interface AgendaDAO {
     
-    AgendaDTO leerAgenda(String especialidad);
+    //AgendaDTO leerAgenda(String especialidad);
     
-    boolean insertarAgenda(AgendaDTO agenda);
+    //boolean insertarAgenda(AgendaDTO agenda);
     
 }
