@@ -20,9 +20,15 @@ public interface MaterialDAO {
     
     List<MaterialDTO> listarMateriales();
     
+    String buscarTipoMat(int id);
+    
+    int buscarIdTipoMat(String nombre);
+    
+    int buscarIdMaterial(String nombre);
+    
     boolean insertarMaterial(MaterialDTO material);
     
-    boolean modificarMaterial(MaterialDTO material);
+    boolean modificarMaterial(MaterialDTO material, String exNombre);
     
     boolean borrarMaterial(MaterialDTO material);
 }

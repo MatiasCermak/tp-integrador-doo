@@ -39,21 +39,23 @@ public class ClienteDAOImplSql implements ClienteDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "select dni, nombre, id_dni_tipo from Clientes where nombre = ?";
+            String sql = "select dni, id_dni_tipo, nombre, apellido from Clientes where nombre = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1,nombre);
             
             rs = sentencia.executeQuery();
             
             String nom;
+            String ape;
             int dni;
             int dniTipo;
             
             while(rs.next()) {
                 nom = rs.getString("nombre");
+                ape = rs.getString("apellido");
                 dni = rs.getInt("dni");
                 dniTipo = rs.getInt("id_dni_tipo");
-                cliente = new ClienteDTO(nom,dniTipo,dni);
+                cliente = new ClienteDTO(nom,ape,dniTipo,dni);
             }
             
         } catch (SQLException e) {
@@ -78,7 +80,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "select dni, nombre, id_dni_tipo from Clientes where dni = ? and id_dni_tipo = ?";
+            String sql = "select dni, nombre, apellido, id_dni_tipo from Clientes where dni = ? and id_dni_tipo = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1,dni);
             sentencia.setString(2, dniTipo);
@@ -86,14 +88,16 @@ public class ClienteDAOImplSql implements ClienteDAO {
             rs = sentencia.executeQuery();
             
             String nom;
+            String ape;
             int dniNum;
             int dniT;
             
             while(rs.next()) {
                 nom = rs.getString("nombre");
+                ape = rs.getString("apellido");
                 dniNum = rs.getInt("dni");
                 dniT = rs.getInt("id_dni_tipo");
-                cliente = new ClienteDTO(nom,dniT,dniNum);
+                cliente = new ClienteDTO(nom,ape,dniT,dniNum);
             }
             
         } catch (SQLException e) {
@@ -119,20 +123,22 @@ public class ClienteDAOImplSql implements ClienteDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "select dni, nombre, id_dni_tipo from Clientes where nombre like '%"+filtro+"%'";
+            String sql = "select dni, nombre, apellido, id_dni_tipo from Clientes where nombre like '%"+filtro+"%'";
             sentencia = con.prepareStatement(sql);
             
             rs = sentencia.executeQuery();
             
             String nom;
+            String ape;
             int dni;
             int dniTipo;
             
             while(rs.next()) {
                 nom = rs.getString("nombre");
+                ape = rs.getString("apellido");
                 dni = rs.getInt("dni");
                 dniTipo = rs.getInt("id_dni_tipo");
-                lista.add(new ClienteDTO(nom,dniTipo,dni));
+                lista.add(new ClienteDTO(nom,ape,dniTipo,dni));
             }
             
         } catch (SQLException e) {
@@ -158,20 +164,22 @@ public class ClienteDAOImplSql implements ClienteDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "select dni, nombre, id_dni_tipo from Clientes order by nombre";
+            String sql = "select dni, nombre, apellido, id_dni_tipo from Clientes order by nombre";
             sentencia = con.prepareStatement(sql);
             
             rs = sentencia.executeQuery();
             
             String nom;
+            String ape;
             int dni;
             int dniTipo;
             
             while(rs.next()) {
                 nom = rs.getString("nombre");
+                ape = rs.getString("apellido");
                 dni = rs.getInt("dni");
                 dniTipo = rs.getInt("id_dni_tipo");
-                lista.add(new ClienteDTO(nom,dniTipo,dni));
+                lista.add(new ClienteDTO(nom,ape,dniTipo,dni));
             }
             
         } catch (SQLException e) {
@@ -196,11 +204,12 @@ public class ClienteDAOImplSql implements ClienteDAO {
         
         try{
             con = conexion.getConnection();
-            String sql = "insert into Clientes (dni,nombre,id_dni_tipo) values (?,?,?)";
+            String sql = "insert into Clientes (dni,id_dni_tipo,nombre,apellido) values (?,?,?,?)";
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1,cliente.getDniNumero());
-            sentencia.setString(2, cliente.getNombre());
-            sentencia.setInt(3, cliente.getDniTipo());
+            sentencia.setInt(2, cliente.getDniTipo());
+            sentencia.setString(3, cliente.getNombre());
+            sentencia.setString(4,cliente.getApellido());
             
             int resultado = sentencia.executeUpdate();
             
@@ -219,6 +228,40 @@ public class ClienteDAOImplSql implements ClienteDAO {
     }
     
     @Override
+    public String buscarTipoDni(int idTipo){
+        Connection con = null;
+        PreparedStatement sentencia = null;
+        ResultSet rs = null;
+        String tipo = null;
+        
+        try {
+            con = conexion.getConnection();
+            String sql = "SELECT tipo FROM dni_tipos WHERE id_dni_tipo = ?";
+            sentencia = con.prepareStatement(sql);
+            sentencia.setInt(1,idTipo);
+            rs = sentencia.executeQuery();
+            while(rs.next()){
+                tipo = rs.getString("tipo");
+                break;
+            }
+        }
+        catch (SQLException e){
+            System.err.println(e);
+        }
+        finally{
+            try{
+                rs.close();
+                sentencia.close();
+            }
+            catch (SQLException ex){
+                System.err.println(ex);
+            }
+        }
+        
+        return tipo;
+    }
+    
+    @Override
     public boolean modificarCliente(ClienteDTO cliente){
         Connection con = null;
         PreparedStatement sentencia = null;
@@ -226,11 +269,12 @@ public class ClienteDAOImplSql implements ClienteDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "update Clientes set nombre = ?, id_dni_tipo = ? where dni = ?";
+            String sql = "update Clientes set nombre = ?, id_dni_tipo = ?, apellido = ? where dni = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1,cliente.getNombre());
             sentencia.setInt(2, cliente.getDniTipo());
-            sentencia.setInt(3,cliente.getDniNumero());
+            sentencia.setInt(4,cliente.getDniNumero());
+            sentencia.setString(3,cliente.getApellido());
             
             int resultado = sentencia.executeUpdate();
             
@@ -274,11 +318,10 @@ public class ClienteDAOImplSql implements ClienteDAO {
                 JOptionPane.showMessageDialog(null,"Error","No se puede eliminar el cliente ya que hay turnos asociados",JOptionPane.WARNING_MESSAGE);
             }
             else {
-                sql = "delete from Clientes where dni = ?, nombre = ?, id_dni_tipo = ?";
+                sql = "delete from Clientes where dni = ?, id_dni_tipo = ?";
                 sentencia = con.prepareStatement(sql);
                 sentencia.setInt(1, cliente.getDniNumero());
-                sentencia.setString(2, cliente.getNombre());
-                sentencia.setInt(3, cliente.getDniTipo());
+                sentencia.setInt(2, cliente.getDniTipo());
 
                 int res = sentencia.executeUpdate();
 
@@ -333,7 +376,6 @@ public class ClienteDAOImplSql implements ClienteDAO {
                 System.err.println(ex);
             }
         }
-        
         return lista;
     }
 }

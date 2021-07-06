@@ -21,8 +21,8 @@ public class MecanicoDTO extends EmpleadoDTO{
     public MecanicoDTO() {
     }
 
-    public MecanicoDTO(EspecialidadDTO especialidad, float costoHora, AgendaDTO agenda, float salario, String rol, UsuarioDTO usuario, String nombre, int dniTipo, int dniNumero) {
-        super(salario, rol, usuario, nombre, dniTipo, dniNumero);
+    public MecanicoDTO(EspecialidadDTO especialidad, float costoHora, AgendaDTO agenda, float salario, String rol, UsuarioDTO usuario, String nombre, String apellido, int dniTipo, int dniNumero) {
+        super(salario, rol, usuario, nombre, apellido, dniTipo, dniNumero);
         this.especialidad = especialidad;
         this.costoHora = costoHora;
         this.agenda = agenda;

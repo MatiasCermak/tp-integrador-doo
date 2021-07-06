@@ -77,7 +77,6 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
         jLabel5.setText("Tipo");
 
         cmbDniTipo.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
-        cmbDniTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "LC", "LE" }));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setActionCommand("CANCELREGCLI");
