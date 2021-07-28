@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/chino/NetBeansProjects/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaSelCli.java</file>
-            <file>file:/home/chino/NetBeansProjects/ServicioMecanico/src/ubp/doo/tp/vista/SelClienteFr.java</file>
-            <file>file:/home/chino/NetBeansProjects/ServicioMecanico/src/ubp/doo/tp/controlador/ControladorFlujoTurno.java</file>
-            <file>file:/home/chino/NetBeansProjects/ServicioMecanico/src/ubp/doo/tp/dao/ClienteDAOImplSql.java</file>
-            <file>file:/home/chino/NetBeansProjects/ServicioMecanico/src/ubp/doo/tp/vista/RegClienteFr.java</file>
-            <file>file:/home/chino/NetBeansProjects/ServicioMecanico/test/Test/ListarClientesTest.java</file>
-            <file>file:/home/chino/NetBeansProjects/ServicioMecanico/src/ubp/doo/tp/vista/RegTurnoFr.java</file>
-            <file>file:/home/chino/NetBeansProjects/ServicioMecanico/test/Test/SeleccionarClienteTest.java</file>
+            <file>file:/home/tomas/Facultad/DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/EmpleadoDAOImplSql.java</file>
+            <file>file:/home/tomas/Facultad/DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/FacturaDTO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,29 +6,29 @@
 
 package ubp.doo.tp.dto;
 
-import ubp.doo.tp.vehiculo.Vehiculo;
+import ubp.doo.tp.Utils.Persona;
 import java.util.ArrayList;
 
 public class ClienteDTO extends Persona {
-    private ArrayList<Vehiculo> listaVehiculo;
+    private ArrayList<VehiculoDTO> listaVehiculo;
 
     public ClienteDTO() {
-        this.listaVehiculo = new ArrayList<Vehiculo>();
+        this.listaVehiculo = new ArrayList<VehiculoDTO>();
     }
 
-    public ClienteDTO(String nombre, String dniTipo, int dniNumero) {
-        super(nombre, dniTipo, dniNumero);
+    public ClienteDTO(String nombre, String apellido, int dniTipo, int dniNumero) {
+        super(nombre, apellido, dniTipo, dniNumero);
     }
 
-    public ArrayList<Vehiculo> getListaVehiculo() {
+    public ArrayList<VehiculoDTO> getListaVehiculo() {
         return listaVehiculo;
     }
     
-    public void addVehiculo(Vehiculo v){
+    public void addVehiculo(VehiculoDTO v){
         this.listaVehiculo.add(v);
     }
     
-    public Vehiculo getVehiculo(String auto){
+    public VehiculoDTO getVehiculo(String auto){
         return this.listaVehiculo.get(this.listaVehiculo.indexOf(auto));
     }
 }

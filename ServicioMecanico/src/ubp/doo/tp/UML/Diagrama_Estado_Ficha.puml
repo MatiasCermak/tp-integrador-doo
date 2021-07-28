@@ -1,0 +1,15 @@
+@startuml Ficha
+
+state Existente <<choice>>
+[*] --> Existente : confirmarFicha()
+Existente  ---> Modificada : [fichaExistente == True]
+
+Existente -right-> Nueva : [fichaExistente == False]
+Nueva -right-> Completa : rellenarDatos()
+Completa --> Registrada : registrarFicha()
+Registrada -->Comunicada : comunicarCliente()
+Comunicada --> Actualizada : agregarConformidad()
+Modificada --> Actualizada : modificarFicha()
+Actualizada --> [*]
+
+@enduml

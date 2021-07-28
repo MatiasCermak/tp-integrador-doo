@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import ubp.doo.tp.dto.ClienteDTO;
-import ubp.doo.tp.modelo.Cliente;
+import ubp.doo.tp.modelo.MCliente;
 import ubp.doo.tp.modelo.Modelo;
 /**
  *
@@ -23,12 +23,12 @@ public class SeleccionarClienteTest {
         ClienteDTO cliente = new ClienteDTO();
         ClienteDTO clienteEsperado = new ClienteDTO();
         
-        Modelo mod = new Cliente();
+        Modelo mod = new MCliente();
         clienteEsperado.setDniNumero(12345687);
-        clienteEsperado.setDniTipo("DNI");
+        clienteEsperado.setDniTipo(1);
         clienteEsperado.setNombre("Armando Barreda");
         
-        cliente=((Cliente)mod).buscarCliente("DNI",12345687);
+        cliente=((MCliente)mod).buscarCliente("DNI",12345687);
         
         assertEquals(clienteEsperado.getNombre(),cliente.getNombre());
         assertEquals(clienteEsperado.getDniTipo(),cliente.getDniTipo());
@@ -39,9 +39,9 @@ public class SeleccionarClienteTest {
     public void testSeleccionarCliente2()
     {
         ClienteDTO cliente = new ClienteDTO();  
-        Modelo mod = new Cliente();
+        Modelo mod = new MCliente();
 
-        cliente=((Cliente)mod).buscarCliente("DNI",22345687);
+        cliente=((MCliente)mod).buscarCliente("DNI",22345687);
         
         assertNull(cliente);
     }

@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import ubp.doo.tp.dto.ClienteDTO;
-import ubp.doo.tp.modelo.Cliente;
+import ubp.doo.tp.modelo.MCliente;
 import ubp.doo.tp.modelo.Modelo;
 /**
  *
@@ -21,12 +21,12 @@ public class ListarClientesTest {
     public void testListarClientes1()
     {
         ClienteDTO cliente = new ClienteDTO();
-        Modelo mod = new Cliente();
+        Modelo mod = new MCliente();
         cliente.setDniNumero(40000005);
-        cliente.setDniTipo("dni");
+        cliente.setDniTipo(1);
         cliente.setNombre("juan cho");
         
-        List<ClienteDTO>result=((Cliente)mod).listarClientes("juan cho");
+        List<ClienteDTO>result=((MCliente)mod).listarClientes("juan cho");
         
         assertEquals(cliente.getNombre(),result.get(0).getNombre());
         assertEquals(cliente.getDniTipo(),result.get(0).getDniTipo());
@@ -37,9 +37,9 @@ public class ListarClientesTest {
     public void testListarClientes2()
     {
         ClienteDTO cliente = new ClienteDTO();
-        Modelo mod = new Cliente();
+        Modelo mod = new MCliente();
         
-        List<ClienteDTO>result=((Cliente)mod).listarClientes("No existe");
+        List<ClienteDTO>result=((MCliente)mod).listarClientes("No existe");
         
         assertTrue(result.isEmpty());
     }
@@ -47,8 +47,8 @@ public class ListarClientesTest {
     @Test
     public void testListarClientes3()
     {
-        Modelo mod = new Cliente();
-        List<ClienteDTO>result=((Cliente)mod).listarClientes("juan");
+        Modelo mod = new MCliente();
+        List<ClienteDTO>result=((MCliente)mod).listarClientes("juan");
         
         assertEquals(5,result.size());
     }

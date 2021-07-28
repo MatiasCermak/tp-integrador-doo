@@ -22,6 +22,10 @@ public interface ClienteDAO {
     
     List<ClienteDTO> listarClientes();
     
+    List<String> listarTiposDNI();
+    
+    String buscarTipoDni(int idTipo);
+    
     boolean insertarCliente(ClienteDTO cliente);
     
     boolean modificarCliente(ClienteDTO cliente);

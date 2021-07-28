@@ -1,0 +1,44 @@
+@startuml Diagrama Casos de Uso 
+(Registrar Turno) as UC1
+(Consultar Agenda) as UC2
+(Generar Comprobante) as UC3
+(Registrar Cliente) as UC4
+(Generar Ficha Mecánica) as UC5
+(Consultar Clientes) as UC6
+(Generar Listado) as UC7
+(Registrar Usuarios) as UC8
+(Registrar Ficha Mecánica) as UC9
+(Generar Const. Conformidad) as UC10
+(Consultar Listados) as UC11
+(Emtir Informes) as UC12
+(Consultar Mecánicos) as UC13
+(Verificar Turno) as UC14
+(Registrar Asistencia) as UC15
+(Registrar Vehículo) as UC16
+
+actor :Encargado Recepcion: as encRec
+actor :SysAdmin: as sysAdm
+actor :Encargado Taller: as encTal
+actor :Gerente Operaciones: as gerOps
+actor :Administracion: as admin
+
+UC3 .up.> UC1 : <<extends>>
+UC4 .up.> UC6 : <<extends>>
+UC16 .up.> UC6 : <<extends>>
+UC15 .up.> UC14 : <<extends>>
+UC13 <.up. UC2 : <<includes>>
+UC6 <.up. UC1 : <<includes>>
+UC5 <.up. UC15 : <<includes>>
+UC2 <.up. UC1 : <<includes>>
+UC16 <.left.UC4 : <<includes>>
+
+encRec --> UC1
+encRec --> UC7
+encRec --> UC14
+sysAdm --> UC8
+encTal --> UC9
+encTal --> UC10
+gerOps --> UC11
+admin --> UC12
+
+@enduml

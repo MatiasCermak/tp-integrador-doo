@@ -14,7 +14,7 @@ import ubp.doo.tp.controlador.Controlador;
 public abstract interface InterfazVista {
     
     public static enum Operacion {
-        NUEVOVEHI, CANCELREGCLI, CARGARSELCLI, NUEVOCLI, SELCLI, FILTCLI, CANCELSELCLI;;
+        NUEVOVEHI, CANCELREGCLI, CARGARSELCLI, CARGARREGCLI, NUEVOCLI, SELCLI, FILTCLI, CANCELSELCLI;;
     }
     
     void setControlador(Controlador c);

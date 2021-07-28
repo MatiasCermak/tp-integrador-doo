@@ -15,6 +15,30 @@ public abstract class FabricaDAO {
     
     public abstract ClienteDAO getClienteDao();
     
+    public abstract AgendaDAO getAgendaDao();
+    
+    public abstract CompSegurosDAO getCompSegurosDao();
+    
+    public abstract DetalleDAO getDetalleDao();
+    
+    public abstract EmpleadoDAO getEmpleadoDao();
+    
+    public abstract EspecialidadDAO getEspecialidadDao();
+    
+    public abstract FacturaDAO getFacturaDao();
+    
+    public abstract FichaDAO getFichaDao();
+    
+    public abstract MaterialDAO getMaterialDao();
+    
+    public abstract MecanicoDAO getMecanicoDao();
+    
+    public abstract TurnoDAO getTurnoDao();
+    
+    public abstract UsuarioDAO getUsuarioDAO();
+    
+    public abstract VehiculoDAO getVehiculoDao();
+    
     public static FabricaDAO getFactory(String nombreClase){
         try {            
             return (FabricaDAO) Class.forName(FabricaDAO.class.getPackageName() + "." + nombreClase).getDeclaredConstructor().newInstance();

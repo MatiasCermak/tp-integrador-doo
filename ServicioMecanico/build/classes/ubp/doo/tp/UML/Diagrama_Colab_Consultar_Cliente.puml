@@ -1,0 +1,16 @@
+@startuml Diagrama Colaboracion Consultar Cliente
+allow_mixing
+actor :EncargadoRecepcion: as encRec
+boundary "VistaConsultarCliente" as view
+control "ControladorConsultarCliente" as ctrl
+collections ":Cliente" as col
+object "cl1:Cliente" as cli
+object "v1:Vehiculo" as veh
+encRec->view : 1.opcionConsultarClientes() \n 6.seleccionarCliente() \n 12.seleccionarVehiculo()
+view->ctrl : 2.getClientes() \n 7.getCliente(int DNI) \n 13.getVehiculo(string matricula)
+ctrl->ctrl : 3.getClientes() \n 8.getCliente(int DNI) \n 14.getVehiculo(string matricula)
+ctrl-up->col : 4.getClientes() \n 9.getCliente(int DNI)
+ctrl -down-> cli : 10.getVehiculos() \n 15.getVehiculo(string matricula)
+ctrl -down-> veh : 16.getNPoliza() \n 17.getMarca() \n 18.getModelo() \n 19.getMatricula()
+view<-ctrl : 5.listarClientes() \n 11.listarVehiculos() \n 20.mostrarVehiculoSeleccionado()
+@enduml
