@@ -59,6 +59,10 @@ public class MCliente extends Modelo {
         return clienteDao.listarTiposDNI();
     }
     
+    public String buscarTipoDni(int idTipo){
+        return clienteDao.buscarTipoDni(idTipo);
+    }
+    
     @Override
     protected void finalize() throws Throwable {
         clienteDao.cerrarConexion();

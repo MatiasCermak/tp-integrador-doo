@@ -160,11 +160,12 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             while (rs.next()){
                 cant++;
             }
-            
+            int confirmar = 0;
             if (cant > 0){
-                JOptionPane.showMessageDialog(null,"Error","No puede modificar especialidad ya que hay mecanicos asociados a la misma",JOptionPane.WARNING_MESSAGE);
+                confirmar = JOptionPane.showConfirmDialog(null,"Warning","Está a punto de modificar una especialidad que tiene mecánicos asociados.\nDesea continuar?",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
             }
-            else {
+            
+            if (confirmar == 0) {
                 sql = "UPDATE especialidades SET especialidad = ? WHERE id_especialidad = ?";
                 sentencia = con.prepareStatement(sql);
                 sentencia.setString(1, especialidad.getNombre());
@@ -211,7 +212,7 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             }
             
             if (cant > 0){
-                JOptionPane.showMessageDialog(null,"Error","No puede eliminar especialidad ya que hay mecanicos asociados a la misma",JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Error","No puede eliminar especialidad ya que hay mecanicos asociados a la misma",JOptionPane.ERROR_MESSAGE);
             }
             else {
                 sql = "UDELETE especialidades WHERE id_especialidad = ?";

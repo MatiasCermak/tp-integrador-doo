@@ -81,7 +81,6 @@ public class MaterialDAOImplSql implements MaterialDAO {
                 System.err.println(ex);
             }
         }
-        
         return material;
     }
     
@@ -121,7 +120,7 @@ public class MaterialDAOImplSql implements MaterialDAO {
         catch (SQLException e){
             System.err.println(e);
         }
-        finally {
+        finally{
             try {
                 rs.close();
                 sentencia.close();
@@ -172,7 +171,7 @@ public class MaterialDAOImplSql implements MaterialDAO {
             System.err.println(e);
         }
         finally {
-            try {
+            try{
                 rs.close();
                 sentencia.close();
             }
@@ -207,7 +206,7 @@ public class MaterialDAOImplSql implements MaterialDAO {
         catch (SQLException e){
             System.err.println(e);
         }
-        finally{
+        finally {
             try{
                 sentencia.close();
             }

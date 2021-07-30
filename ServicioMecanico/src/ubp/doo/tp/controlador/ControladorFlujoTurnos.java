@@ -54,10 +54,10 @@ public class ControladorFlujoTurnos extends Controlador {
                         JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"Complete los campos para continuar","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else {
-                        cliente = new ClienteDTO(((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText()+" "+((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText(),
+                        cliente = new ClienteDTO(((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText(),((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText(),
                                    ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().getSelectedIndex() ,Integer.valueOf(((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()));
                         ((MCliente)this.MODELO).insertarCliente(cliente);
-                        System.out.println(cliente.getNombre());
+                        System.out.println(cliente.getNombre()+" "+cliente.getApellido());
                         JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"El siguiente formulario corresponderá a la carga de vehículo","Flujo de sistema",JOptionPane.INFORMATION_MESSAGE);
                         ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
                         ((RegClienteFr)this.VISTAREGCLI).limpiar();
@@ -71,11 +71,11 @@ public class ControladorFlujoTurnos extends Controlador {
                     modeloTabla.fireTableDataChanged();
                     listadoClientes = ((MCliente)this.MODELO).listarClientes();
                     for (ClienteDTO cli : listadoClientes){
-                        modeloTabla.addRow(new Object[]{cli.getNombre(), cli.getDniNumero(),cli.getDniTipo()});
+                        modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),((MCliente)this.MODELO).buscarTipoDni(cli.getDniTipo())});
                     }
-                    break;
+                    break; 
                 case CARGARREGCLI:
-                     tipos = ((MCliente)this.MODELO).listadoDniTipos();
+                    tipos = ((MCliente)this.MODELO).listadoDniTipos();
                     for (String tipo : tipos){
                         ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().addItem(tipo);
                     }
@@ -87,7 +87,7 @@ public class ControladorFlujoTurnos extends Controlador {
                 case SELCLI:
                     if (((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow() >= 0){
                         cliente = ((MCliente)this.MODELO).buscarCliente((String)modeloTabla.getValueAt(((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow(), 0));
-                        System.out.println(cliente.getNombre() + ": "+cliente.getDniTipo()+"= "+String.valueOf(cliente.getDniNumero()));
+                        System.out.println(cliente.getNombre()+" "+cliente.getApellido() + ": "+cliente.getDniTipo()+"= "+String.valueOf(cliente.getDniNumero()));
                     }
                     break;
                 case FILTCLI:
@@ -96,7 +96,7 @@ public class ControladorFlujoTurnos extends Controlador {
                     filtro = (String)((SelClienteFr)this.VISTASELCLI).getFiltro();
                     listadoClientes = ((MCliente)this.MODELO).listarClientes(filtro);
                     for (ClienteDTO cli : listadoClientes){
-                        modeloTabla.addRow(new Object[]{cli.getNombre(), cli.getDniNumero(),cli.getDniTipo()});
+                        modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
                     }
                     break;
                 case CANCELSELCLI:
