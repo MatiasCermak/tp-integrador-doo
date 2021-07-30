@@ -20,6 +20,8 @@ public interface MaterialDAO {
     
     List<MaterialDTO> listarMateriales();
     
+    List<MaterialDTO> listarMateriales(String filtro);
+    
     boolean insertarMaterial(MaterialDTO material);
     
     boolean modificarMaterial(MaterialDTO material);

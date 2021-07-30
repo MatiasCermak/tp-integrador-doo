@@ -11,6 +11,8 @@ package ubp.doo.tp.dto;
  */
 public class MaterialDTO {
     
+    private int id;
+    
     private String nombre;
     
     private String tipo;
@@ -22,7 +24,8 @@ public class MaterialDTO {
     public MaterialDTO() {
     }
 
-    public MaterialDTO(String nombre, String tipo, float precio, String medida) {
+    public MaterialDTO(int id, String nombre, String tipo, float precio, String medida) {
+        this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.precio = precio;
@@ -59,6 +62,14 @@ public class MaterialDTO {
 
     public void setMedida(String medida) {
         this.medida = medida;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
 }
