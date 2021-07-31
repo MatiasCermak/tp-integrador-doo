@@ -83,7 +83,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Seleccionar Mec&#xe1;nico"/>
+        <Property name="text" type="java.lang.String" value="Seleccion F. de Turno"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbHorario">

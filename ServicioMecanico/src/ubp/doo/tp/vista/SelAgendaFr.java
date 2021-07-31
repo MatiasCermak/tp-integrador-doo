@@ -40,7 +40,7 @@ public class SelAgendaFr extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setText("Seleccionar Mecánico");
+        jLabel1.setText("Seleccion F. de Turno");
 
         cmbHorario.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
 
