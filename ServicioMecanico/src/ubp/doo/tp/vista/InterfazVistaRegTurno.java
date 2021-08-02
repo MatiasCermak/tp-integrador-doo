@@ -9,6 +9,7 @@ package ubp.doo.tp.vista;
  *
  * @author tomas
  */
-public interface InterfazVistaRegTurno {
+public interface InterfazVistaRegTurno extends InterfazVistaFlujoTurno {
     
+    public void limpiar();
 }

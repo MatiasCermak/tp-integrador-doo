@@ -171,7 +171,7 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
     public void setControlador(Controlador c) {
         this.btnCancelar.addActionListener(c);
         this.btnSiguiente.addActionListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.CARGARREGCLI.toString()));  
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.RCCARGAR.toString()));  
     }
     
     @Override

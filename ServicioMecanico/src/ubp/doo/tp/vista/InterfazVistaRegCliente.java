@@ -11,7 +11,7 @@ import ubp.doo.tp.controlador.Controlador;
  *
  * @author tomas
  */
-public interface InterfazVistaRegCliente extends InterfazVista{
+public interface InterfazVistaRegCliente extends InterfazVistaFlujoTurno{
     
     public void limpiar();
 }

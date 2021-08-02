@@ -11,10 +11,12 @@ import ubp.doo.tp.controlador.Controlador;
  *
  * @author tomas
  */
-public abstract interface InterfazVista {
+public abstract interface InterfazVistaFlujoTurno {
     
     public static enum Operacion {
-        NUEVOVEHI, CANCELREGCLI, CARGARSELCLI, CARGARREGCLI, NUEVOCLI, SELCLI, FILTCLI, CANCELSELCLI;;
+        RCNUEVOVEHI, RCCANCELAR, RCCARGAR,
+        SCCARGAR, SCNUEVOCLI, SCSELCLI, SCFILTCLI, SCCANCELAR,
+        RTEXAMCLI, RTNUEVOVEHI,RTSIGUIENTE, RTCANCELAR;
     }
     
     void setControlador(Controlador c);

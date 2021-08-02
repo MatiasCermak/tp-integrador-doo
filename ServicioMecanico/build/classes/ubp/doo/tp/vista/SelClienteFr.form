@@ -128,7 +128,7 @@
     <Component class="javax.swing.JButton" name="btnSeleccionar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Seleccionar"/>
-        <Property name="actionCommand" type="java.lang.String" value="SELCLI"/>
+        <Property name="actionCommand" type="java.lang.String" value="SCSELCLI"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnNuevo">
@@ -140,7 +140,7 @@
           <Image iconType="3" name="/ubp/doo/tp/imagenes/btn_redondo.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Registrar Nuevo Cliente"/>
-        <Property name="actionCommand" type="java.lang.String" value="NUEVOCLI"/>
+        <Property name="actionCommand" type="java.lang.String" value="SCNUEVOCLI"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
             <BevelBorder/>

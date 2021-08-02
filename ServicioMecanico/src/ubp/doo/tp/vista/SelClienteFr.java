@@ -102,12 +102,12 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         jScrollPane1.setViewportView(tblClientes);
 
         btnSeleccionar.setText("Seleccionar");
-        btnSeleccionar.setActionCommand("SELCLI");
+        btnSeleccionar.setActionCommand("SCSELCLI");
 
         btnNuevo.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ubp/doo/tp/imagenes/btn_redondo.png"))); // NOI18N
         btnNuevo.setToolTipText("Registrar Nuevo Cliente");
-        btnNuevo.setActionCommand("NUEVOCLI");
+        btnNuevo.setActionCommand("SCNUEVOCLI");
         btnNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevo.setBorderPainted(false);
         btnNuevo.setContentAreaFilled(false);
@@ -220,7 +220,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         this.btnCancelar.addActionListener(c);
         this.btnNuevo.addActionListener(c);
         this.textSearch.addKeyListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.CARGARSELCLI.toString()));    
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.SCCARGAR.toString()));    
     }
     
     @Override
@@ -240,7 +240,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
     
     @Override
     public void actualizaTabla(Controlador c){
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.CARGARSELCLI.toString()));
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.SCCARGAR.toString()));
     }
     
     public javax.swing.JTable getTblClientes() {
