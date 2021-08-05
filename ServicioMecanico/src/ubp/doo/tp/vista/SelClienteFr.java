@@ -121,7 +121,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         });
 
         btnCancelar.setText("Cancelar");
-        btnCancelar.setActionCommand("CANCELSELCLI");
+        btnCancelar.setActionCommand("SCCANCELAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

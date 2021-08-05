@@ -38,7 +38,17 @@ public class CompSegurosDAOImplSql implements CompSegurosDAO{
         CompSegurosDTO compania = null;
         
         try {
+            con = conexion.getConnection();
+            String sql = "SELECT nombre FROM comp_seguros WHERE nombre = ?";
+            sentencia = con.prepareStatement(sql);
+            sentencia.setString(1, nombre);
             
+            rs = sentencia.executeQuery();
+            
+            while (rs.next()){
+                compania = new CompSegurosDTO(rs.getString("nombre"));
+                break;
+            }
         }
         catch (SQLException e){
             System.err.println(e);
