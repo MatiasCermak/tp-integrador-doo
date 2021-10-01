@@ -164,14 +164,14 @@
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
-        <Property name="actionCommand" type="java.lang.String" value="CANCELREGCLI"/>
+        <Property name="actionCommand" type="java.lang.String" value="RCCANCELAR"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSiguiente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Siguiente"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
-        <Property name="actionCommand" type="java.lang.String" value="NUEVOVEHI"/>
+        <Property name="actionCommand" type="java.lang.String" value="RCNUEVOVEHI"/>
       </Properties>
     </Component>
   </SubComponents>

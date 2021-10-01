@@ -80,7 +80,11 @@ public class ClienteDAOImplSql implements ClienteDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "select dni, nombre, apellido, id_dni_tipo from Clientes where dni = ? and id_dni_tipo = ?";
+            String sql = "select c.dni, c.nombre, c.apellido, dt.id_dni_tipo "
+                    + "from Clientes c "
+                    + "join dni_tipos dt "
+                    + "on c.id_dni_tipo = dt.id_dni_tipo "
+                    + "where c.dni = ? and dt.tipo = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1,dni);
             sentencia.setString(2, dniTipo);
@@ -207,7 +211,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             String sql = "insert into Clientes (dni,id_dni_tipo,nombre,apellido) values (?,?,?,?)";
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1,cliente.getDniNumero());
-            sentencia.setInt(2, cliente.getDniTipo());
+            sentencia.setInt(2, cliente.getIdDniTipo());
             sentencia.setString(3, cliente.getNombre());
             sentencia.setString(4,cliente.getApellido());
             
@@ -272,7 +276,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             String sql = "update Clientes set nombre = ?, id_dni_tipo = ?, apellido = ? where dni = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1,cliente.getNombre());
-            sentencia.setInt(2, cliente.getDniTipo());
+            sentencia.setInt(2, cliente.getIdDniTipo());
             sentencia.setInt(4,cliente.getDniNumero());
             sentencia.setString(3,cliente.getApellido());
             
@@ -304,7 +308,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             con = conexion.getConnection();
             String sql = "SELECT * FROM turnos WHERE dni = ? AND id_dni_tipo = ?";
             sentencia.setInt(1, cliente.getDniNumero());
-            sentencia.setInt(2, cliente.getDniTipo());
+            sentencia.setInt(2, cliente.getIdDniTipo());
             
             rs = sentencia.executeQuery();
             
@@ -321,7 +325,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
                 sql = "delete from Clientes where dni = ?, id_dni_tipo = ?";
                 sentencia = con.prepareStatement(sql);
                 sentencia.setInt(1, cliente.getDniNumero());
-                sentencia.setInt(2, cliente.getDniTipo());
+                sentencia.setInt(2, cliente.getIdDniTipo());
 
                 int res = sentencia.executeUpdate();
 

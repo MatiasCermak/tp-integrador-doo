@@ -25,13 +25,13 @@ public class SeleccionarClienteTest {
         
         Modelo mod = new MCliente();
         clienteEsperado.setDniNumero(12345687);
-        clienteEsperado.setDniTipo(1);
+        clienteEsperado.setIdDniTipo(1);
         clienteEsperado.setNombre("Armando Barreda");
         
         cliente=((MCliente)mod).buscarCliente("DNI",12345687);
         
         assertEquals(clienteEsperado.getNombre(),cliente.getNombre());
-        assertEquals(clienteEsperado.getDniTipo(),cliente.getDniTipo());
+        assertEquals(clienteEsperado.getIdDniTipo(),cliente.getIdDniTipo());
         assertEquals(clienteEsperado.getDniNumero(),cliente.getDniNumero());
     }
     

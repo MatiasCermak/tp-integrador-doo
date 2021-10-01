@@ -220,7 +220,6 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         this.btnCancelar.addActionListener(c);
         this.btnNuevo.addActionListener(c);
         this.textSearch.addKeyListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.SCCARGAR.toString()));    
     }
     
     @Override

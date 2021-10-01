@@ -89,11 +89,7 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         btnNuevo.setText("Nuevo");
         btnNuevo.setActionCommand("RTNUEVOVEHI");
 
-        cbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Especialidad");
-
-        cbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,5 +206,9 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
     @Override
     public void limpiar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void setCliente(String cliente){
+        this.teCliente.setText(cliente);
     }
 }

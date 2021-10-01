@@ -70,31 +70,48 @@ public class ControladorFlujoTurnos extends Controlador {
                         ((RegClienteFr)this.VISTAREGCLI).limpiar();
                         ((RegClienteFr)this.VISTAREGCLI).dispose();
                         this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoTurno.Operacion.SCCARGAR.toString()));
-                        ((SelClienteFr)this.VISTASELCLI).setVisible(true);
                     }
                     break;
-                case SCCARGAR:
-                    modeloTabla.setRowCount(0);
-                    modeloTabla.fireTableDataChanged();
-                    listadoClientes = ((MCliente)this.MODELO).listarClientes();
-                    for (ClienteDTO cli : listadoClientes){
-                        modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),((MCliente)this.MODELO).buscarTipoDni(cli.getDniTipo())});
-                    }
-                    break; 
                 case RCCARGAR:
                     tipos = ((MCliente)this.MODELO).listadoDniTipos();
                     for (String tipo : tipos){
                         ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().addItem(tipo);
                     }
                     break;
+                case RCCANCELAR:
+                    ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
+                    ((RegClienteFr)this.VISTAREGCLI).dispose();
+                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoTurno.Operacion.SCCARGAR.toString()));
+                    ((SelClienteFr)this.VISTASELCLI).setVisible(true);
+                    break;
+                case SCCARGAR:
+                    modeloTabla.setRowCount(0);
+                    modeloTabla.fireTableDataChanged();
+                    listadoClientes = ((MCliente)this.MODELO).listarClientes();
+                    for (ClienteDTO cli : listadoClientes){
+                        modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),((MCliente)this.MODELO).buscarTipoDni(cli.getIdDniTipo())});
+                    }
+                    ((SelClienteFr)this.VISTASELCLI).setVisible(true);
+                    break; 
                 case SCNUEVOCLI:
                     ((SelClienteFr)this.VISTASELCLI).setVisible(false);
+                    ((SelClienteFr)this.VISTASELCLI).dispose();
                     ((RegClienteFr)this.VISTAREGCLI).iniciaVista();
                     break;
                 case SCSELCLI:
                     if (((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow() >= 0){
-                        cliente = ((MCliente)this.MODELO).buscarCliente((String)modeloTabla.getValueAt(((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow(), 0));
-                        System.out.println(cliente.getNombre()+" "+cliente.getApellido() + ": "+cliente.getDniTipo()+"= "+String.valueOf(cliente.getDniNumero()));
+                        int row = ((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow();
+                        int numDni = (int)modeloTabla.getValueAt(row, 1);
+                        String tipo = (String)modeloTabla.getValueAt(row, 2);
+                        cliente = ((MCliente)this.MODELO).buscarCliente(tipo, numDni);
+                        ((RegTurnoFr)this.VISTAREGTURNO).setCliente(cliente.getNombre()
+                                +" "+cliente.getApellido()
+                                +", "+((MCliente)this.MODELO).buscarTipoDni(cliente.getIdDniTipo())
+                                +"= "+cliente.getDniNumero());
+                        ((SelClienteFr)this.VISTASELCLI).setVisible(false);
+                        ((SelClienteFr)this.VISTASELCLI).dispose();
+                        
+                        ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     }
                     break;
                 case SCFILTCLI:
@@ -103,7 +120,7 @@ public class ControladorFlujoTurnos extends Controlador {
                     filtro = (String)((SelClienteFr)this.VISTASELCLI).getFiltro();
                     listadoClientes = ((MCliente)this.MODELO).listarClientes(filtro);
                     for (ClienteDTO cli : listadoClientes){
-                        modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
+                        modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getIdDniTipo()});
                     }
                     break;
                 case SCCANCELAR:
@@ -111,13 +128,10 @@ public class ControladorFlujoTurnos extends Controlador {
                     ((SelClienteFr)this.VISTASELCLI).dispose();
                     ((RegClienteFr)this.VISTAREGCLI).dispose();
                     break;
-                case RCCANCELAR:
-                    ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
-                    ((RegClienteFr)this.VISTAREGCLI).dispose();
-                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoTurno.Operacion.SCCARGAR.toString()));
-                    ((SelClienteFr)this.VISTASELCLI).setVisible(true);
-                    break;
                 case RTCANCELAR:
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
+                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoTurno.Operacion.SCCANCELAR.toString()));
+                    ((RegTurnoFr)this.VISTAREGTURNO).dispose();
                     break;
                 case RTSIGUIENTE:
                     break;
