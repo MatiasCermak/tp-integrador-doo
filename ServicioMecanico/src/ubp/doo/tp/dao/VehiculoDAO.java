@@ -5,10 +5,27 @@
  */
 package ubp.doo.tp.dao;
 
+import ubp.doo.tp.dto.VehiculoDTO;
+import java.util.List;
 /**
  *
  * @author tomas
  */
 public interface VehiculoDAO {
     
+    VehiculoDTO buscarVehiculo(String matricula);
+    
+    VehiculoDTO buscarVehiculo(String comp, int poliza);
+    
+    List<VehiculoDTO> listarVehiculos();
+
+    List<VehiculoDTO> listarVehiculos(String dniTipo, int dni);
+
+    List<VehiculoDTO> listarVehiculos(String compania);
+
+    boolean insertarVehiculo(VehiculoDTO vehiculo);
+
+    boolean modificarVehiculo(VehiculoDTO vehiculo);
+
+    boolean borrarVehiculo(VehiculoDTO vehiculo);
 }

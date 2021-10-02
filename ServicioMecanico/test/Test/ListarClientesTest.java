@@ -23,13 +23,13 @@ public class ListarClientesTest {
         ClienteDTO cliente = new ClienteDTO();
         Modelo mod = new MCliente();
         cliente.setDniNumero(40000005);
-        cliente.setIdDniTipo(1);
+        cliente.setDniTipo("DNI");
         cliente.setNombre("juan cho");
         
         List<ClienteDTO>result=((MCliente)mod).listarClientes("juan cho");
         
         assertEquals(cliente.getNombre(),result.get(0).getNombre());
-        assertEquals(cliente.getIdDniTipo(),result.get(0).getIdDniTipo());
+        assertEquals(cliente.getDniTipo(),result.get(0).getDniTipo());
         assertEquals(cliente.getDniNumero(),result.get(0).getDniNumero());
     }
     

@@ -5,6 +5,9 @@
  */
 package ubp.doo.tp.dto;
 
+import ubp.doo.tp.dao.CompSegurosDAO;
+import ubp.doo.tp.dao.CompSegurosDAOImplSql;
+
 /**
  *
  * @author tomas
@@ -24,8 +27,9 @@ public class VehiculoDTO {
     public VehiculoDTO() {
     }
 
-    public VehiculoDTO(CompSegurosDTO aseguradora, int poliza, String matricula, String modelo, String marca) {
-        this.aseguradora = aseguradora;
+    public VehiculoDTO(String aseguradora, int poliza, String matricula, String modelo, String marca) {
+        CompSegurosDAO cDao = new CompSegurosDAOImplSql();
+        this.aseguradora = cDao.buscarComp(aseguradora);
         this.poliza = poliza;
         this.matricula = matricula;
         this.modelo = modelo;

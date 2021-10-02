@@ -27,12 +27,12 @@ public abstract class Persona {
         this.nombre = nombre;
     }
 
-    public int getIdDniTipo() {
-        return idDniTipo;
+    public String getDniTipo() {
+        return dniTipo;
     }
 
-    public void setIdDniTipo(int idDniTipo) {
-        this.idDniTipo = idDniTipo;
+    public void setDniTipo(String dniTipo) {
+        this.dniTipo = dniTipo;
     }
 
     public int getDniNumero() {
@@ -46,16 +46,16 @@ public abstract class Persona {
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, int dniTipo, int dniNumero) {
+    public Persona(String nombre, String apellido, String dniTipo, int dniNumero) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.idDniTipo = dniTipo;
+        this.dniTipo = dniTipo;
         this.dniNumero = dniNumero;
     }
     
     private String nombre;
     private String apellido;
-    private int idDniTipo;
+    private String dniTipo;
     private int dniNumero;
     
     
