@@ -198,14 +198,12 @@ public class ClienteDAOImplSql implements ClienteDAO {
                 dniTipo = rs.getString("tipo");
                 lista.add(new ClienteDTO(nom,ape,dniTipo,dni));
             }
-            
         } catch (SQLException e) {
             System.err.println(e);
         } finally {
             try {
-                rs.close();
                 sentencia.close();
-            } catch (SQLException ex) {
+            }catch (SQLException ex) {
                 System.err.println(ex);
             }
         }
@@ -223,7 +221,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             con = conexion.getConnection();
             String sql = "insert into clientes (dni,id_dni_tipo,nombre,apellido) "
                     + "values (?,"
-                    + "(select dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?),"
+                    + "(select first dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?),"
                     + "?,?)";
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1,cliente.getDniNumero());
@@ -257,7 +255,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             con = conexion.getConnection();
             String sql = "update Clientes set "
                     + "nombre = ?, "
-                    + "id_dni_tipo = (select dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?),"
+                    + "id_dni_tipo = (select first dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?),"
                     + " apellido = ? where dni = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1,cliente.getNombre());
@@ -292,24 +290,18 @@ public class ClienteDAOImplSql implements ClienteDAO {
         try {
             con = conexion.getConnection();
             String sql = "SELECT * FROM turnos WHERE dni = ? AND "
-                    + "id_dni_tipo = (select dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?)";
+                    + "id_dni_tipo = (select first dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?)";
             sentencia.setInt(1, cliente.getDniNumero());
             sentencia.setString(2, cliente.getDniTipo());
             
             rs = sentencia.executeQuery();
             
-            int cant = 0;
-            
-            while (rs.next()){
-                cant++;
-            }
-            
-            if (cant > 0){
+            if (rs.next()){
                 JOptionPane.showMessageDialog(null,"Error","No se puede eliminar el cliente ya que hay turnos asociados",JOptionPane.WARNING_MESSAGE);
             }
             else {
                 sql = "delete from Clientes where dni = ?, "
-                        + "id_dni_tipo = (select dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?)";
+                        + "id_dni_tipo = (select first dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?)";
                 sentencia = con.prepareStatement(sql);
                 sentencia.setInt(1, cliente.getDniNumero());
                 sentencia.setString(2, cliente.getDniTipo());

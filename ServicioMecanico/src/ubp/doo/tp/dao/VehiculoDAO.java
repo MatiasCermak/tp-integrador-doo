@@ -28,4 +28,6 @@ public interface VehiculoDAO {
     boolean modificarVehiculo(VehiculoDTO vehiculo);
 
     boolean borrarVehiculo(VehiculoDTO vehiculo);
+    
+    void cerrarConexion();
 }
