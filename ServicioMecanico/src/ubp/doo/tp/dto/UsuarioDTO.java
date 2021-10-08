@@ -14,13 +14,16 @@ public class UsuarioDTO {
     private String user;
     
     private String password;
+    
+    private EmpleadoDTO empleado;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String user, String password) {
+    public UsuarioDTO(String user, String password, EmpleadoDTO empleado) {
         this.user = user;
         this.password = password;
+        this.empleado = empleado;
     }
 
     public String getUser() {
@@ -38,5 +41,12 @@ public class UsuarioDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    public EmpleadoDTO getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(EmpleadoDTO empleado) {
+        this.empleado = empleado;
+    }
 }

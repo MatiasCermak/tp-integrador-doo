@@ -20,10 +20,6 @@ public class FichaDTO {
     private String motivoConformidad;
     
     private String etapa;
-    
-    private ArrayList<DetalleDTO> detalles;
-    
-    private ArrayList<String> actividades;
 
     public FichaDTO() {
     }
@@ -65,21 +61,5 @@ public class FichaDTO {
 
     public void setEtapa(String etapa) {
         this.etapa = etapa;
-    }
-
-    public ArrayList<DetalleDTO> getDetalles() {
-        return detalles;
-    }
-
-    public ArrayList<String> getActividades() {
-        return actividades;
-    }
-    
-    public void agregarDetalle (DetalleDTO detalle){
-        this.detalles.add(detalle);
-    }
-    
-    public void agregarActividad (String actividad){
-        this.actividades.add(actividad);
     }
 }

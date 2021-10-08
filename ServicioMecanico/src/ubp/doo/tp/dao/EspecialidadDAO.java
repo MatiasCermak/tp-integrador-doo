@@ -22,7 +22,7 @@ public interface EspecialidadDAO {
     
     boolean insertarEspecialidad(EspecialidadDTO especialidad);
     
-    boolean modificarEspecialidad(EspecialidadDTO especialidad);
+    boolean modificarEspecialidad(EspecialidadDTO especialidad, String ex_esp);
     
     boolean borrarEspecialidad(EspecialidadDTO especialidad);
 }

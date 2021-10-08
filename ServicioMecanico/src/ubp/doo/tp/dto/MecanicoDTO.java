@@ -15,17 +15,14 @@ public class MecanicoDTO extends EmpleadoDTO{
     private EspecialidadDTO especialidad;
     
     private float costoHora;
-    
-    private AgendaDTO agenda;
 
     public MecanicoDTO() {
     }
 
-    public MecanicoDTO(EspecialidadDTO especialidad, float costoHora, AgendaDTO agenda, float salario, String rol, UsuarioDTO usuario, String nombre, String apellido, String dniTipo, int dniNumero) {
-        super(salario, rol, usuario, nombre, apellido, dniTipo, dniNumero);
+    public MecanicoDTO(EspecialidadDTO especialidad, float costoHora, float salario, String rol, String nombre, String apellido, String dniTipo, int dniNumero) {
+        super(salario, rol,nombre, apellido, dniTipo, dniNumero);
         this.especialidad = especialidad;
         this.costoHora = costoHora;
-        this.agenda = agenda;
     }
 
     public EspecialidadDTO getEspecialidad() {
@@ -43,13 +40,4 @@ public class MecanicoDTO extends EmpleadoDTO{
     public void setCostoHora(float costoHora) {
         this.costoHora = costoHora;
     }
-
-    public AgendaDTO getAgenda() {
-        return agenda;
-    }
-
-    public void setAgenda(AgendaDTO agenda) {
-        this.agenda = agenda;
-    }
-    
 }

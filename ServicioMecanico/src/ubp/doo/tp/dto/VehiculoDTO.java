@@ -14,7 +14,9 @@ import ubp.doo.tp.dao.CompSegurosDAOImplSql;
  */
 public class VehiculoDTO {
     
-    private String aseguradora;
+    private CompSegurosDTO aseguradora;
+    
+    private ClienteDTO cliente;
     
     private int poliza;
     
@@ -23,28 +25,33 @@ public class VehiculoDTO {
     private String modelo;
     
     private String marca;
-    
-    private String dniTipo;
-    
-    private int dni;
 
     public VehiculoDTO() {
     }
 
-    public VehiculoDTO(String aseguradora, int poliza, String matricula, String modelo, String marca) {
+    public VehiculoDTO(CompSegurosDTO aseguradora, ClienteDTO cliente, int poliza, String matricula, String modelo, String marca) {
         this.aseguradora = aseguradora;
+        this.cliente = cliente;
         this.poliza = poliza;
         this.matricula = matricula;
         this.modelo = modelo;
         this.marca = marca;
     }
 
-    public String getAseguradora() {
+    public CompSegurosDTO getAseguradora() {
         return aseguradora;
     }
 
-    public void setAseguradora(String aseguradora) {
+    public void setAseguradora(CompSegurosDTO aseguradora) {
         this.aseguradora = aseguradora;
+    }
+
+    public ClienteDTO getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.cliente = cliente;
     }
 
     public int getPoliza() {
@@ -77,21 +84,5 @@ public class VehiculoDTO {
 
     public void setMarca(String marca) {
         this.marca = marca;
-    }
-
-    public String getDniTipo() {
-        return dniTipo;
-    }
-
-    public void setDniTipo(String dniTipo) {
-        this.dniTipo = dniTipo;
-    }
-
-    public int getDni() {
-        return dni;
-    }
-
-    public void setDni(int dni) {
-        this.dni = dni;
     }
 }

@@ -14,13 +14,16 @@ public class DetalleDTO {
     private MaterialDTO material;
     
     private int cantidad;
+    
+    private FichaDTO ficha;
 
-    public DetalleDTO() {
-    }
-
-    public DetalleDTO(MaterialDTO material, int cantidad) {
+    public DetalleDTO(MaterialDTO material, int cantidad, FichaDTO ficha) {
         this.material = material;
         this.cantidad = cantidad;
+        this.ficha = ficha;
+    }
+
+    public DetalleDTO() {
     }
 
     public MaterialDTO getMaterial() {
@@ -37,5 +40,13 @@ public class DetalleDTO {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public FichaDTO getFicha() {
+        return ficha;
+    }
+
+    public void setFicha(FichaDTO ficha) {
+        this.ficha = ficha;
     }
 }

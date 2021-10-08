@@ -15,8 +15,6 @@ public class FacturaDTO {
     
     private CompSegurosDTO aseguradora;
     
-    private ArrayList<String> servicios;
-    
     private float costoTotal;
     
     private float pagoRealizado;
@@ -52,13 +50,5 @@ public class FacturaDTO {
 
     public void setPagoRealizado(float pagoRealizado) {
         this.pagoRealizado = pagoRealizado;
-    }
-
-    public ArrayList<String> getServicios() {
-        return servicios;
-    }
-    
-    public void agregarServicio (String servicio){
-        this.servicios.add(servicio);
     }
 }

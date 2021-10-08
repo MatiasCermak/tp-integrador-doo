@@ -6,14 +6,20 @@
 package ubp.doo.tp.dao;
 
 import ubp.doo.tp.dto.AgendaDTO;
+import java.util.List;
 /**
  *
  * @author tomas
  */
 public interface AgendaDAO {
     
-    //AgendaDTO leerAgenda(String especialidad);
+    AgendaDTO buscarAgenda(String dniTipo, int dni);
     
-    //boolean insertarAgenda(AgendaDTO agenda);
+    boolean insertarAgenda(AgendaDTO agenda);
     
+    boolean modificarAgenda(AgendaDTO agenda);
+    
+    boolean eliminarAgenda(AgendaDTO agenda);
+    
+    void cerrarConexion();
 }

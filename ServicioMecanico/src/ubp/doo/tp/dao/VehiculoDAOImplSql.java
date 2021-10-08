@@ -13,6 +13,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import ubp.doo.tp.dto.VehiculoDTO;
+import ubp.doo.tp.dto.CompSegurosDTO;
+import ubp.doo.tp.dto.ClienteDTO;
 
 /**
  *
@@ -35,29 +37,38 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
 
         try {
             con = conexion.getConnection();
-            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre "
-                        +"FROM vehiculos v "
-                        +"JOIN comp_seguros c "
-                        +"ON v.id_comp_seguro = c.id_com_seguro "
-                        +"WHERE v.matricula = ?";
+            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre AS compania, "
+                        + "cl.nombre, cl.apellido, v.dni, dt.tipo "
+                        + "FROM vehiculos v "
+                        + "JOIN comp_seguros c ON v.id_comp_seguro = c.id_com_seguro "
+                        + "JOIN clientes cl ON v.dni = cl.dni ADN v.id_dni_tipo = cl.id_dni_tipo "
+                        + "JOIN dni_tipos dt ON v.id_dni_tipo = dt.id_dni_tipo "
+                        + "WHERE v.matricula = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, matricula);
 
             rs = sentencia.executeQuery();
 
-            String matr;
             int poliza;
             String marca;
             String modelo;
             String comp;
+            String nCliente;
+            String aCliente;
+            int dni;
+            String dniTipo;
 
             while (rs.next()){
-                matr = rs.getString("matricula");
                 poliza = rs.getInt("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
-                comp = rs.getString("nombre");
-                vehiculo = new VehiculoDTO(comp,poliza,matr,modelo,marca);
+                comp = rs.getString("compania");
+                nCliente = rs.getString("nombre");
+                aCliente = rs.getString("apellido");
+                dni = rs.getInt("dni");
+                dniTipo = rs.getString("tipo");
+                vehiculo = new VehiculoDTO(new CompSegurosDTO(comp),new ClienteDTO(nCliente,aCliente,dniTipo,dni),
+                        poliza,matricula,modelo,marca);
                 break;
             }
         } catch (SQLException e){
@@ -83,11 +94,13 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
 
         try {
             con = conexion.getConnection();
-            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre "
-                        +"FROM vehiculos v "
-                        +"JOIN comp_seguros c "
-                        +"ON v.id_comp_seguro = c.id_com_seguro "
-                        +"WHERE c.nombre = ? AND v.poliza = ?";
+            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre AS compania, "
+                        + "cl.nombre, cl.apellido, v.dni, dt.tipo "
+                        + "FROM vehiculos v "
+                        + "JOIN comp_seguros c ON v.id_comp_seguro = c.id_com_seguro "
+                        + "JOIN clientes cl ON v.dni = cl.dni ADN v.id_dni_tipo = cl.id_dni_tipo "
+                        + "JOIN dni_tipos dt ON v.id_dni_tipo = dt.id_dni_tipo "
+                        + "WHERE c.nombre = ? AND v.poliza = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, comp);
             sentencia.setInt(2, poliza);
@@ -95,18 +108,23 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             rs = sentencia.executeQuery();
 
             String matr;
-            int pol;
             String marca;
             String modelo;
-            String compania;
+            String nCliente;
+            String aCliente;
+            int dni;
+            String dniTipo;
 
             while (rs.next()){
                 matr = rs.getString("matricula");
-                pol = rs.getInt("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
-                compania = rs.getString("nombre");
-                vehiculo = new VehiculoDTO(compania,pol,matr,modelo,marca);
+                nCliente = rs.getString("nombre");
+                aCliente = rs.getString("apellido");
+                dni = rs.getInt("dni");
+                dniTipo = rs.getString("tipo");
+                vehiculo = new VehiculoDTO(new CompSegurosDTO(comp),new ClienteDTO(nCliente,aCliente,dniTipo,dni),
+                        poliza,matr,modelo,marca);
                 break;
             }
         } catch (SQLException e){
@@ -132,10 +150,12 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
 
         try {
             con = conexion.getConnection();
-            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre "
-                        +"FROM vehiculos v "
-                        +"JOIN comp_seguros c "
-                        +"ON v.id_comp_seguro = c.id_com_seguro";
+            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre AS compania, "
+                        + "cl.nombre, cl.apellido, v.dni, dt.tipo "
+                        + "FROM vehiculos v "
+                        + "JOIN comp_seguros c ON v.id_comp_seguro = c.id_com_seguro "
+                        + "JOIN clientes cl ON v.dni = cl.dni ADN v.id_dni_tipo = cl.id_dni_tipo "
+                        + "JOIN dni_tipos dt ON v.id_dni_tipo = dt.id_dni_tipo";
             sentencia = con.prepareStatement(sql);
 
             rs = sentencia.executeQuery();
@@ -144,15 +164,24 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             int poliza;
             String marca;
             String modelo;
-            String compania;
+            String comp;
+            String nCliente;
+            String aCliente;
+            int dni;
+            String dniTipo;
 
             while (rs.next()){
                 matr = rs.getString("matricula");
                 poliza = rs.getInt("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
-                compania = rs.getString("nombre");
-                vehiculos.add(new VehiculoDTO(compania,poliza,matr,modelo,marca));
+                comp = rs.getString("compania");
+                nCliente = rs.getString("nombre");
+                aCliente = rs.getString("apellido");
+                dni = rs.getInt("dni");
+                dniTipo = rs.getString("tipo");
+                vehiculos.add(new VehiculoDTO(new CompSegurosDTO(comp),new ClienteDTO(nCliente,aCliente,dniTipo,dni),
+                        poliza,matr,modelo,marca));
             }
         } catch (SQLException e){
             System.err.println(e);
@@ -177,15 +206,16 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
 
         try {
             con = conexion.getConnection();
-            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre "
-                        +"FROM vehiculos v "
-                        +"JOIN comp_seguros c "
-                        +"ON v.id_comp_seguro = c.id_com_seguro "
-                        + "WHERE v.dni = ? AND "
-                        + "v.id_dni_tipo = (SELECT FIRST dt.id_dni_tipo FROM dni_tipos dt WHERE dt.tipo = ?)";
+            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre AS compania, "
+                        + "cl.nombre, cl.apellido, v.dni, dt.tipo "
+                        + "FROM vehiculos v "
+                        + "JOIN comp_seguros c ON v.id_comp_seguro = c.id_com_seguro "
+                        + "JOIN clientes cl ON v.dni = cl.dni ADN v.id_dni_tipo = cl.id_dni_tipo "
+                        + "JOIN dni_tipos dt ON v.id_dni_tipo = dt.id_dni_tipo "
+                        + "WHERE dt.tipo = ? AND v.dni = ?";
             sentencia = con.prepareStatement(sql);
-            sentencia.setInt(1, dni);
-            sentencia.setString(2, dniTipo);
+            sentencia.setString(1, dniTipo);
+            sentencia.setInt(2, dni);
 
             rs = sentencia.executeQuery();
 
@@ -193,15 +223,20 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             int poliza;
             String marca;
             String modelo;
-            String compania;
+            String comp;
+            String nCliente;
+            String aCliente;
 
             while (rs.next()){
                 matr = rs.getString("matricula");
                 poliza = rs.getInt("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
-                compania = rs.getString("nombre");
-                vehiculos.add(new VehiculoDTO(compania,poliza,matr,modelo,marca));
+                comp = rs.getString("compania");
+                nCliente = rs.getString("nombre");
+                aCliente = rs.getString("apellido");
+                vehiculos.add(new VehiculoDTO(new CompSegurosDTO(comp),new ClienteDTO(nCliente,aCliente,dniTipo,dni),
+                        poliza,matr,modelo,marca));
             }
         } catch (SQLException e){
             System.err.println(e);
@@ -226,11 +261,13 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
 
         try {
             con = conexion.getConnection();
-            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre "
-                        +"FROM vehiculos v "
-                        +"JOIN comp_seguros c "
-                        +"ON v.id_comp_seguro = c.id_com_seguro "
-                        +"WHERE c.nombre = ?";
+            String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre AS compania, "
+                        + "cl.nombre, cl.apellido, v.dni, dt.tipo "
+                        + "FROM vehiculos v "
+                        + "JOIN comp_seguros c ON v.id_comp_seguro = c.id_com_seguro "
+                        + "JOIN clientes cl ON v.dni = cl.dni ADN v.id_dni_tipo = cl.id_dni_tipo "
+                        + "JOIN dni_tipos dt ON v.id_dni_tipo = dt.id_dni_tipo "
+                        + "WHERE c.nombre = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, comp);
 
@@ -240,15 +277,22 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             int poliza;
             String marca;
             String modelo;
-            String compania;
+            String nCliente;
+            String aCliente;
+            String dniTipo;
+            int dni;
 
             while (rs.next()){
                 matr = rs.getString("matricula");
                 poliza = rs.getInt("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
-                compania = rs.getString("nombre");
-                vehiculos.add(new VehiculoDTO(compania,poliza,matr,modelo,marca));
+                nCliente = rs.getString("nombre");
+                aCliente = rs.getString("apellido");
+                dniTipo = rs.getString("tipo");
+                dni = rs.getInt("dni");
+                vehiculos.add(new VehiculoDTO(new CompSegurosDTO(comp),new ClienteDTO(nCliente,aCliente,dniTipo,dni),
+                        poliza,matr,modelo,marca));
             }
         } catch (SQLException e){
             System.err.println(e);
@@ -280,9 +324,9 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             sentencia.setInt(2, vehiculo.getPoliza());
             sentencia.setString(3, vehiculo.getMarca());
             sentencia.setString(4, vehiculo.getModelo());
-            sentencia.setString(5, vehiculo.getAseguradora());
-            sentencia.setInt(6, vehiculo.getDni());
-            sentencia.setString(7, vehiculo.getDniTipo());
+            sentencia.setString(5, vehiculo.getAseguradora().getNombre());
+            sentencia.setInt(6, vehiculo.getCliente().getDniNumero());
+            sentencia.setString(7, vehiculo.getCliente().getDniTipo());
             
             int r = sentencia.executeUpdate();
             
@@ -321,9 +365,9 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             sentencia.setInt(1, vehiculo.getPoliza());
             sentencia.setString(2, vehiculo.getMarca());
             sentencia.setString(3, vehiculo.getModelo());
-            sentencia.setString(4, vehiculo.getAseguradora());
-            sentencia.setInt(5, vehiculo.getDni());
-            sentencia.setString(6, vehiculo.getDniTipo());
+            sentencia.setString(4, vehiculo.getAseguradora().getNombre());
+            sentencia.setInt(5, vehiculo.getCliente().getDniNumero());
+            sentencia.setString(6, vehiculo.getCliente().getDniTipo());
             
             int r = sentencia.executeUpdate();
             

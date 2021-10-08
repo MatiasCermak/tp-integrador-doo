@@ -17,14 +17,15 @@ public class AgendaDTO {
     
     private int horaFin;
     
-    private ArrayList<TurnoDTO> turnos;
-    
-    public void agregarTurno (TurnoDTO t){
-        this.turnos.add(t);
+    private EmpleadoDTO empleado;
+
+    public AgendaDTO() {
     }
 
-    public ArrayList<TurnoDTO> getTurnos() {
-        return turnos;
+    public AgendaDTO(int horaInicio, int horaFin, EmpleadoDTO empleado) {
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.empleado = empleado;
     }
 
     public int getHoraInicio() {
@@ -43,11 +44,11 @@ public class AgendaDTO {
         this.horaFin = horaFin;
     }
 
-    public AgendaDTO(int horaInicio, int horaFin) {
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+    public EmpleadoDTO getEmpleado() {
+        return empleado;
     }
 
-    public AgendaDTO() {
+    public void setEmpleado(EmpleadoDTO empleado) {
+        this.empleado = empleado;
     }
 }
