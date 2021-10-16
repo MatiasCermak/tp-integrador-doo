@@ -11,27 +11,30 @@ package ubp.doo.tp.dto;
  */
 public class DetalleDTO {
     
-    private MaterialDTO material;
+    private MaterialDTO Material;
     
     private int cantidad;
     
     private FichaDTO ficha;
-
-    public DetalleDTO(MaterialDTO material, int cantidad, FichaDTO ficha) {
-        this.material = material;
-        this.cantidad = cantidad;
-        this.ficha = ficha;
-    }
+    
+    private int idOperacion;
 
     public DetalleDTO() {
     }
 
-    public MaterialDTO getMaterial() {
-        return material;
+    public DetalleDTO(MaterialDTO Material, int cantidad, FichaDTO Ficha, int idOperacion) {
+        this.Material = Material;
+        this.cantidad = cantidad;
+        this.ficha = Ficha;
+        this.idOperacion = idOperacion;
     }
 
-    public void setMaterial(MaterialDTO material) {
-        this.material = material;
+    public MaterialDTO getMaterial() {
+        return Material;
+    }
+
+    public void setMaterial(MaterialDTO Material) {
+        this.Material = Material;
     }
 
     public int getCantidad() {
@@ -46,7 +49,15 @@ public class DetalleDTO {
         return ficha;
     }
 
-    public void setFicha(FichaDTO ficha) {
-        this.ficha = ficha;
+    public void setFicha(FichaDTO Ficha) {
+        this.ficha = Ficha;
+    }
+
+    public int getIdOperacion() {
+        return idOperacion;
+    }
+
+    public void setIdOperacion(int idOperacion) {
+        this.idOperacion = idOperacion;
     }
 }

@@ -4,9 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/AgendaDTO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/AgendaDAOImplSql.java</file>
+            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/VehiculoDTO.java</file>
+            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/DetalleDAOImplSql.java</file>
+            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/TurnoDTO.java</file>
+            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/ClienteDTO.java</file>
             <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/EmpleadoDTO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/ClienteDAOImplSql.java</file>
+            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/FichaDTO.java</file>
+            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/DetalleDTO.java</file>
         </group>
     </open-files>
 </project-private>

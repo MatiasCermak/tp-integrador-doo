@@ -5,10 +5,24 @@
  */
 package ubp.doo.tp.dao;
 
+import ubp.doo.tp.dto.DetalleDTO;
+import java.util.List;
+
 /**
  *
  * @author tomas
  */
 public interface DetalleDAO {
     
+    void cerrarConexion();
+    
+    DetalleDTO buscarDetalle(int idOperacion);
+    
+    List<DetalleDTO> listarDetalles(DetalleDTO detalle); //Listar todos los detalles de la misma ficha
+    
+    boolean insertarDetalle(DetalleDTO detalle);
+    
+    boolean modificarDetalle(DetalleDTO detalle);
+    
+    boolean eliminarDetalle(DetalleDTO detalle);
 }
