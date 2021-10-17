@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface AgendaDAO {
     
-    AgendaDTO buscarAgenda(String dniTipo, int dni);
+    AgendaDTO buscarAgenda(int id_empleado);
     
     boolean insertarAgenda(AgendaDTO agenda);
     

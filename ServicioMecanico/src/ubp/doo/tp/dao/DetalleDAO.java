@@ -16,9 +16,9 @@ public interface DetalleDAO {
     
     void cerrarConexion();
     
-    DetalleDTO buscarDetalle(int idOperacion);
+    DetalleDTO buscarDetalle(int id_detalle);
     
-    List<DetalleDTO> listarDetalles(DetalleDTO detalle); //Listar todos los detalles de la misma ficha
+    List<DetalleDTO> listarDetalles(int id_ficha); //Listar todos los detalles de la misma ficha
     
     boolean insertarDetalle(DetalleDTO detalle);
     

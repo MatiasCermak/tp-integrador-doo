@@ -136,7 +136,8 @@ public class ClienteDAOImplSql implements ClienteDAO {
                     + "from clientes c "
                     + "join dni_tipos dt "
                     + "on dt.id_dni_tipo = c.id_dni_tipo "
-                    + "where c.nombre like '%"+filtro+"%'";
+                    + "where c.nombre like '%"+filtro+"%' "
+                    + "order by c.nombre";
             sentencia = con.prepareStatement(sql);
             
             rs = sentencia.executeQuery();
@@ -221,7 +222,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             con = conexion.getConnection();
             String sql = "insert into clientes (dni,id_dni_tipo,nombre,apellido) "
                     + "values (?,"
-                    + "(select first dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?),"
+                    + "(select dt.id_dni_tipo from dni_tipos dt where dt.tipo = ? order by dt.id_dni_tipo asc limit 1),"
                     + "?,?)";
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1,cliente.getDniNumero());
@@ -255,7 +256,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             con = conexion.getConnection();
             String sql = "update Clientes set "
                     + "nombre = ?, "
-                    + "id_dni_tipo = (select first dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?),"
+                    + "id_dni_tipo = (select dt.id_dni_tipo from dni_tipos dt where dt.tipo = ? order by dt.id_dni_tipo asc limit 1),"
                     + " apellido = ? where dni = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1,cliente.getNombre());
@@ -290,7 +291,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
         try {
             con = conexion.getConnection();
             String sql = "SELECT * FROM turnos WHERE dni = ? AND "
-                    + "id_dni_tipo = (select first dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?)";
+                    + "id_dni_tipo = (select dt.id_dni_tipo from dni_tipos dt where dt.tipo = ? order by dt.id_dni_tipo asc limit 1)";
             sentencia.setInt(1, cliente.getDniNumero());
             sentencia.setString(2, cliente.getDniTipo());
             
@@ -301,7 +302,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             }
             else {
                 sql = "delete from Clientes where dni = ?, "
-                        + "id_dni_tipo = (select first dt.id_dni_tipo from dni_tipos dt where dt.tipo = ?)";
+                        + "id_dni_tipo = (select dt.id_dni_tipo from dni_tipos dt where dt.tipo = ? order by dt.id_dni_tipo asc limit 1)";
                 sentencia = con.prepareStatement(sql);
                 sentencia.setInt(1, cliente.getDniNumero());
                 sentencia.setString(2, cliente.getDniTipo());

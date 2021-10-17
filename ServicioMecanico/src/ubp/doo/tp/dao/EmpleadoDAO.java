@@ -16,17 +16,13 @@ public interface EmpleadoDAO {
     
     void cerrarConexion();
     
-    int buscarIdRol(String rol);
+    EmpleadoDTO buscarEmpleado(int id_empleado);
     
-    int buscarIdEmpleado(String nombre);
+    List<EmpleadoDTO> listarEmleados();
     
-    EmpleadoDTO buscarEspecialidad(String empleado);
+    boolean insertarEmpleado(EmpleadoDTO empleado);
     
-    List<EmpleadoDTO> listarEspecialidades();
+    boolean modificarEmpleado(EmpleadoDTO empleado);
     
-    boolean insertarEspecialidad(EmpleadoDTO empleado);
-    
-    boolean modificarEspecialidad(EmpleadoDTO empleado);
-    
-    boolean borrarEspecialidad(EmpleadoDTO empleado);
+    boolean borrarEmpleado(EmpleadoDTO empleado);
 }

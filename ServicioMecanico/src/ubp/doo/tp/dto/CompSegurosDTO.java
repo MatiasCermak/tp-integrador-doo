@@ -11,13 +11,24 @@ package ubp.doo.tp.dto;
  */
 public class CompSegurosDTO {
     
+    private int id_comp_seguros;
+    
     private String nombre;
 
     public CompSegurosDTO() {
     }
 
-    public CompSegurosDTO(String nombre) {
+    public CompSegurosDTO(int id_comp_seguros, String nombre) {
+        this.id_comp_seguros = id_comp_seguros;
         this.nombre = nombre;
+    }
+
+    public int getId_comp_seguros() {
+        return id_comp_seguros;
+    }
+
+    public void setId_comp_seguros(int id_comp_seguros) {
+        this.id_comp_seguros = id_comp_seguros;
     }
 
     public String getNombre() {
@@ -27,5 +38,4 @@ public class CompSegurosDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
 }

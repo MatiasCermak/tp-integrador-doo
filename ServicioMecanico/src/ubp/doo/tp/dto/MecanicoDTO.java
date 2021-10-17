@@ -12,25 +12,17 @@ import java.util.ArrayList;
  */
 public class MecanicoDTO extends EmpleadoDTO{
     
-    private EspecialidadDTO especialidad;
+    private int id_especialidad;
     
     private float costoHora;
 
     public MecanicoDTO() {
     }
 
-    public MecanicoDTO(EspecialidadDTO especialidad, float costoHora, float salario, String rol, String nombre, String apellido, String dniTipo, int dniNumero) {
-        super(salario, rol,nombre, apellido, dniTipo, dniNumero);
-        this.especialidad = especialidad;
+    public MecanicoDTO(int id_especialidad, float costoHora, int id_empleado, float salario, String rol, String nombre, String apellido, String dniTipo, int dniNumero) {
+        super(id_empleado, salario, rol, nombre, apellido, dniTipo, dniNumero);
+        this.id_especialidad = id_especialidad;
         this.costoHora = costoHora;
-    }
-
-    public EspecialidadDTO getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(EspecialidadDTO especialidad) {
-        this.especialidad = especialidad;
     }
 
     public float getCostoHora() {

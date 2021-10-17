@@ -11,19 +11,30 @@ package ubp.doo.tp.dto;
  */
 public class UsuarioDTO {
     
+    private int id_usuario;
+    
     private String user;
     
     private String password;
     
-    private EmpleadoDTO empleado;
+    private int id_empleado;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(String user, String password, EmpleadoDTO empleado) {
+    public UsuarioDTO(int id_usuario, String user, String password, int id_empleado) {
+        this.id_usuario = id_usuario;
         this.user = user;
         this.password = password;
-        this.empleado = empleado;
+        this.id_empleado = id_empleado;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getUser() {
@@ -42,11 +53,11 @@ public class UsuarioDTO {
         this.password = password;
     }
 
-    public EmpleadoDTO getEmpleado() {
-        return empleado;
+    public int getId_empleado() {
+        return id_empleado;
     }
 
-    public void setEmpleado(EmpleadoDTO empleado) {
-        this.empleado = empleado;
+    public void setId_empleado(int id_empleado) {
+        this.id_empleado = id_empleado;
     }
 }

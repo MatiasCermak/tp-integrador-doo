@@ -11,30 +11,38 @@ package ubp.doo.tp.dto;
  */
 public class DetalleDTO {
     
-    private MaterialDTO Material;
+    private int id_detalle;
+    
+    private int id_material;
     
     private int cantidad;
     
-    private FichaDTO ficha;
-    
-    private int idOperacion;
+    private int id_ficha;
 
     public DetalleDTO() {
     }
 
-    public DetalleDTO(MaterialDTO Material, int cantidad, FichaDTO Ficha, int idOperacion) {
-        this.Material = Material;
+    public DetalleDTO(int id_detalle, int id_material, int cantidad, int id_ficha) {
+        this.id_detalle = id_detalle;
+        this.id_material = id_material;
         this.cantidad = cantidad;
-        this.ficha = Ficha;
-        this.idOperacion = idOperacion;
+        this.id_ficha = id_ficha;
     }
 
-    public MaterialDTO getMaterial() {
-        return Material;
+    public int getId_detalle() {
+        return id_detalle;
     }
 
-    public void setMaterial(MaterialDTO Material) {
-        this.Material = Material;
+    public void setId_detalle(int id_detalle) {
+        this.id_detalle = id_detalle;
+    }
+
+    public int getId_material() {
+        return id_material;
+    }
+
+    public void setId_material(int id_material) {
+        this.id_material = id_material;
     }
 
     public int getCantidad() {
@@ -45,19 +53,11 @@ public class DetalleDTO {
         this.cantidad = cantidad;
     }
 
-    public FichaDTO getFicha() {
-        return ficha;
+    public int getId_ficha() {
+        return id_ficha;
     }
 
-    public void setFicha(FichaDTO Ficha) {
-        this.ficha = Ficha;
-    }
-
-    public int getIdOperacion() {
-        return idOperacion;
-    }
-
-    public void setIdOperacion(int idOperacion) {
-        this.idOperacion = idOperacion;
+    public void setId_ficha(int id_ficha) {
+        this.id_ficha = id_ficha;
     }
 }
