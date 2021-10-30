@@ -20,6 +20,8 @@ public interface EmpleadoDAO {
     
     List<EmpleadoDTO> listarEmleados();
     
+    List<EmpleadoDTO> filtrarEmpleados(String filtro);
+    
     boolean insertarEmpleado(EmpleadoDTO empleado);
     
     boolean modificarEmpleado(EmpleadoDTO empleado);

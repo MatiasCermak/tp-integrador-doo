@@ -9,12 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import ubp.doo.tp.dto.ClienteDTO;
 
@@ -136,8 +132,8 @@ public class ClienteDAOImplSql implements ClienteDAO {
                     + "from clientes c "
                     + "join dni_tipos dt "
                     + "on dt.id_dni_tipo = c.id_dni_tipo "
-                    + "where c.nombre like '%"+filtro+"%' "
-                    + "order by c.nombre";
+                    + "where c.nombre like '%"+filtro+"%' or c.apellido like '%"+filtro+"%' "
+                    + "order by c.apellido";
             sentencia = con.prepareStatement(sql);
             
             rs = sentencia.executeQuery();
@@ -232,7 +228,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
             
             int resultado = sentencia.executeUpdate();
             
-            result = (resultado > 0);
+            result = (resultado > 0);            
         } catch (SQLException e) {
             System.err.println(e);
         } finally {

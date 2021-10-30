@@ -9,12 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import ubp.doo.tp.dto.EspecialidadDTO;
 
@@ -44,15 +40,12 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "SELECT especialidad FROM especialidades WHERE especialidad = ?";
+            String sql = "SELECT id_especialidad FROM especialidades WHERE especialidad = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1,especialidad);
             
-            String esp;
-            
             while (rs.next()){
-                esp = rs.getString("especialidad");
-                r = new EspecialidadDTO(esp);
+                r = new EspecialidadDTO(rs.getInt("id_especialidad"), especialidad);
                 break;
             }
         }
@@ -80,16 +73,13 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
         
         try{
             con = conexion.getConnection();
-            String sql = "SELECT especialidad FROM especialidades";
+            String sql = "SELECT id_especialidad, especialidad FROM especialidades";
             sentencia = con.prepareStatement(sql);
             
             rs = sentencia.executeQuery();
             
-            String esp;
-            
             while(rs.next()){
-                esp = rs.getString("especialidad");
-                lista.add(new EspecialidadDTO(esp));
+                lista.add(new EspecialidadDTO(rs.getInt("id_especialidad"), rs.getString("especialidad")));
             }
         }
         catch (SQLException e){
@@ -111,6 +101,7 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
     public boolean insertarEspecialidad(EspecialidadDTO especialidad) {
         Connection con = null;
         PreparedStatement sentencia = null;
+        ResultSet rs = null;
         boolean r = false;
         
         try {
@@ -121,6 +112,16 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             int resultado = sentencia.executeUpdate();
             
             r = (resultado > 0);
+            
+            if (r){
+                sql = "SELEC id_especialidad FROM especialidades ORDER BY id_especialidades DESC LIMIT 1";
+                sentencia = con.prepareStatement(sql);
+                rs = sentencia.executeQuery();
+                
+                if (rs.next()){
+                    especialidad.setId_especialidad(rs.getInt("id_especialidad"));
+                }
+            }
         }
         catch (SQLException e){
             System.err.println(e);
@@ -137,7 +138,7 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
     }
 
     @Override
-    public boolean modificarEspecialidad(EspecialidadDTO especialidad, String ex_esp) {
+    public boolean modificarEspecialidad(EspecialidadDTO especialidad) {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
@@ -145,13 +146,9 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
         
         try{
             con = conexion.getConnection();
-            String sql = "SELECT * "
-                    + "FROM mecanicos m "
-                    + "JOIN especialidades e "
-                    + "ON e.id_especialidad = m.id_especialidad "
-                    + "WHERE e.especialidad = ?";
+            String sql = "SELECT * FROM mecanicos WHERE id_especialidad = ?";
             sentencia = con.prepareStatement(sql);
-            sentencia.setString(1, ex_esp);
+            sentencia.setInt(1, especialidad.getId_especialidad());
             
             rs = sentencia.executeQuery();
             
@@ -168,10 +165,10 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             
             if (confirmar == 0) {
                 sql = "UPDATE especialidades SET especialidad = ? "
-                        + "WHERE id_especialidad = (SELECT FIRST e.id_especialidad FROM especialidades e WHERE e.especialidad = ?)";
+                        + "WHERE id_especialidad = ?";
                 sentencia = con.prepareStatement(sql);
                 sentencia.setString(1, especialidad.getNombre());
-                sentencia.setString(2, ex_esp);
+                sentencia.setInt(2, especialidad.getId_especialidad());
 
                 int resultado = sentencia.executeUpdate();
 
@@ -201,13 +198,9 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
         
         try{
             con = conexion.getConnection();
-            String sql = "SELECT * "
-                    + "FROM mecanicos m "
-                    + "JOIN especialidades e "
-                    + "ON e.id_especialidad = m. id_especialidad "
-                    + "WHERE e.especialidad = ?";
+            String sql = "SELECT * FROM mecanicos WHERE id_especialidad = ?";
             sentencia = con.prepareStatement(sql);
-            sentencia.setString(1, especialidad.getNombre());
+            sentencia.setInt(1, especialidad.getId_especialidad());
             
             rs = sentencia.executeQuery();
             
@@ -221,9 +214,9 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
                 JOptionPane.showMessageDialog(null,"Error","No puede eliminar especialidad ya que hay mecanicos asociados a la misma",JOptionPane.ERROR_MESSAGE);
             }
             else {
-                sql = "DELETE especialidades WHERE especialidad = ?";
+                sql = "DELETE especialidades WHERE id_especialidad = ?";
                 sentencia = con.prepareStatement(sql);
-                sentencia.setString(1, especialidad.getNombre());
+                sentencia.setInt(1, especialidad.getId_especialidad());
 
                 int resultado = sentencia.executeUpdate();
 

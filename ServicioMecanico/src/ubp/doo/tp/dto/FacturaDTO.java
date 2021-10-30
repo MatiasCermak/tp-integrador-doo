@@ -6,6 +6,7 @@
 package ubp.doo.tp.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -20,6 +21,8 @@ public class FacturaDTO {
     private float costoTotal;
     
     private float pagoRealizado;
+    
+    private Date fecha;
 
     public FacturaDTO() {
     }
@@ -61,5 +64,13 @@ public class FacturaDTO {
 
     public void setPagoRealizado(float pagoRealizado) {
         this.pagoRealizado = pagoRealizado;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }
