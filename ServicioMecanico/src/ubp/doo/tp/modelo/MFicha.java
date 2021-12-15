@@ -12,7 +12,7 @@ import ubp.doo.tp.dao.FichaDAO;
  *
  * @author bettic
  */
-public class MFicha {
+public class MFicha extends Modelo {
 	private final FabricaDAO fabricaDao;
     private final FichaDAO fichaDao;
     

@@ -16,7 +16,7 @@ import ubp.doo.tp.dto.FacturaDTO;
  *
  * @author bettic
  */
-public class MFactura {
+public class MFactura extends Modelo {
 	private final FabricaDAO fabricaDao;
     private final FacturaDAO facturaDao;
     

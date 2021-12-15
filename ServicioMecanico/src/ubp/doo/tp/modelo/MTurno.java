@@ -12,7 +12,7 @@ import ubp.doo.tp.dao.TurnoDAO;
  *
  * @author bettic
  */
-public class MTurno {
+public class MTurno extends Modelo {
 	private final FabricaDAO fabricaDao;
     private final TurnoDAO turnoDao;
     

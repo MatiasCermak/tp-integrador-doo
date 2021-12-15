@@ -3,9 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/FacturaDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/FacturaDTO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/FacturaDAO.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaRegCliente.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/modelo/MFicha.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaSysAdmin.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/test/Test/ListarClientesTest.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaMenuTaller.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaRegUsuario.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/RegTurnoFr.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaSelCli.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/main/Main.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaCrearFicha.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/RegClienteFr.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaRegTurno.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaMenuAdm.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/test/Test/SeleccionarClienteTest.java</file>
         </group>
     </open-files>
 </project-private>

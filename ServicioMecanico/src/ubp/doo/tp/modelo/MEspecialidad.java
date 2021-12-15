@@ -15,7 +15,7 @@ import ubp.doo.tp.dto.EspecialidadDTO;
  *
  * @author bettic
  */
-public class MEspecialidad {
+public class MEspecialidad extends Modelo {
 	private final FabricaDAO fabricaDao;
     private final EspecialidadDAO especialidadDao;
     
