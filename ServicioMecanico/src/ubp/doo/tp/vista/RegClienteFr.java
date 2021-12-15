@@ -79,11 +79,11 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
         cmbDniTipo.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
 
         btnCancelar.setText("Cancelar");
-        btnCancelar.setActionCommand("CANCELREGCLI");
+        btnCancelar.setActionCommand("RCCANCELAR");
 
         btnSiguiente.setText("Siguiente");
         btnSiguiente.setToolTipText("");
-        btnSiguiente.setActionCommand("NUEVOVEHI");
+        btnSiguiente.setActionCommand("RCNUEVOVEHI");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,7 +171,7 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
     public void setControlador(Controlador c) {
         this.btnCancelar.addActionListener(c);
         this.btnSiguiente.addActionListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.CARGARREGCLI.toString()));  
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.RCCARGAR.toString()));  
     }
     
     @Override

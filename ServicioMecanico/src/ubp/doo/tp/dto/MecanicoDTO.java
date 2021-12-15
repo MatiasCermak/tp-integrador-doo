@@ -12,28 +12,17 @@ import java.util.ArrayList;
  */
 public class MecanicoDTO extends EmpleadoDTO{
     
-    private EspecialidadDTO especialidad;
+    private int id_especialidad;
     
     private float costoHora;
-    
-    private AgendaDTO agenda;
 
     public MecanicoDTO() {
     }
 
-    public MecanicoDTO(EspecialidadDTO especialidad, float costoHora, AgendaDTO agenda, float salario, String rol, UsuarioDTO usuario, String nombre, String apellido, int dniTipo, int dniNumero) {
-        super(salario, rol, usuario, nombre, apellido, dniTipo, dniNumero);
-        this.especialidad = especialidad;
+    public MecanicoDTO(int id_especialidad, float costoHora, int id_empleado, float salario, String rol, String nombre, String apellido, String dniTipo, int dniNumero) {
+        super(id_empleado, salario, rol, nombre, apellido, dniTipo, dniNumero);
+        this.id_especialidad = id_especialidad;
         this.costoHora = costoHora;
-        this.agenda = agenda;
-    }
-
-    public EspecialidadDTO getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(EspecialidadDTO especialidad) {
-        this.especialidad = especialidad;
     }
 
     public float getCostoHora() {
@@ -43,13 +32,4 @@ public class MecanicoDTO extends EmpleadoDTO{
     public void setCostoHora(float costoHora) {
         this.costoHora = costoHora;
     }
-
-    public AgendaDTO getAgenda() {
-        return agenda;
-    }
-
-    public void setAgenda(AgendaDTO agenda) {
-        this.agenda = agenda;
-    }
-    
 }

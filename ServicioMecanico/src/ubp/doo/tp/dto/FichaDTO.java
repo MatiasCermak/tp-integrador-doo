@@ -13,34 +13,41 @@ import java.util.ArrayList;
  */
 public class FichaDTO {
     
-    private TurnoDTO turno;
+    private int id_ficha;
+    
+    private int id_turno;
     
     private boolean conformidad;
     
     private String motivoConformidad;
     
     private String etapa;
-    
-    private ArrayList<DetalleDTO> detalles;
-    
-    private ArrayList<String> actividades;
 
     public FichaDTO() {
     }
 
-    public FichaDTO(TurnoDTO turno, boolean conformidad, String motivoConformidad, String etapa) {
-        this.turno = turno;
+    public FichaDTO(int id_ficha, int id_turno, boolean conformidad, String motivoConformidad, String etapa) {
+        this.id_ficha = id_ficha;
+        this.id_turno = id_turno;
         this.conformidad = conformidad;
         this.motivoConformidad = motivoConformidad;
         this.etapa = etapa;
     }
 
-    public TurnoDTO getTurno() {
-        return turno;
+    public int getId_ficha() {
+        return id_ficha;
     }
 
-    public void setTurno(TurnoDTO turno) {
-        this.turno = turno;
+    public void setId_ficha(int id_ficha) {
+        this.id_ficha = id_ficha;
+    }
+
+    public int getId_turno() {
+        return id_turno;
+    }
+
+    public void setId_turno(int id_turno) {
+        this.id_turno = id_turno;
     }
 
     public boolean isConformidad() {
@@ -65,21 +72,5 @@ public class FichaDTO {
 
     public void setEtapa(String etapa) {
         this.etapa = etapa;
-    }
-
-    public ArrayList<DetalleDTO> getDetalles() {
-        return detalles;
-    }
-
-    public ArrayList<String> getActividades() {
-        return actividades;
-    }
-    
-    public void agregarDetalle (DetalleDTO detalle){
-        this.detalles.add(detalle);
-    }
-    
-    public void agregarActividad (String actividad){
-        this.actividades.add(actividad);
     }
 }

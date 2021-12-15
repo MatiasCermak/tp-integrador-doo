@@ -11,7 +11,7 @@ import ubp.doo.tp.controlador.Controlador;
  *
  * @author tomas
  */
-public interface InterfazVistaSelCli extends InterfazVista{
+public interface InterfazVistaSelCli extends InterfazVistaFlujoTurno{
         
     void actualizaTabla(Controlador c);
 }

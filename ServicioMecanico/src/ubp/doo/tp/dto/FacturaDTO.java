@@ -6,6 +6,7 @@
 package ubp.doo.tp.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -13,29 +14,40 @@ import java.util.ArrayList;
  */
 public class FacturaDTO {
     
-    private CompSegurosDTO aseguradora;
+    private int id_factura;
     
-    private ArrayList<String> servicios;
+    private int id_comp_seguros;
     
     private float costoTotal;
     
     private float pagoRealizado;
+    
+    private Date fecha;
 
     public FacturaDTO() {
     }
 
-    public FacturaDTO(CompSegurosDTO aseguradora, float costoTotal, float pagoRealizado) {
-        this.aseguradora = aseguradora;
+    public FacturaDTO(int id_factura, int id_comp_seguros, float costoTotal, float pagoRealizado) {
+        this.id_factura = id_factura;
+        this.id_comp_seguros = id_comp_seguros;
         this.costoTotal = costoTotal;
         this.pagoRealizado = pagoRealizado;
     }
 
-    public CompSegurosDTO getAseguradora() {
-        return aseguradora;
+    public int getId_factura() {
+        return id_factura;
     }
 
-    public void setAseguradora(CompSegurosDTO aseguradora) {
-        this.aseguradora = aseguradora;
+    public void setId_factura(int id_factura) {
+        this.id_factura = id_factura;
+    }
+
+    public int getId_comp_seguros() {
+        return id_comp_seguros;
+    }
+
+    public void setId_comp_seguros(int id_comp_seguros) {
+        this.id_comp_seguros = id_comp_seguros;
     }
 
     public float getCostoTotal() {
@@ -54,11 +66,11 @@ public class FacturaDTO {
         this.pagoRealizado = pagoRealizado;
     }
 
-    public ArrayList<String> getServicios() {
-        return servicios;
+    public Date getFecha() {
+        return fecha;
     }
-    
-    public void agregarServicio (String servicio){
-        this.servicios.add(servicio);
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }

@@ -11,24 +11,16 @@ package ubp.doo.tp.dto;
  */
 public class EspecialidadDTO {
     
+    private int id_especialidad;
+    
     private String nombre;
     
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public EspecialidadDTO() {
     }
 
-    public EspecialidadDTO(String nombre, int id) {
+    public EspecialidadDTO(int id_especialidad, String nombre) {
+        this.id_especialidad = id_especialidad;
         this.nombre = nombre;
-        this.id = id;
     }
 
     public String getNombre() {
@@ -37,6 +29,14 @@ public class EspecialidadDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getId_especialidad() {
+        return id_especialidad;
+    }
+
+    public void setId_especialidad(int id_especialidad) {
+        this.id_especialidad = id_especialidad;
     }
     
 }

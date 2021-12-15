@@ -27,11 +27,11 @@ public abstract class Persona {
         this.nombre = nombre;
     }
 
-    public int getDniTipo() {
+    public String getDniTipo() {
         return dniTipo;
     }
 
-    public void setDniTipo(int dniTipo) {
+    public void setDniTipo(String dniTipo) {
         this.dniTipo = dniTipo;
     }
 
@@ -46,7 +46,7 @@ public abstract class Persona {
     public Persona() {
     }
 
-    public Persona(String nombre, String apellido, int dniTipo, int dniNumero) {
+    public Persona(String nombre, String apellido, String dniTipo, int dniNumero) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dniTipo = dniTipo;
@@ -55,7 +55,7 @@ public abstract class Persona {
     
     private String nombre;
     private String apellido;
-    private int dniTipo;
+    private String dniTipo;
     private int dniNumero;
     
     

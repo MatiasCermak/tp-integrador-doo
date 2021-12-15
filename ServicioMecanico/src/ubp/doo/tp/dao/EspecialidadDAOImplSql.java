@@ -9,12 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import ubp.doo.tp.dto.EspecialidadDTO;
 
@@ -44,17 +40,12 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "SELECT especialidad FROM especialidades WHERE especialidad = ?";
+            String sql = "SELECT id_especialidad FROM especialidades WHERE especialidad = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1,especialidad);
             
-            String esp;
-            int id;
-            
             while (rs.next()){
-                esp = rs.getString("especialidad");
-                id = rs.getInt("id_especialidad");
-                r = new EspecialidadDTO(esp,id);
+                r = new EspecialidadDTO(rs.getInt("id_especialidad"), especialidad);
                 break;
             }
         }
@@ -82,18 +73,13 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
         
         try{
             con = conexion.getConnection();
-            String sql = "SELECT especialidad FROM especialidades";
+            String sql = "SELECT id_especialidad, especialidad FROM especialidades";
             sentencia = con.prepareStatement(sql);
             
             rs = sentencia.executeQuery();
             
-            String esp;
-            int id;
-            
             while(rs.next()){
-                esp = rs.getString("especialidad");
-                id = rs.getInt("id_especialidad");
-                lista.add(new EspecialidadDTO(esp,id));
+                lista.add(new EspecialidadDTO(rs.getInt("id_especialidad"), rs.getString("especialidad")));
             }
         }
         catch (SQLException e){
@@ -115,6 +101,7 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
     public boolean insertarEspecialidad(EspecialidadDTO especialidad) {
         Connection con = null;
         PreparedStatement sentencia = null;
+        ResultSet rs = null;
         boolean r = false;
         
         try {
@@ -125,6 +112,16 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             int resultado = sentencia.executeUpdate();
             
             r = (resultado > 0);
+            
+            if (r){
+                sql = "SELEC id_especialidad FROM especialidades ORDER BY id_especialidades DESC LIMIT 1";
+                sentencia = con.prepareStatement(sql);
+                rs = sentencia.executeQuery();
+                
+                if (rs.next()){
+                    especialidad.setId_especialidad(rs.getInt("id_especialidad"));
+                }
+            }
         }
         catch (SQLException e){
             System.err.println(e);
@@ -151,7 +148,7 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             con = conexion.getConnection();
             String sql = "SELECT * FROM mecanicos WHERE id_especialidad = ?";
             sentencia = con.prepareStatement(sql);
-            sentencia.setInt(1, especialidad.getId());
+            sentencia.setInt(1, especialidad.getId_especialidad());
             
             rs = sentencia.executeQuery();
             
@@ -160,16 +157,18 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             while (rs.next()){
                 cant++;
             }
+            
             int confirmar = 0;
             if (cant > 0){
                 confirmar = JOptionPane.showConfirmDialog(null,"Warning","Está a punto de modificar una especialidad que tiene mecánicos asociados.\nDesea continuar?",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
             }
             
             if (confirmar == 0) {
-                sql = "UPDATE especialidades SET especialidad = ? WHERE id_especialidad = ?";
+                sql = "UPDATE especialidades SET especialidad = ? "
+                        + "WHERE id_especialidad = ?";
                 sentencia = con.prepareStatement(sql);
                 sentencia.setString(1, especialidad.getNombre());
-                sentencia.setInt(2, especialidad.getId());
+                sentencia.setInt(2, especialidad.getId_especialidad());
 
                 int resultado = sentencia.executeUpdate();
 
@@ -201,7 +200,7 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             con = conexion.getConnection();
             String sql = "SELECT * FROM mecanicos WHERE id_especialidad = ?";
             sentencia = con.prepareStatement(sql);
-            sentencia.setInt(1, especialidad.getId());
+            sentencia.setInt(1, especialidad.getId_especialidad());
             
             rs = sentencia.executeQuery();
             
@@ -215,10 +214,9 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
                 JOptionPane.showMessageDialog(null,"Error","No puede eliminar especialidad ya que hay mecanicos asociados a la misma",JOptionPane.ERROR_MESSAGE);
             }
             else {
-                sql = "UDELETE especialidades WHERE id_especialidad = ?";
+                sql = "DELETE especialidades WHERE id_especialidad = ?";
                 sentencia = con.prepareStatement(sql);
-                sentencia.setString(1, especialidad.getNombre());
-                sentencia.setInt(2, especialidad.getId());
+                sentencia.setInt(1, especialidad.getId_especialidad());
 
                 int resultado = sentencia.executeUpdate();
 

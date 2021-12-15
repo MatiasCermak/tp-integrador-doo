@@ -5,13 +5,20 @@
  */
 package ubp.doo.tp.dto;
 
+import ubp.doo.tp.dao.CompSegurosDAO;
+import ubp.doo.tp.dao.CompSegurosDAOImplSql;
+
 /**
  *
  * @author tomas
  */
 public class VehiculoDTO {
     
-    private CompSegurosDTO aseguradora;
+    private int id_comp_seguros;
+    
+    private int dni_cliente;
+    
+    private String dniTipo_cliente;
     
     private int poliza;
     
@@ -24,20 +31,38 @@ public class VehiculoDTO {
     public VehiculoDTO() {
     }
 
-    public VehiculoDTO(CompSegurosDTO aseguradora, int poliza, String matricula, String modelo, String marca) {
-        this.aseguradora = aseguradora;
+    public VehiculoDTO(int id_comp_seguros, int dni_cliente, String dniTipo_cliente, int poliza, String matricula, String modelo, String marca) {
+        this.id_comp_seguros = id_comp_seguros;
+        this.dni_cliente = dni_cliente;
+        this.dniTipo_cliente = dniTipo_cliente;
         this.poliza = poliza;
         this.matricula = matricula;
         this.modelo = modelo;
         this.marca = marca;
     }
 
-    public CompSegurosDTO getAseguradora() {
-        return aseguradora;
+    public int getId_comp_seguros() {
+        return id_comp_seguros;
     }
 
-    public void setAseguradora(CompSegurosDTO aseguradora) {
-        this.aseguradora = aseguradora;
+    public void setId_comp_seguros(int id_comp_seguros) {
+        this.id_comp_seguros = id_comp_seguros;
+    }
+
+    public int getDni_cliente() {
+        return dni_cliente;
+    }
+
+    public void setDni_cliente(int dni_cliente) {
+        this.dni_cliente = dni_cliente;
+    }
+
+    public String getDniTipo_cliente() {
+        return dniTipo_cliente;
+    }
+
+    public void setDniTipo_cliente(String dniTipo_cliente) {
+        this.dniTipo_cliente = dniTipo_cliente;
     }
 
     public int getPoliza() {
@@ -71,5 +96,4 @@ public class VehiculoDTO {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    
 }

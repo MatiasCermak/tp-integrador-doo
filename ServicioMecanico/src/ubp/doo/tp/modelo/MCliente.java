@@ -59,8 +59,8 @@ public class MCliente extends Modelo {
         return clienteDao.listarTiposDNI();
     }
     
-    public String buscarTipoDni(int idTipo){
-        return clienteDao.buscarTipoDni(idTipo);
+    public String clienteToStr(ClienteDTO cliente){
+        return cliente.getNombre()+" "+cliente.getApellido()+", "+cliente.getDniTipo()+"= "+cliente.getDniNumero();
     }
     
     @Override

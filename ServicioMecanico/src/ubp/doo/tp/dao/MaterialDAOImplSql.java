@@ -27,68 +27,45 @@ public class MaterialDAOImplSql implements MaterialDAO {
     private ConexionSql conexion = null;
     
     public MaterialDAOImplSql(){
-        this.conexion = ConexionSql.getInstancia();
-    }
-
-    @Override
-    public void cerrarConexion() {
-        this.conexion.desconectar();
-    }
-
-    @Override
-    public String buscarTipoMat(int id){
-        Connection con = null;
-        PreparedStatement sentencia = null;
-        ResultSet rs = null;
-        String tMaterial = null;
-        
-        try{
-            con = conexion.getConnection();
-            String sql = "SELECT tipo_material FROM tipos_mat WHERE id_tipo_mat = ?";
-            sentencia = con.prepareStatement(sql);
-            sentencia.setInt(1, id);
-            
-            rs = sentencia.executeQuery();
-            
-            while (rs.next()){
-                tMaterial = rs.getString("tipo_material");
-            }
-        }
-        catch (SQLException e){
-            System.err.println(e);
-        }
-        finally {
-            try{
-                rs.close();
-                sentencia.close();
-            }
-            catch (SQLException ex){
-                System.err.println(ex);
-            }
-        }
-        
-        return tMaterial;
+        conexion = ConexionSql.getInstancia();
     }
     
     @Override
-    public int buscarIdTipoMat(String nombre){
+    public void cerrarConexion(){
+        conexion.desconectar();
+    }
+    
+    @Override
+    public MaterialDTO buscarMaterial(String nombre){
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        int id = -1;
+        MaterialDTO material = null;
         
         try {
             con = conexion.getConnection();
-            String sql = "SELECT id_tipo_mat FROM tipos_mat WHERE tipo_material = ?";
+            String sql = "SELECT m.nombre, t.tipo_material, m.precio, m.medida\n" +
+                         "FROM materiales m\n" +
+                         "JOIN tipos_mat t\n" +
+                         "ON m.id_tipo_mat = t.id_tipo_mat\n" +
+                         "WHERE m.nombre = ?";
             sentencia = con.prepareStatement(sql);
-            sentencia.setString(1,nombre);
+            sentencia.setString(1, nombre);
             
             rs = sentencia.executeQuery();
             
-            while (rs.next()){
-                id = rs.getInt("id_tipo_mat");
-                break;
+            String nom = null;
+            String tipoMat = null;
+            String medida = null;
+            float precio = 0;
+            
+            while(rs.next()){
+                nom = rs.getString("nombre");
+                tipoMat = rs.getString("tipo_material");
+                precio = rs.getFloat("precio");
+                medida = rs.getString("medida");
             }
+            material = new MaterialDTO(nom,tipoMat,precio,medida);
         }
         catch (SQLException e){
             System.err.println(e);
@@ -102,28 +79,86 @@ public class MaterialDAOImplSql implements MaterialDAO {
                 System.err.println(ex);
             }
         }
-        
-        return id;
+        return material;
     }
     
     @Override
-    public int buscarIdMaterial(String nombre){
+    public MaterialDTO buscarMaterial(String nombre, String tipo){
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        int idM = -1;
+        MaterialDTO material = null;
         
-        try{
+        try {
             con = conexion.getConnection();
-            String sql = "SELECT id_material FROM materiales WHERE nombre = ?";
+            String sql = "SELECT m.nombre, t.tipo_material, m.precio, m.medida\n" +
+                         "FROM materiales m\n" +
+                         "JOIN tipos_mat t\n" +
+                         "ON m.id_tipo_mat = t.id_tipo_mat\n" +
+                         "WHERE m.nombre = ? AND t.tipo_material = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, nombre);
+            sentencia.setString(2, tipo);
             
             rs = sentencia.executeQuery();
             
+            String nom = null;
+            String tipoMat = null;
+            String medida = null;
+            float precio = 0;
+            
+            while(rs.next()){
+                nom = rs.getString("nombre");
+                tipoMat = rs.getString("tipo_material");
+                precio = rs.getFloat("precio");
+                medida = rs.getString("medida");
+            }
+            material = new MaterialDTO(nom,tipoMat,precio,medida);
+        }
+        catch (SQLException e){
+            System.err.println(e);
+        }
+        finally{
+            try{
+                rs.close();
+                sentencia.close();
+            }
+            catch (SQLException ex){
+                System.err.println(ex);
+            }
+        }
+        return material;
+    }
+    
+    @Override
+    public List<MaterialDTO> listarMateriales(){
+        Connection con = null;
+        PreparedStatement sentencia = null;
+        ResultSet rs = null;
+        List<MaterialDTO> materiales = new ArrayList<MaterialDTO>();
+        
+        try {
+            con = conexion.getConnection();
+            String sql = "SELECT m.nombre, t.tipo_material, m.precio, m.medida\n" +
+                         "FROM materiales m\n" +
+                         "JOIN tipos_mat t\n" +
+                         "ON m.id_tipo_mat = t.id_tipo_mat\n";
+            sentencia = con.prepareStatement(sql);
+            
+            rs = sentencia.executeQuery();
+            
+            String nom = null;
+            String tipoMat = null;
+            String medida = null;
+            float precio = 0;
+            
             while (rs.next()){
-                idM = rs.getInt("id_material");
-                break;
+                nom = rs.getString("nombre");
+                tipoMat = rs.getString("tipo_material");
+                precio = rs.getFloat("precio");
+                medida = rs.getString("medida");
+                
+                materiales.add(new MaterialDTO(nom,tipoMat,precio,medida));
             }
         }
         catch (SQLException e){
@@ -139,40 +174,39 @@ public class MaterialDAOImplSql implements MaterialDAO {
             }
         }
         
-        return idM;
+        return materiales;
     }
     
     @Override
-    public MaterialDTO buscarMaterial(String nombre) {
+    public List<MaterialDTO> listarMateriales(String filtro){
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        MaterialDTO material = null;
+        List<MaterialDTO> materiales = new ArrayList<MaterialDTO>();
         
         try {
             con = conexion.getConnection();
-            String sql = "SELECT * FROM materiales WHERE nombre = ?";
+            String sql = "SELECT m.nombre, t.tipo_material, m.precio, m.medida\n" +
+                         "FROM materiales m\n" +
+                         "JOIN tipos_mat t\n" +
+                         "ON m.id_tipo_mat = t.id_tipo_mat\n" +
+                         "WHERE m.nombre LIKE '%"+filtro+"%'";
             sentencia = con.prepareStatement(sql);
-            sentencia.setString(1,nombre);
             
             rs = sentencia.executeQuery();
             
-            String nom;
-            String tipo;
-            String medida;
-            float precio;
-            int tipoM;
+            String nom = null;
+            String tipoMat = null;
+            String medida = null;
+            float precio = 0;
             
             while (rs.next()){
                 nom = rs.getString("nombre");
-                tipoM = rs.getInt("id_tipo_mat");
-                medida = rs.getString("medida");
+                tipoMat = rs.getString("tipo_material");
                 precio = rs.getFloat("precio");
+                medida = rs.getString("medida");
                 
-                tipo = buscarTipoMat(tipoM);
-                
-                material = new MaterialDTO(nom,tipo,precio,medida);
-                break;
+                materiales.add(new MaterialDTO(nom,tipoMat,precio,medida));
             }
         }
         catch (SQLException e){
@@ -188,74 +222,100 @@ public class MaterialDAOImplSql implements MaterialDAO {
             }
         }
         
-        return material;
+        return materiales;
     }
-
+    
     @Override
-    public List<MaterialDTO> listarMateriales() {
+    public boolean insertarMaterial(MaterialDTO material){
+        boolean result = false;
         Connection con = null;
         PreparedStatement sentencia = null;
-        ResultSet rs = null;
-        List<MaterialDTO> lista = new ArrayList<MaterialDTO>();
+        
+        try {
+            con = conexion.getConnection();
+            String sql = "INSERT INTO materiales (nombre,id_tipo_mat,precio,medida) "
+                       + "VALUES (?,(SELECT id_tipo_mat FROM tipos_mat WHERE tipo_material = ? LIMIT 1),?,?)";
+            sentencia = con.prepareStatement(sql);
+            sentencia.setString(1,material.getNombre());
+            sentencia.setString(2,material.getTipo());
+            sentencia.setFloat(3, material.getPrecio());
+            sentencia.setString(4,material.getMedida());
+            
+            int r = sentencia.executeUpdate();
+            
+            result = (r > 0);
+        }
+        catch (SQLException e){
+            System.err.println(e);
+        }
+        finally {
+            try{
+                sentencia.close();
+            }
+            catch (SQLException ex){
+                System.err.println(ex);
+            }
+        }
+        
+        return result;
+    }
+    
+    @Override
+    public boolean modificarMaterial(MaterialDTO material, String nombre, String tipo){
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement sentencia = null;
+        
+        try {
+            con = conexion.getConnection();
+            String sql = "UPDATE TABLE materiales "
+                       + "SET nombre = ?, id_tipo_mat = (SELECT id_tipo_mat FROM tipos_mat WHERE material = ? LIMIT 1), precio = ?, medida = ?"
+                       + "WHERE nombre = ? ADN "
+                    + "id_tipo_mat = (SELECT FIRST tm.id_tipo_mat FROM tipos_mat tm WHERE tm.tipo_material = ?)";
+            sentencia = con.prepareStatement(sql);
+            sentencia.setString(1, material.getNombre());
+            sentencia.setString(2, material.getTipo());
+            sentencia.setFloat(3, material.getPrecio());
+            sentencia.setString(4, material.getMedida());
+            sentencia.setString(5, nombre);
+            sentencia.setString(6, tipo);
+            
+            int r = sentencia.executeUpdate();
+            
+            result = (r > 0);
+        }
+        catch(SQLException e){
+            System.err.println(e);
+        }
+        finally {
+            try{
+                sentencia.close();
+            }
+            catch(SQLException ex){
+                System.err.println(ex);
+            }
+        }
+        
+        return result;
+    }
+    
+    @Override
+    public boolean borrarMaterial(MaterialDTO material){
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement sentencia = null;
         
         try{
             con = conexion.getConnection();
-            String sql = "SELECT * FROM materiales";
+            String sql = "DELETE materiales WHERE nombre = ? AND id_tipo_mat = "
+                    + "(SELECT FIRST tm.id_tipo_mat FROM tipos_mat tm WHERE tipo_material = ?)";
             sentencia = con.prepareStatement(sql);
+            sentencia.setString(1, material.getNombre());
+            sentencia.setString(2, material.getTipo());
             
-            rs = sentencia.executeQuery();
+            int r = sentencia.executeUpdate();
             
-            String nom;
-            String tipo;
-            String medida;
-            float precio;
-            int tipoM;
-            
-            while (rs.next()){
-                nom = rs.getString("nombre");
-                tipoM = rs.getInt("id_tipo_mat");
-                medida = rs.getString("medida");
-                precio = rs.getFloat("precio");
-                
-                tipo = buscarTipoMat(tipoM);
-                
-                lista.add(new MaterialDTO(nom,tipo,precio,medida));
-            }
-        }
-        catch (SQLException e){
-            System.err.println(e);
-        }
-        finally {
-            try{
-                rs.close();
-                sentencia.close();
-            }
-            catch (SQLException ex){
-                System.err.println(ex);
-            }
-        }
-        
-        return lista;
-    }
-
-    @Override
-    public boolean insertarMaterial(MaterialDTO material) {
-        Connection con = null;
-        PreparedStatement sentencia = null;
-        boolean r = false;
-        
-        try {
-            int idTipo = buscarIdTipoMat(material.getTipo());
-            if (idTipo > 0){
-                con = conexion.getConnection();
-                String sql = "INSERT INTO materiales (nombre,id_tipo_mat,precio,medida) VALUES ('"+material.getNombre()+"'"
-                        + ",'"+idTipo+"','"+material.getPrecio()+"','"+material.getMedida()+"')";
-                sentencia = con.prepareStatement(sql);
-                
-                int result = sentencia.executeUpdate();
-                
-                r = (result > 0);
-            }
+            result = (r > 0);
         }
         catch (SQLException e){
             System.err.println(e);
@@ -268,119 +328,6 @@ public class MaterialDAOImplSql implements MaterialDAO {
                 System.err.println(ex);
             }
         }
-        return r;
+        return result;
     }
-
-    @Override
-    public boolean modificarMaterial(MaterialDTO material, String exNombre) {
-        Connection con = null;
-        PreparedStatement sentencia = null;
-        ResultSet rs = null;
-        boolean r = false;
-        
-        try {
-            int idTipo = buscarIdTipoMat(material.getTipo());
-            if (idTipo > 0){
-                con = conexion.getConnection();
-                int id = buscarIdMaterial(exNombre);
-                String sql = "SELECT * FROM detalles WHERE id_material = ?";
-                sentencia = con.prepareStatement(sql);
-                sentencia.setInt(1,id);
-                
-                rs = sentencia.executeQuery();
-                
-                int cant = 0;
-                while(rs.next()){
-                    cant++;
-                }
-                
-                int opc = 0;
-                if (cant > 0){
-                    opc = JOptionPane.showConfirmDialog(null,"Warning","Hay detalles asociados al material que está intentando modificar.\nDesea continuar?",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
-                }
-                
-                if (opc == 0){
-                    sql = "UPDATE materiales SET nombre = ?, id_tipo_mat = ?, precio = ?, medida = ? WHERE id_material = ?";
-                    sentencia = con.prepareStatement(sql);
-                    sentencia.setString(1,material.getNombre());
-                    sentencia.setInt(2, buscarIdTipoMat(material.getTipo()));
-                    sentencia.setFloat(3, material.getPrecio());
-                    sentencia.setString(4, material.getMedida());
-                    sentencia.setInt(5, id);
-                    
-                    int result = sentencia.executeUpdate();
-                
-                    r = (result > 0);
-                }
-                
-            }
-        }
-        catch (SQLException e){
-            System.err.println(e);
-        }
-        finally{
-            try{
-                rs.close();
-                sentencia.close();
-            }
-            catch (SQLException ex){
-                System.err.println(ex);
-            }
-        }
-        return r;
-    }
-
-    @Override
-    public boolean borrarMaterial(MaterialDTO material) {
-        Connection con = null;
-        PreparedStatement sentencia = null;
-        ResultSet rs = null;
-        boolean r = false;
-        
-        try {
-            int idTipo = buscarIdTipoMat(material.getTipo());
-            if (idTipo > 0){
-                con = conexion.getConnection();
-                int id = buscarIdMaterial(material.getNombre());
-                String sql = "SELECT * FROM detalles WHERE id_material = ?";
-                sentencia = con.prepareStatement(sql);
-                sentencia.setInt(1,id);
-                
-                rs = sentencia.executeQuery();
-                
-                int cant = 0;
-                while(rs.next()){
-                    cant++;
-                }
-                
-                if (cant > 0){
-                    JOptionPane.showMessageDialog(null,"Error","No puede eliminar el material ya que hay detalles asociados al mismo",JOptionPane.ERROR_MESSAGE);
-                }
-                else {
-                    sql = "DELETE materiales WHERE id_material = ?";
-                    sentencia = con.prepareStatement(sql);
-                    sentencia.setInt(1, id);
-                    
-                    int result = sentencia.executeUpdate();
-                
-                    r = (result > 0);
-                }
-                
-            }
-        }
-        catch (SQLException e){
-            System.err.println(e);
-        }
-        finally{
-            try{
-                rs.close();
-                sentencia.close();
-            }
-            catch (SQLException ex){
-                System.err.println(ex);
-            }
-        }
-        return r;
-    }
-    
 }

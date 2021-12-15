@@ -13,20 +13,28 @@ import ubp.doo.tp.Utils.Persona;
  */
 public class EmpleadoDTO extends Persona{
     
+    private int id_empleado;
+    
     private float salario;
     
     private String rol;
-    
-    private UsuarioDTO usuario;
 
     public EmpleadoDTO() {
     }
-
-    public EmpleadoDTO(float salario, String rol, UsuarioDTO usuario, String nombre, String apellido, int dniTipo, int dniNumero) {
+    
+    public EmpleadoDTO(int id_empleado, float salario, String rol, String nombre, String apellido, String dniTipo, int dniNumero) {
         super(nombre, apellido, dniTipo, dniNumero);
+        this.id_empleado = id_empleado;
         this.salario = salario;
         this.rol = rol;
-        this.usuario = usuario;
+    }
+
+    public int getId_empleado() {
+        return id_empleado;
+    }
+
+    public void setId_empleado(int id_empleado) {
+        this.id_empleado = id_empleado;
     }
 
     public float getSalario() {
@@ -44,14 +52,4 @@ public class EmpleadoDTO extends Persona{
     public void setRol(String rol) {
         this.rol = rol;
     }
-
-    public UsuarioDTO getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioDTO usuario) {
-        this.usuario = usuario;
-    }
-    
-    
 }

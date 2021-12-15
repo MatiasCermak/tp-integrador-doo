@@ -13,18 +13,30 @@ import java.util.ArrayList;
  */
 public class AgendaDTO {
     
+    private int id_agenda;
+    
     private int horaInicio;
     
     private int horaFin;
     
-    private ArrayList<TurnoDTO> turnos;
-    
-    public void agregarTurno (TurnoDTO t){
-        this.turnos.add(t);
+    private int id_empleado;
+
+    public AgendaDTO() {
     }
 
-    public ArrayList<TurnoDTO> getTurnos() {
-        return turnos;
+    public AgendaDTO(int id_agenda, int horaInicio, int horaFin, int id_empleado) {
+        this.id_agenda = id_agenda;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.id_empleado = id_empleado;
+    }
+
+    public int getId_agenda() {
+        return id_agenda;
+    }
+
+    public void setId_agenda(int id_agenda) {
+        this.id_agenda = id_agenda;
     }
 
     public int getHoraInicio() {
@@ -43,11 +55,11 @@ public class AgendaDTO {
         this.horaFin = horaFin;
     }
 
-    public AgendaDTO(int horaInicio, int horaFin) {
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+    public int getId_empleado() {
+        return id_empleado;
     }
 
-    public AgendaDTO() {
+    public void setId_empleado(int id_empleado) {
+        this.id_empleado = id_empleado;
     }
 }

@@ -14,9 +14,10 @@ import ubp.doo.tp.vista.SelClienteFr;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import ubp.doo.tp.vista.InterfazVista;
 import ubp.doo.tp.vista.InterfazVistaSelCli;
 import ubp.doo.tp.vista.RegClienteFr;
+import ubp.doo.tp.vista.RegTurnoFr;
+import ubp.doo.tp.vista.InterfazVistaFlujoTurno;
 
 /**
  *
@@ -39,17 +40,21 @@ public class Main {
                 
                 Modelo modelo = new MCliente();
                 
-                InterfazVista vistaSelCli = SelClienteFr.getInstancia();
+                InterfazVistaFlujoTurno vistaSelCli = SelClienteFr.getInstancia();
                 
-                InterfazVista vistaRegCli = RegClienteFr.getInstancia();
+                InterfazVistaFlujoTurno vistaRegCli = RegClienteFr.getInstancia();
                 
-                Controlador control = new ControladorFlujoTurnos(vistaSelCli,vistaRegCli,modelo);
+                InterfazVistaFlujoTurno vistaRegTurno = RegTurnoFr.getInstancia();
+                
+                Controlador control = new ControladorFlujoTurnos(vistaSelCli,vistaRegCli,vistaRegTurno,modelo);
                 
                 vistaSelCli.setControlador(control);
                 
                 vistaRegCli.setControlador(control);
                 
-                vistaSelCli.iniciaVista();
+                vistaRegTurno.setControlador(control);
+                
+                vistaRegTurno.iniciaVista();
             }
         });
     }

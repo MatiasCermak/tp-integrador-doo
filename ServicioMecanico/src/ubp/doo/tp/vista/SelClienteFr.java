@@ -102,12 +102,12 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         jScrollPane1.setViewportView(tblClientes);
 
         btnSeleccionar.setText("Seleccionar");
-        btnSeleccionar.setActionCommand("SELCLI");
+        btnSeleccionar.setActionCommand("SCSELCLI");
 
         btnNuevo.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ubp/doo/tp/imagenes/btn_redondo.png"))); // NOI18N
         btnNuevo.setToolTipText("Registrar Nuevo Cliente");
-        btnNuevo.setActionCommand("NUEVOCLI");
+        btnNuevo.setActionCommand("SCNUEVOCLI");
         btnNuevo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevo.setBorderPainted(false);
         btnNuevo.setContentAreaFilled(false);
@@ -121,7 +121,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         });
 
         btnCancelar.setText("Cancelar");
-        btnCancelar.setActionCommand("CANCELSELCLI");
+        btnCancelar.setActionCommand("SCCANCELAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,17 +144,16 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
                                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
+                        .addGap(143, 143, 143)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
@@ -220,7 +219,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         this.btnCancelar.addActionListener(c);
         this.btnNuevo.addActionListener(c);
         this.textSearch.addKeyListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.CARGARSELCLI.toString()));    
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.SCCARGAR.toString()));    
     }
     
     @Override
@@ -240,7 +239,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
     
     @Override
     public void actualizaTabla(Controlador c){
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.CARGARSELCLI.toString()));
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.SCCARGAR.toString()));
     }
     
     public javax.swing.JTable getTblClientes() {

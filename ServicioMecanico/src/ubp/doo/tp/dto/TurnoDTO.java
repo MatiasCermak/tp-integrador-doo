@@ -12,9 +12,13 @@ import java.util.Date;
  */
 public class TurnoDTO {
     
-    private ClienteDTO cliente;
+    private int id_turno;
     
-    private VehiculoDTO vehiculo;
+    private int cliente_dni;
+    
+    private String cliente_dniTipo;
+    
+    private String matricula_vehiculo;
     
     private Date fecha;
     
@@ -23,50 +27,93 @@ public class TurnoDTO {
     private int estado;
     
     private int asistencia;
+    
+    private int id_agenda;
 
-    public TurnoDTO(Date fecha, int hora) {
+    public TurnoDTO() {
+    }
+
+    public TurnoDTO(int id_turno, int cliente_dni, String cliente_dniTipo, String matricula_vehiculo, Date fecha, int hora, int estado, int asistencia, int id_agenda) {
+        this.id_turno = id_turno;
+        this.cliente_dni = cliente_dni;
+        this.cliente_dniTipo = cliente_dniTipo;
+        this.matricula_vehiculo = matricula_vehiculo;
         this.fecha = fecha;
         this.hora = hora;
-        this.estado = 0;
+        this.estado = estado;
+        this.asistencia = asistencia;
+        this.id_agenda = id_agenda;
     }
 
-    public ClienteDTO getCliente() {
-        return cliente;
+    public int getId_turno() {
+        return id_turno;
     }
 
-    public VehiculoDTO getVehiculo() {
-        return vehiculo;
+    public void setId_turno(int id_turno) {
+        this.id_turno = id_turno;
+    }
+
+    public int getCliente_dni() {
+        return cliente_dni;
+    }
+
+    public void setCliente_dni(int cliente_dni) {
+        this.cliente_dni = cliente_dni;
+    }
+
+    public String getCliente_dniTipo() {
+        return cliente_dniTipo;
+    }
+
+    public void setCliente_dniTipo(String cliente_dniTipo) {
+        this.cliente_dniTipo = cliente_dniTipo;
+    }
+
+    public String getMatricula_vehiculo() {
+        return matricula_vehiculo;
+    }
+
+    public void setMatricula_vehiculo(String matricula_vehiculo) {
+        this.matricula_vehiculo = matricula_vehiculo;
     }
 
     public Date getFecha() {
         return fecha;
     }
 
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
     public int getHora() {
         return hora;
+    }
+
+    public void setHora(int hora) {
+        this.hora = hora;
     }
 
     public int getEstado() {
         return estado;
     }
 
-    public int getAsistencia() {
-        return asistencia;
-    }
-
-    public void setCliente(ClienteDTO cliente) {
-        this.cliente = cliente;
-    }
-
-    public void setVehiculo(VehiculoDTO vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
     public void setEstado(int estado) {
         this.estado = estado;
     }
 
+    public int getAsistencia() {
+        return asistencia;
+    }
+
     public void setAsistencia(int asistencia) {
         this.asistencia = asistencia;
+    }
+
+    public int getId_agenda() {
+        return id_agenda;
+    }
+
+    public void setId_agenda(int id_agenda) {
+        this.id_agenda = id_agenda;
     }
 }
