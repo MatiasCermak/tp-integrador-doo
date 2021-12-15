@@ -5,10 +5,19 @@
  */
 package ubp.doo.tp.modelo;
 
+import ubp.doo.tp.dao.FabricaDAO;
+import ubp.doo.tp.dao.MecanicoDAO;
+
 /**
  *
- * @author tomas
+ * @author bettic
  */
 public class MMecanico {
+	private final FabricaDAO fabricaDao;
+    private final MecanicoDAO mecanicoDao;
     
+    public MMecanico() {
+        fabricaDao = FabricaDAO.getFactory("SqlFabricaDAO");
+        mecanicoDao = fabricaDao.getMecanicoDao();
+    }
 }

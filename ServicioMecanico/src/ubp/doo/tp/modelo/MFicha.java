@@ -5,10 +5,19 @@
  */
 package ubp.doo.tp.modelo;
 
+import ubp.doo.tp.dao.FabricaDAO;
+import ubp.doo.tp.dao.FichaDAO;
+
 /**
  *
- * @author tomas
+ * @author bettic
  */
 public class MFicha {
+	private final FabricaDAO fabricaDao;
+    private final FichaDAO fichaDao;
     
+    public MFicha() {
+        fabricaDao = FabricaDAO.getFactory("SqlFabricaDAO");
+        fichaDao = fabricaDao.getFichaDao();
+    }
 }

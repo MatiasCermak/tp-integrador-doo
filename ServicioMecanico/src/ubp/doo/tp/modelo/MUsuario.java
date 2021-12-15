@@ -5,10 +5,19 @@
  */
 package ubp.doo.tp.modelo;
 
+import ubp.doo.tp.dao.FabricaDAO;
+import ubp.doo.tp.dao.UsuarioDAO;
+
 /**
  *
- * @author tomas
+ * @author bettic
  */
 public class MUsuario {
-    
+	private final FabricaDAO fabricaDao;
+	private final UsuarioDAO usuarioDao;
+	
+	public MUsuario() {
+		fabricaDao = FabricaDAO.getFactory("SqlFabricaDAO");
+		usuarioDao = fabricaDao.getUsuarioDAO();
+	}
 }
