@@ -9,6 +9,6 @@ package ubp.doo.tp.facade;
  *
  * @author tomas
  */
-public class FacadeInitOpciones {
+public class FacadeInitOpciones implements Facade {
     
 }

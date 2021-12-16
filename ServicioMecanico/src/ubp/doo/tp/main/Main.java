@@ -6,7 +6,7 @@
 package ubp.doo.tp.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import ubp.doo.tp.controlador.ControladorFlujoTurnos;
+import ubp.doo.tp.controlador.ControladorFlujoRegTurnos;
 import ubp.doo.tp.controlador.Controlador;
 import ubp.doo.tp.modelo.MCliente;
 import ubp.doo.tp.modelo.Modelo;
@@ -17,7 +17,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import ubp.doo.tp.vista.InterfazVistaSelCli;
 import ubp.doo.tp.vista.RegClienteFr;
 import ubp.doo.tp.vista.RegTurnoFr;
-import ubp.doo.tp.vista.InterfazVistaFlujoTurno;
+import ubp.doo.tp.vista.InterfazVistaRegTurno;
 
 /**
  *
@@ -40,13 +40,13 @@ public class Main {
                 
                 Modelo modelo = new MCliente();
                 
-                InterfazVistaFlujoTurno vistaSelCli = SelClienteFr.getInstancia();
+                InterfazVistaRegTurno vistaSelCli = SelClienteFr.getInstancia();
                 
                 InterfazVistaFlujoTurno vistaRegCli = RegClienteFr.getInstancia();
                 
                 InterfazVistaFlujoTurno vistaRegTurno = RegTurnoFr.getInstancia();
                 
-                Controlador control = new ControladorFlujoTurnos(vistaSelCli,vistaRegCli,vistaRegTurno,modelo);
+                Controlador control = new ControladorFlujoRegTurnos(vistaSelCli,vistaRegCli,vistaRegTurno,modelo);
                 
                 vistaSelCli.setControlador(control);
                 

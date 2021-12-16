@@ -9,8 +9,8 @@ import ubp.doo.tp.modelo.Modelo;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
-import ubp.doo.tp.vista.InterfazVistaSelCli;
-import ubp.doo.tp.vista.InterfazVistaFlujoTurno;
+import ubp.doo.tp.vista.InterfazVistaSelCliente;
+import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
 
 /**
  *
