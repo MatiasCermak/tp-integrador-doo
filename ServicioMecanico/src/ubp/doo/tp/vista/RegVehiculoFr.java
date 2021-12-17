@@ -14,10 +14,6 @@ import ubp.doo.tp.vista.InterfazVistaRegVehiculo;
  */
 public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRegVehiculo {
 
-    public static RegVehiculoFr getInstancia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * Creates new form RegVehiculo
      */
@@ -25,6 +21,13 @@ public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRe
         initComponents();
     }
 
+    private static RegVehiculoFr instancia = null;
+    public static RegVehiculoFr getInstancia() {
+        if (instancia == null) {
+            instancia = new RegVehiculoFr();
+        }
+        return instancia;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

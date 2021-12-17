@@ -136,6 +136,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                         ((RegClienteFr)this.VISTAREGCLI).dispose();
                         this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
                     }
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(true);
                     break;
                 case RCCARGAR:
                     tipos = ((MCliente)this.MCLIENTES).listadoDniTipos();
@@ -156,7 +157,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     for (ClienteDTO cli : listadoClientes){
                         modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
                     }
-                    ((SelClienteFr)this.VISTASELCLI).setVisible(true);
+                    //((SelClienteFr)this.VISTASELCLI).setVisible(true);
                     break; 
                 case SCNUEVOCLI:
                     ((SelClienteFr)this.VISTASELCLI).setVisible(false);
@@ -213,15 +214,26 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((RegTurnoFr)this.VISTAREGTURNO).dispose();
                     ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(true);
                     break;
-                /*case SAACEPTAR:
-                    return;
+                case SAACEPTAR:
+                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
+                    ((SelAgendaFr)this.VISTASELAGENDA).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
                 case SACANCELAR:
+                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
+                    ((SelAgendaFr)this.VISTASELAGENDA).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
                 case RVREGISTRAR:
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(false);
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
                 case RVCANCELAR:
-                    break;*/
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(false);
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
+                    break;
             }
             
         } catch (RuntimeException ex) {

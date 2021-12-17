@@ -21,6 +21,13 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaFlujo
     public RegTurnoFr() {
         initComponents();
     }
+    private static RegTurnoFr instancia = null;
+    public static RegTurnoFr getInstancia() {
+        if (instancia == null) {
+            instancia = new RegTurnoFr();
+        }
+        return instancia;
+    }
 
     public static RegTurnoFr getInstancia() {
         if (instancia == null) {
@@ -196,7 +203,8 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaFlujo
     public void setControlador(Controlador c) {
         this.btnCancelar.addActionListener(c);
         this.btnSiguiente.addActionListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.CARGARREGCLI.toString()));  
+        this.btnNuevo.addActionListener(c);
+        this.btnExaminar.addActionListener(c);
     }
     
     @Override
