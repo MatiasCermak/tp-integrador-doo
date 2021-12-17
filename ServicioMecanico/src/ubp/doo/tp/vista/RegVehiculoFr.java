@@ -12,19 +12,19 @@ import ubp.doo.tp.vista.InterfazVistaRegVehiculo;
  *
  * @author jeresabelox
  */
-public class RegVehiculo extends javax.swing.JFrame implements InterfazVistaRegVehiculo {
+public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRegVehiculo {
 
     /**
      * Creates new form RegVehiculo
      */
-    public RegVehiculo() {
+    public RegVehiculoFr() {
         initComponents();
     }
 
-    private static RegVehiculo instancia = null;
-    public static RegVehiculo getInstancia() {
+    private static RegVehiculoFr instancia = null;
+    public static RegVehiculoFr getInstancia() {
         if (instancia == null) {
-            instancia = new RegVehiculo();
+            instancia = new RegVehiculoFr();
         }
         return instancia;
     }
@@ -201,20 +201,21 @@ public class RegVehiculo extends javax.swing.JFrame implements InterfazVistaRegV
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegVehiculoFr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegVehiculoFr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegVehiculoFr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegVehiculoFr.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegVehiculo().setVisible(true);
+                new RegVehiculoFr().setVisible(true);
             }
         });
     }

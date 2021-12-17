@@ -20,7 +20,7 @@ import ubp.doo.tp.vista.RegTurnoFr;
 import ubp.doo.tp.vista.InterfazVistaRegTurno;
 import ubp.doo.tp.vista.SelAgendaFr;
 import ubp.doo.tp.vista.InterfazVistaSelAgenda;
-import ubp.doo.tp.vista.RegVehiculo;
+import ubp.doo.tp.vista.RegVehiculoFr;
 import ubp.doo.tp.vista.InterfazVistaRegVehiculo;
 import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
 
@@ -48,7 +48,7 @@ public class Main {
                 InterfazVistaFlujoRegTurno vistaSelCli = SelClienteFr.getInstancia();
                 InterfazVistaFlujoRegTurno vistaRegCli = RegClienteFr.getInstancia();
                 InterfazVistaFlujoRegTurno vistaRegTurno = RegTurnoFr.getInstancia();
-                InterfazVistaFlujoRegTurno vistaRegVehi = RegVehiculo.getInstancia();
+                InterfazVistaFlujoRegTurno vistaRegVehi = RegVehiculoFr.getInstancia();
                 InterfazVistaFlujoRegTurno vistaSelAgen = SelAgendaFr.getInstancia();
                 
                 Controlador control = new ControladorFlujoRegTurnos(vistaSelAgen,vistaRegVehi,vistaSelCli,vistaRegCli,vistaRegTurno,modelo);
