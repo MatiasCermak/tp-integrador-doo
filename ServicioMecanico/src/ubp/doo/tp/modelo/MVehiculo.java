@@ -15,7 +15,7 @@ import ubp.doo.tp.dto.VehiculoDTO;
  *
  * @author bettic
  */
-public class MVehiculo extends Modelo {
+public class MVehiculo implements Modelo {
 	private final FabricaDAO fabricaDao;
     private final VehiculoDAO vehiculoDao;
     

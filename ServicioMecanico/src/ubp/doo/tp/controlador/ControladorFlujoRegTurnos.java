@@ -80,6 +80,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                         ((RegClienteFr)this.VISTAREGCLI).dispose();
                         this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
                     }
+                    ((RegVehiculo)this.VISTAREGVEHICULO).setVisible(true);
                     break;
                 case RCCARGAR:
                     tipos = ((MCliente)this.MODELO).listadoDniTipos();
@@ -100,7 +101,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     for (ClienteDTO cli : listadoClientes){
                         modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
                     }
-                    ((SelClienteFr)this.VISTASELCLI).setVisible(true);
+                    //((SelClienteFr)this.VISTASELCLI).setVisible(true);
                     break; 
                 case SCNUEVOCLI:
                     ((SelClienteFr)this.VISTASELCLI).setVisible(false);
@@ -158,6 +159,9 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((RegVehiculo)this.VISTAREGVEHICULO).setVisible(true);
                     break;
                 case SAACEPTAR:
+                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
+                    ((SelAgendaFr)this.VISTASELAGENDA).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
                 case SACANCELAR:
                     ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
@@ -165,6 +169,9 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
                 case RVREGISTRAR:
+                    ((RegVehiculo)this.VISTAREGVEHICULO).setVisible(false);
+                    ((RegVehiculo)this.VISTAREGVEHICULO).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
                 case RVCANCELAR:
                     ((RegVehiculo)this.VISTAREGVEHICULO).setVisible(false);

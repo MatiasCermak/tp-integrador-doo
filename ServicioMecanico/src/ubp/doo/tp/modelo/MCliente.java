@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author tomas
  */
-public class MCliente extends Modelo {
+public class MCliente implements Modelo {
     
     private final FabricaDAO fabricaDao;
     private final ClienteDAO clienteDao;

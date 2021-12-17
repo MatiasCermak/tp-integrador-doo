@@ -15,7 +15,7 @@ import ubp.doo.tp.dto.CompSegurosDTO;
  *
  * @author bettic
  */
-public class MCompSeguros extends Modelo {
+public class MCompSeguros implements Modelo {
     private final FabricaDAO fabricaDao;
     private final CompSegurosDAO compSegurosDao;
     

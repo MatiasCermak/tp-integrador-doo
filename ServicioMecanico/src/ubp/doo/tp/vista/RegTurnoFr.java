@@ -197,7 +197,6 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         this.btnSiguiente.addActionListener(c);
         this.btnNuevo.addActionListener(c);
         this.btnExaminar.addActionListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.CARGARREGCLI.toString()));  
     }
     
     @Override
