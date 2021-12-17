@@ -15,7 +15,7 @@ import ubp.doo.tp.dto.MaterialDTO;
  *
  * @author bettic
  */
-public class MMaterial extends Modelo {
+public class MMaterial implements Modelo {
 	private final FabricaDAO fabricaDao;
     private final MaterialDAO materialDao;
     

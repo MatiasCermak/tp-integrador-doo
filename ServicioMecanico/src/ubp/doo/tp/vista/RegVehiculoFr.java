@@ -14,7 +14,7 @@ import ubp.doo.tp.vista.InterfazVistaRegVehiculo;
  */
 public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRegVehiculo {
 
-    public static Vista getInstancia() {
+    public static RegVehiculoFr getInstancia() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -39,7 +39,13 @@ public class ControladorFlujoRegTurnos extends Controlador {
     private InterfazVistaFlujoRegTurno VISTAREGTURNO = null;
     private InterfazVistaFlujoRegTurno VISTAREGVEHICULO = null;
     private InterfazVistaFlujoRegTurno VISTASELAGENDA = null;
-    private Modelo MODELOCLIENTES = null;
+    private Modelo MCLIENTES = null;
+    private Modelo MAGENDAS = null;
+    private Modelo MCOMPSEGUROS = null;
+    private Modelo MESPECIALIDADES = null;
+    private Modelo MMECANICOS = null;
+    private Modelo MTURNOS = null;
+    private Modelo MVEHICULOS = null;
     
     public ControladorFlujoRegTurnos(){}
     
@@ -49,7 +55,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
         VISTAREGTURNO = vistaRegTur;
         VISTAREGVEHICULO = vistaRegVeh;
         VISTASELAGENDA = vistaSelAge;
-        MODELOCLIENTES = modelo;
+        MCLIENTES = modelo;
     }
     
     public void setVistaSelCli(InterfazVistaFlujoRegTurno vista){
@@ -70,6 +76,34 @@ public class ControladorFlujoRegTurnos extends Controlador {
     
     public void setVistaSelAgenda(InterfazVistaFlujoRegTurno vista){
         this.VISTASELAGENDA = vista;
+    }
+    
+    public void setMClientes(Modelo modelo){
+        this.MCLIENTES = modelo;
+    }
+    
+    public void setMAgendas(Modelo modelo){
+        this.MAGENDAS = modelo;
+    }
+    
+    public void setMCompSeguros(Modelo modelo){
+        this.MCOMPSEGUROS = modelo;
+    }
+    
+    public void setMEspecialidades(Modelo modelo){
+        this.MESPECIALIDADES = modelo;
+    }
+    
+    public void setMMecanicos(Modelo modelo){
+        this.MMECANICOS = modelo;
+    }
+    
+    public void setMTurnos(Modelo modelo){
+        this.MTURNOS = modelo;
+    }
+    
+    public void setMVehiculos(Modelo modelo){
+        this.MVEHICULOS = modelo;
     }
     
     @Override
@@ -94,7 +128,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     else {
                         cliente = new ClienteDTO(((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText(),((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText(),
                                    ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().getSelectedItem().toString() ,Integer.valueOf(((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()));
-                        ((MCliente)this.MODELO).insertarCliente(cliente);
+                        ((MCliente)this.MCLIENTES).insertarCliente(cliente);
                         System.out.println(cliente.getNombre()+" "+cliente.getApellido());
                         JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"El siguiente formulario corresponderá a la carga de vehículo","Flujo de sistema",JOptionPane.INFORMATION_MESSAGE);
                         ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
@@ -104,7 +138,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     }
                     break;
                 case RCCARGAR:
-                    tipos = ((MCliente)this.MODELO).listadoDniTipos();
+                    tipos = ((MCliente)this.MCLIENTES).listadoDniTipos();
                     for (String tipo : tipos){
                         ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().addItem(tipo);
                     }
@@ -118,7 +152,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                 case SCCARGAR:
                     modeloTabla.setRowCount(0);
                     modeloTabla.fireTableDataChanged();
-                    listadoClientes = ((MCliente)this.MODELO).listarClientes();
+                    listadoClientes = ((MCliente)this.MCLIENTES).listarClientes();
                     for (ClienteDTO cli : listadoClientes){
                         modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
                     }
@@ -134,7 +168,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                         int row = ((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow();
                         int numDni = (int)modeloTabla.getValueAt(row, 1);
                         String tipo = (String)modeloTabla.getValueAt(row, 2);
-                        cliente = ((MCliente)this.MODELO).buscarCliente(tipo, numDni);
+                        cliente = ((MCliente)this.MCLIENTES).buscarCliente(tipo, numDni);
                         ((RegTurnoFr)this.VISTAREGTURNO).setCliente(cliente.getNombre()
                                 +" "+cliente.getApellido()
                                 +", "+cliente.getDniTipo()
@@ -149,7 +183,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     modeloTabla.setRowCount(0);
                     modeloTabla.fireTableDataChanged();
                     filtro = (String)((SelClienteFr)this.VISTASELCLI).getFiltro();
-                    listadoClientes = ((MCliente)this.MODELO).listarClientes(filtro);
+                    listadoClientes = ((MCliente)this.MCLIENTES).listarClientes(filtro);
                     for (ClienteDTO cli : listadoClientes){
                         modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
                     }
@@ -179,14 +213,15 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((RegTurnoFr)this.VISTAREGTURNO).dispose();
                     ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(true);
                     break;
-                case SAACEPTAR:
+                /*case SAACEPTAR:
+                    return;
                     break;
                 case SACANCELAR:
                     break;
                 case RVREGISTRAR:
                     break;
                 case RVCANCELAR:
-                    break;
+                    break;*/
             }
             
         } catch (RuntimeException ex) {

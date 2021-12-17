@@ -12,7 +12,7 @@ import ubp.doo.tp.dao.MecanicoDAO;
  *
  * @author bettic
  */
-public class MMecanico extends Modelo {
+public class MMecanico implements Modelo {
 	private final FabricaDAO fabricaDao;
     private final MecanicoDAO mecanicoDao;
     

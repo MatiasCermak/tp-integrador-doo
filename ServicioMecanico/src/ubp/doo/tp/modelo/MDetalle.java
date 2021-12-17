@@ -15,7 +15,7 @@ import ubp.doo.tp.dto.DetalleDTO;
  *
  * @author bettic
  */
-public class MDetalle extends Modelo {
+public class MDetalle implements Modelo {
 	private final FabricaDAO fabricaDao;
     private final DetalleDAO detalleDao;
     
