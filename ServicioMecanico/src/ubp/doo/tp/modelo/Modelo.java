@@ -9,6 +9,6 @@ package ubp.doo.tp.modelo;
  *
  * @author tomas
  */
-public abstract class Modelo {
+public interface Modelo {
     
 }

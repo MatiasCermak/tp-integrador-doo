@@ -12,7 +12,7 @@ import ubp.doo.tp.vista.SelClienteFr;
 import ubp.doo.tp.vista.RegClienteFr;
 import ubp.doo.tp.vista.RegTurnoFr;
 import ubp.doo.tp.vista.SelAgendaFr;
-import ubp.doo.tp.vista.RegVehiculo;
+import ubp.doo.tp.vista.RegVehiculoFr;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -39,7 +39,9 @@ public class ControladorFlujoRegTurnos extends Controlador {
     private InterfazVistaFlujoRegTurno VISTAREGTURNO = null;
     private InterfazVistaFlujoRegTurno VISTAREGVEHICULO = null;
     private InterfazVistaFlujoRegTurno VISTASELAGENDA = null;
-    private Modelo MODELO = null;
+    private Modelo MODELOCLIENTES = null;
+    
+    public ControladorFlujoRegTurnos(){}
     
     public ControladorFlujoRegTurnos(InterfazVistaFlujoRegTurno vistaSelAge, InterfazVistaFlujoRegTurno vistaRegVeh,InterfazVistaFlujoRegTurno vistaSelCli, InterfazVistaFlujoRegTurno vistaRegCli, InterfazVistaFlujoRegTurno vistaRegTur, Modelo modelo){
         VISTASELCLI = vistaSelCli;
@@ -47,7 +49,27 @@ public class ControladorFlujoRegTurnos extends Controlador {
         VISTAREGTURNO = vistaRegTur;
         VISTAREGVEHICULO = vistaRegVeh;
         VISTASELAGENDA = vistaSelAge;
-        MODELO = modelo;
+        MODELOCLIENTES = modelo;
+    }
+    
+    public void setVistaSelCli(InterfazVistaFlujoRegTurno vista){
+        this.VISTASELCLI = vista;
+    }
+    
+    public void setVistaRegCli(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGCLI = vista;
+    }
+    
+    public void setVistaRegTurno(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGTURNO = vista;
+    }
+    
+    public void setVistaRegVehiculo(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGVEHICULO = vista;
+    }
+    
+    public void setVistaSelAgenda(InterfazVistaFlujoRegTurno vista){
+        this.VISTASELAGENDA = vista;
     }
     
     @Override
@@ -155,7 +177,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                 case RTNUEVOVEHI:
                     ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
                     ((RegTurnoFr)this.VISTAREGTURNO).dispose();
-                    ((RegVehiculo)this.VISTAREGVEHICULO).setVisible(true);
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(true);
                     break;
                 case SAACEPTAR:
                     break;

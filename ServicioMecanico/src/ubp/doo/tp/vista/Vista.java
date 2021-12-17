@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ubp.doo.tp.factory;
+package ubp.doo.tp.vista;
 
 /**
  *
- * @author tomas
+ * @author mcrmak
  */
-public class MVCFactoryRegistrarTurnos {
+public interface Vista {
     
 }

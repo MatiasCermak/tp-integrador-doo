@@ -12,8 +12,9 @@ import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
  *
  * @author chino
  */
-public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTurno{
+public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaFlujoRegTurno{
 
+    private static RegTurnoFr instancia = null;
     /**
      * Creates new form NewJFrame
      */
@@ -21,6 +22,13 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         initComponents();
     }
 
+    public static RegTurnoFr getInstancia() {
+        if (instancia == null) {
+            instancia = new RegTurnoFr();
+        }
+        return instancia;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

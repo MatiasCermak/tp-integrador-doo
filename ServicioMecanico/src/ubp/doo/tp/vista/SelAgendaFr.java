@@ -14,6 +14,10 @@ import ubp.doo.tp.vista.InterfazVistaSelAgenda;
  */
 public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelAgenda{
 
+    public static Vista getInstancia() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * Creates new form SelAgendaFr
      */
@@ -71,7 +75,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
                         .addGap(56, 56, 56)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(27, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,7 +85,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
                                 .addComponent(jLabel5)
                                 .addComponent(jLabel3)
                                 .addComponent(cmbMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(56, 56, 56))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

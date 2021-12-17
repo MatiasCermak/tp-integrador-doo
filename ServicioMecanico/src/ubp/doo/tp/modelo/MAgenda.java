@@ -13,7 +13,7 @@ import ubp.doo.tp.dto.AgendaDTO;
  *
  * @author bettic
  */
-public class MAgenda extends Modelo {
+public class MAgenda implements Modelo {
     private final FabricaDAO fabricaDao;
     private final AgendaDAO agendaDao;
     
