@@ -20,6 +20,13 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
     public RegTurnoFr() {
         initComponents();
     }
+    private static RegTurnoFr instancia = null;
+    public static RegTurnoFr getInstancia() {
+        if (instancia == null) {
+            instancia = new RegTurnoFr();
+        }
+        return instancia;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -188,6 +195,8 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
     public void setControlador(Controlador c) {
         this.btnCancelar.addActionListener(c);
         this.btnSiguiente.addActionListener(c);
+        this.btnNuevo.addActionListener(c);
+        this.btnExaminar.addActionListener(c);
         c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.CARGARREGCLI.toString()));  
     }
     

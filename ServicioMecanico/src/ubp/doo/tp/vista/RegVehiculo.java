@@ -21,6 +21,13 @@ public class RegVehiculo extends javax.swing.JFrame implements InterfazVistaRegV
         initComponents();
     }
 
+    private static RegVehiculo instancia = null;
+    public static RegVehiculo getInstancia() {
+        if (instancia == null) {
+            instancia = new RegVehiculo();
+        }
+        return instancia;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

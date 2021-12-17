@@ -14,10 +14,15 @@ import ubp.doo.tp.vista.SelClienteFr;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import ubp.doo.tp.vista.InterfazVistaSelCli;
+import ubp.doo.tp.vista.InterfazVistaSelCliente;
 import ubp.doo.tp.vista.RegClienteFr;
 import ubp.doo.tp.vista.RegTurnoFr;
 import ubp.doo.tp.vista.InterfazVistaRegTurno;
+import ubp.doo.tp.vista.SelAgendaFr;
+import ubp.doo.tp.vista.InterfazVistaSelAgenda;
+import ubp.doo.tp.vista.RegVehiculo;
+import ubp.doo.tp.vista.InterfazVistaRegVehiculo;
+import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
 
 /**
  *
@@ -40,19 +45,23 @@ public class Main {
                 
                 Modelo modelo = new MCliente();
                 
-                InterfazVistaRegTurno vistaSelCli = SelClienteFr.getInstancia();
+                InterfazVistaFlujoRegTurno vistaSelCli = SelClienteFr.getInstancia();
+                InterfazVistaFlujoRegTurno vistaRegCli = RegClienteFr.getInstancia();
+                InterfazVistaFlujoRegTurno vistaRegTurno = RegTurnoFr.getInstancia();
+                InterfazVistaFlujoRegTurno vistaRegVehi = RegVehiculo.getInstancia();
+                InterfazVistaFlujoRegTurno vistaSelAgen = SelAgendaFr.getInstancia();
                 
-                InterfazVistaFlujoTurno vistaRegCli = RegClienteFr.getInstancia();
-                
-                InterfazVistaFlujoTurno vistaRegTurno = RegTurnoFr.getInstancia();
-                
-                Controlador control = new ControladorFlujoRegTurnos(vistaSelCli,vistaRegCli,vistaRegTurno,modelo);
+                Controlador control = new ControladorFlujoRegTurnos(vistaSelAgen,vistaRegVehi,vistaSelCli,vistaRegCli,vistaRegTurno,modelo);
                 
                 vistaSelCli.setControlador(control);
                 
                 vistaRegCli.setControlador(control);
                 
                 vistaRegTurno.setControlador(control);
+                
+                vistaRegVehi.setControlador(control);
+                
+                vistaSelAgen.setControlador(control);
                 
                 vistaRegTurno.iniciaVista();
             }

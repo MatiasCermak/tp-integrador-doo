@@ -160,10 +160,16 @@ public class ControladorFlujoRegTurnos extends Controlador {
                 case SAACEPTAR:
                     break;
                 case SACANCELAR:
+                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
+                    ((SelAgendaFr)this.VISTASELAGENDA).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
                 case RVREGISTRAR:
                     break;
                 case RVCANCELAR:
+                    ((RegVehiculo)this.VISTAREGVEHICULO).setVisible(false);
+                    ((RegVehiculo)this.VISTAREGVEHICULO).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
             }
             
