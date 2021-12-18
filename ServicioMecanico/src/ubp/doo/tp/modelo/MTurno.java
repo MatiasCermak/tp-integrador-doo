@@ -5,10 +5,19 @@
  */
 package ubp.doo.tp.modelo;
 
+import ubp.doo.tp.dao.FabricaDAO;
+import ubp.doo.tp.dao.TurnoDAO;
+
 /**
  *
- * @author tomas
+ * @author bettic
  */
-public class MTurno {
+public class MTurno implements Modelo {
+	private final FabricaDAO fabricaDao;
+    private final TurnoDAO turnoDao;
     
+    public MTurno() {
+    	fabricaDao = FabricaDAO.getFactory("SqlFabricaDAO");
+    	turnoDao = fabricaDao.getTurnoDao();
+    }
 }

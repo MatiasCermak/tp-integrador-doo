@@ -4,32 +4,38 @@
  * and open the template in the editor.
  */
 package ubp.doo.tp.vista;
-
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 import ubp.doo.tp.controlador.Controlador;
-
+import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
 /**
  *
  * @author chino
  */
-public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTurno {
+public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaFlujoRegTurno{
 
-    
-    private static final long serialVersionUID = 1L;
-    
     private static RegTurnoFr instancia = null;
-    
-    
+    /**
+     * Creates new form NewJFrame
+     */
     public RegTurnoFr() {
         initComponents();
     }
-    
-    public static RegTurnoFr getInstancia(){
-        if (instancia == null){
+    private static RegTurnoFr instancia = null;
+    public static RegTurnoFr getInstancia() {
+        if (instancia == null) {
             instancia = new RegTurnoFr();
         }
         return instancia;
     }
 
+    public static RegTurnoFr getInstancia() {
+        if (instancia == null) {
+            instancia = new RegTurnoFr();
+        }
+        return instancia;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,7 +45,7 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        teCliente = new javax.swing.JTextField();
+        tfCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,16 +53,17 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         btnCancelar = new javax.swing.JButton();
         btnExaminar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
-        cbEspecialidad = new javax.swing.JComboBox<>();
+        cmbEspecialidad = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        cbVehiculo = new javax.swing.JComboBox<>();
+        cmbVehiculo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(null);
+        setResizable(false);
 
-        teCliente.addActionListener(new java.awt.event.ActionListener() {
+        tfCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teClienteActionPerformed(evt);
+                tfClienteActionPerformed(evt);
             }
         });
 
@@ -89,7 +96,11 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         btnNuevo.setText("Nuevo");
         btnNuevo.setActionCommand("RTNUEVOVEHI");
 
+        cmbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         jLabel4.setText("Especialidad");
+
+        cmbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,26 +112,28 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jLabel3))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(tfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnExaminar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cbEspecialidad, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(cbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(teCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExaminar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSiguiente)
-                        .addGap(295, 295, 295)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSiguiente)
+                                .addGap(317, 317, 317)
+                                .addComponent(btnCancelar))
+                            .addComponent(cmbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(jLabel3)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,19 +144,19 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(teCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExaminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo)
-                    .addComponent(cbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(cmbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSiguiente)
                     .addComponent(btnCancelar))
@@ -153,9 +166,9 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void teClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teClienteActionPerformed
+    private void tfClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_teClienteActionPerformed
+    }//GEN-LAST:event_tfClienteActionPerformed
 
     private void btnExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExaminarActionPerformed
         // TODO add your handling code here:
@@ -171,44 +184,45 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnExaminar;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnSiguiente;
-    private javax.swing.JComboBox<String> cbEspecialidad;
-    private javax.swing.JComboBox<String> cbVehiculo;
+    public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnExaminar;
+    public javax.swing.JButton btnNuevo;
+    public javax.swing.JButton btnSiguiente;
+    public javax.swing.JComboBox<String> cmbEspecialidad;
+    public javax.swing.JComboBox<String> cmbVehiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField teCliente;
+    public javax.swing.JTextField tfCliente;
     // End of variables declaration//GEN-END:variables
 
+    
+    
     @Override
     public void setControlador(Controlador c) {
-        this.btnExaminar.addActionListener(c);
         this.btnCancelar.addActionListener(c);
-        this.btnNuevo.addActionListener(c);
         this.btnSiguiente.addActionListener(c);
+        this.btnNuevo.addActionListener(c);
+        this.btnExaminar.addActionListener(c);
     }
-
+    
     @Override
     public void iniciaVista() {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
+    
     @Override
-    public void imprimeMensaje(Exception... e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void limpiar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void imprimeMensaje(Exception... e){
+        if(e.length>0){
+            JOptionPane.showMessageDialog(this, "Error: " + e[0].getMessage(), "Información", JOptionPane.ERROR_MESSAGE);
+        }else {
+            JOptionPane.showMessageDialog(this, "Operación ejecutada con exito", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     public void setCliente(String cliente){
-        this.teCliente.setText(cliente);
+        this.tfCliente.setText(cliente);
     }
 }

@@ -11,6 +11,8 @@ import ubp.doo.tp.modelo.Modelo;
 import ubp.doo.tp.vista.SelClienteFr;
 import ubp.doo.tp.vista.RegClienteFr;
 import ubp.doo.tp.vista.RegTurnoFr;
+import ubp.doo.tp.vista.SelAgendaFr;
+import ubp.doo.tp.vista.RegVehiculoFr;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -20,25 +22,88 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import ubp.doo.tp.vista.InterfazVistaSelCli;
+import ubp.doo.tp.vista.InterfazVistaSelCliente;
 import ubp.doo.tp.vista.InterfazVistaRegCliente;
-import ubp.doo.tp.vista.InterfazVistaFlujoTurno;
+import ubp.doo.tp.vista.InterfazVistaRegTurno;
+import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
+import ubp.doo.tp.vista.InterfazVistaRegVehiculo;
+import ubp.doo.tp.vista.InterfazVistaSelAgenda;
 /**
  *
  * @author tomas
  */
-public class ControladorFlujoTurnos extends Controlador {
+public class ControladorFlujoRegTurnos extends Controlador {
     
-    private InterfazVistaFlujoTurno VISTASELCLI = null;
-    private InterfazVistaFlujoTurno VISTAREGCLI = null;
-    private InterfazVistaFlujoTurno VISTAREGTURNO = null;
-    private Modelo MODELO = null;
+    private InterfazVistaFlujoRegTurno VISTASELCLI = null;
+    private InterfazVistaFlujoRegTurno VISTAREGCLI = null;
+    private InterfazVistaFlujoRegTurno VISTAREGTURNO = null;
+    private InterfazVistaFlujoRegTurno VISTAREGVEHICULO = null;
+    private InterfazVistaFlujoRegTurno VISTASELAGENDA = null;
+    private Modelo MCLIENTES = null;
+    private Modelo MAGENDAS = null;
+    private Modelo MCOMPSEGUROS = null;
+    private Modelo MESPECIALIDADES = null;
+    private Modelo MMECANICOS = null;
+    private Modelo MTURNOS = null;
+    private Modelo MVEHICULOS = null;
     
-    public ControladorFlujoTurnos(InterfazVistaFlujoTurno vistaSelCli, InterfazVistaFlujoTurno vistaRegCli, InterfazVistaFlujoTurno vistaRegTur, Modelo modelo){
+    public ControladorFlujoRegTurnos(){}
+    
+    public ControladorFlujoRegTurnos(InterfazVistaFlujoRegTurno vistaSelAge, InterfazVistaFlujoRegTurno vistaRegVeh,InterfazVistaFlujoRegTurno vistaSelCli, InterfazVistaFlujoRegTurno vistaRegCli, InterfazVistaFlujoRegTurno vistaRegTur, Modelo modelo){
         VISTASELCLI = vistaSelCli;
         VISTAREGCLI = vistaRegCli;
         VISTAREGTURNO = vistaRegTur;
-        MODELO = modelo;
+        VISTAREGVEHICULO = vistaRegVeh;
+        VISTASELAGENDA = vistaSelAge;
+        MCLIENTES = modelo;
+    }
+    
+    public void setVistaSelCli(InterfazVistaFlujoRegTurno vista){
+        this.VISTASELCLI = vista;
+    }
+    
+    public void setVistaRegCli(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGCLI = vista;
+    }
+    
+    public void setVistaRegTurno(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGTURNO = vista;
+    }
+    
+    public void setVistaRegVehiculo(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGVEHICULO = vista;
+    }
+    
+    public void setVistaSelAgenda(InterfazVistaFlujoRegTurno vista){
+        this.VISTASELAGENDA = vista;
+    }
+    
+    public void setMClientes(Modelo modelo){
+        this.MCLIENTES = modelo;
+    }
+    
+    public void setMAgendas(Modelo modelo){
+        this.MAGENDAS = modelo;
+    }
+    
+    public void setMCompSeguros(Modelo modelo){
+        this.MCOMPSEGUROS = modelo;
+    }
+    
+    public void setMEspecialidades(Modelo modelo){
+        this.MESPECIALIDADES = modelo;
+    }
+    
+    public void setMMecanicos(Modelo modelo){
+        this.MMECANICOS = modelo;
+    }
+    
+    public void setMTurnos(Modelo modelo){
+        this.MTURNOS = modelo;
+    }
+    
+    public void setMVehiculos(Modelo modelo){
+        this.MVEHICULOS = modelo;
     }
     
     @Override
@@ -53,7 +118,7 @@ public class ControladorFlujoTurnos extends Controlador {
         List<ClienteDTO> listadoClientes;
         List<String> tipos;
         try {
-            switch (InterfazVistaFlujoTurno.Operacion.valueOf(e.getActionCommand())){
+            switch (InterfazVistaFlujoRegTurno.Operacion.valueOf(e.getActionCommand())){
                 case RCNUEVOVEHI:
                     if ((((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText().length() <= 0)
                         || (((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText().length() <= 0)
@@ -63,17 +128,18 @@ public class ControladorFlujoTurnos extends Controlador {
                     else {
                         cliente = new ClienteDTO(((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText(),((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText(),
                                    ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().getSelectedItem().toString() ,Integer.valueOf(((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()));
-                        ((MCliente)this.MODELO).insertarCliente(cliente);
+                        ((MCliente)this.MCLIENTES).insertarCliente(cliente);
                         System.out.println(cliente.getNombre()+" "+cliente.getApellido());
                         JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"El siguiente formulario corresponderá a la carga de vehículo","Flujo de sistema",JOptionPane.INFORMATION_MESSAGE);
                         ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
                         ((RegClienteFr)this.VISTAREGCLI).limpiar();
                         ((RegClienteFr)this.VISTAREGCLI).dispose();
-                        this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoTurno.Operacion.SCCARGAR.toString()));
+                        this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
                     }
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(true);
                     break;
                 case RCCARGAR:
-                    tipos = ((MCliente)this.MODELO).listadoDniTipos();
+                    tipos = ((MCliente)this.MCLIENTES).listadoDniTipos();
                     for (String tipo : tipos){
                         ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().addItem(tipo);
                     }
@@ -81,17 +147,17 @@ public class ControladorFlujoTurnos extends Controlador {
                 case RCCANCELAR:
                     ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
                     ((RegClienteFr)this.VISTAREGCLI).dispose();
-                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoTurno.Operacion.SCCARGAR.toString()));
+                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
                     ((SelClienteFr)this.VISTASELCLI).setVisible(true);
                     break;
                 case SCCARGAR:
                     modeloTabla.setRowCount(0);
                     modeloTabla.fireTableDataChanged();
-                    listadoClientes = ((MCliente)this.MODELO).listarClientes();
+                    listadoClientes = ((MCliente)this.MCLIENTES).listarClientes();
                     for (ClienteDTO cli : listadoClientes){
                         modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
                     }
-                    ((SelClienteFr)this.VISTASELCLI).setVisible(true);
+                    //((SelClienteFr)this.VISTASELCLI).setVisible(true);
                     break; 
                 case SCNUEVOCLI:
                     ((SelClienteFr)this.VISTASELCLI).setVisible(false);
@@ -103,7 +169,7 @@ public class ControladorFlujoTurnos extends Controlador {
                         int row = ((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow();
                         int numDni = (int)modeloTabla.getValueAt(row, 1);
                         String tipo = (String)modeloTabla.getValueAt(row, 2);
-                        cliente = ((MCliente)this.MODELO).buscarCliente(tipo, numDni);
+                        cliente = ((MCliente)this.MCLIENTES).buscarCliente(tipo, numDni);
                         ((RegTurnoFr)this.VISTAREGTURNO).setCliente(cliente.getNombre()
                                 +" "+cliente.getApellido()
                                 +", "+cliente.getDniTipo()
@@ -118,7 +184,7 @@ public class ControladorFlujoTurnos extends Controlador {
                     modeloTabla.setRowCount(0);
                     modeloTabla.fireTableDataChanged();
                     filtro = (String)((SelClienteFr)this.VISTASELCLI).getFiltro();
-                    listadoClientes = ((MCliente)this.MODELO).listarClientes(filtro);
+                    listadoClientes = ((MCliente)this.MCLIENTES).listarClientes(filtro);
                     for (ClienteDTO cli : listadoClientes){
                         modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
                     }
@@ -130,17 +196,43 @@ public class ControladorFlujoTurnos extends Controlador {
                     break;
                 case RTCANCELAR:
                     ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
-                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoTurno.Operacion.SCCANCELAR.toString()));
+                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCANCELAR.toString()));
                     ((RegTurnoFr)this.VISTAREGTURNO).dispose();
                     break;
                 case RTSIGUIENTE:
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
+                    ((RegTurnoFr)this.VISTAREGTURNO).dispose();
+                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(true);
                     break;
                 case RTEXAMCLI:
                     ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
-                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoTurno.Operacion.SCCARGAR.toString()));
+                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
                     ((SelClienteFr)this.VISTASELCLI).setVisible(true);
                     break;
                 case RTNUEVOVEHI:
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
+                    ((RegTurnoFr)this.VISTAREGTURNO).dispose();
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(true);
+                    break;
+                case SAACEPTAR:
+                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
+                    ((SelAgendaFr)this.VISTASELAGENDA).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
+                    break;
+                case SACANCELAR:
+                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
+                    ((SelAgendaFr)this.VISTASELAGENDA).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
+                    break;
+                case RVREGISTRAR:
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(false);
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
+                    break;
+                case RVCANCELAR:
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(false);
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
                     break;
             }
             
@@ -162,7 +254,7 @@ public class ControladorFlujoTurnos extends Controlador {
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getSource() instanceof JTextField){
-            this.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.SCFILTCLI.toString()));
+            this.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.SCFILTCLI.toString()));
         }
         else { 
             verificarInputTxt(e);
@@ -177,6 +269,10 @@ public class ControladorFlujoTurnos extends Controlador {
                 || (Character.isDigit(c)))&&(!(e.getSource() instanceof JTextField))) {
             e.consume();
         }
+        
+        
     }
+    
+        
     
 }

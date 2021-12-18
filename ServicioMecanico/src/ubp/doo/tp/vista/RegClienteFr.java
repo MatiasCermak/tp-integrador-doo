@@ -8,7 +8,7 @@ package ubp.doo.tp.vista;
 import ubp.doo.tp.controlador.Controlador;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-
+import ubp.doo.tp.vista.InterfazVistaRegCliente;
 /**
  *
  * @author tomas
@@ -90,7 +90,7 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
@@ -109,18 +109,17 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
                             .addComponent(btnSiguiente)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
                             .addComponent(btnCancelar))))
-                .addGap(20, 20, 20))
+                .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(57, 57, 57)
                 .addComponent(jLabel1)
-                .addGap(87, 87, 87))
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(23, 23, 23)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +170,7 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
     public void setControlador(Controlador c) {
         this.btnCancelar.addActionListener(c);
         this.btnSiguiente.addActionListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.RCCARGAR.toString()));  
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.RCCARGAR.toString()));  
     }
     
     @Override

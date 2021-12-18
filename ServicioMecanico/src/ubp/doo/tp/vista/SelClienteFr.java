@@ -15,7 +15,7 @@ import javax.swing.JFrame;
  *
  * @author chino
  */
-public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSelCli {
+public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSelCliente {
 
     private static final long serialVersionUID = 1L;
     
@@ -156,9 +156,9 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnSeleccionar))
@@ -219,7 +219,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         this.btnCancelar.addActionListener(c);
         this.btnNuevo.addActionListener(c);
         this.textSearch.addKeyListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.SCCARGAR.toString()));    
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.SCCARGAR.toString()));    
     }
     
     @Override
@@ -239,7 +239,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
     
     @Override
     public void actualizaTabla(Controlador c){
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCli.Operacion.SCCARGAR.toString()));
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.SCCARGAR.toString()));
     }
     
     public javax.swing.JTable getTblClientes() {

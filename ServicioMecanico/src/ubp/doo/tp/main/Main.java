@@ -6,7 +6,8 @@
 package ubp.doo.tp.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import ubp.doo.tp.controlador.ControladorFlujoTurnos;
+import ubp.doo.tp.facade.FacadeInitOpciones;
+import ubp.doo.tp.controlador.ControladorFlujoRegTurnos;
 import ubp.doo.tp.controlador.Controlador;
 import ubp.doo.tp.modelo.MCliente;
 import ubp.doo.tp.modelo.Modelo;
@@ -14,10 +15,16 @@ import ubp.doo.tp.vista.SelClienteFr;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import ubp.doo.tp.vista.InterfazVistaSelCli;
+import ubp.doo.tp.facade.Facade;
+import ubp.doo.tp.vista.InterfazVistaSelCliente;
 import ubp.doo.tp.vista.RegClienteFr;
 import ubp.doo.tp.vista.RegTurnoFr;
-import ubp.doo.tp.vista.InterfazVistaFlujoTurno;
+import ubp.doo.tp.vista.InterfazVistaRegTurno;
+import ubp.doo.tp.vista.SelAgendaFr;
+import ubp.doo.tp.vista.InterfazVistaSelAgenda;
+import ubp.doo.tp.vista.RegVehiculoFr;
+import ubp.doo.tp.vista.InterfazVistaRegVehiculo;
+import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
 
 /**
  *
@@ -38,23 +45,8 @@ public class Main {
                     System.err.println("Failed to initialize LaF");
                 }
                 
-                Modelo modelo = new MCliente();
-                
-                InterfazVistaFlujoTurno vistaSelCli = SelClienteFr.getInstancia();
-                
-                InterfazVistaFlujoTurno vistaRegCli = RegClienteFr.getInstancia();
-                
-                InterfazVistaFlujoTurno vistaRegTurno = RegTurnoFr.getInstancia();
-                
-                Controlador control = new ControladorFlujoTurnos(vistaSelCli,vistaRegCli,vistaRegTurno,modelo);
-                
-                vistaSelCli.setControlador(control);
-                
-                vistaRegCli.setControlador(control);
-                
-                vistaRegTurno.setControlador(control);
-                
-                vistaRegTurno.iniciaVista();
+                FacadeInitOpciones facadeOpciones = new FacadeInitOpciones();
+                facadeOpciones.execFlujo("RegistrarTurno");
             }
         });
     }
