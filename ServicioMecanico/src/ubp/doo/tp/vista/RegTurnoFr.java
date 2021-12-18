@@ -13,8 +13,6 @@ import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
  * @author chino
  */
 public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaFlujoRegTurno{
-
-    private static RegTurnoFr instancia = null;
     /**
      * Creates new form NewJFrame
      */
@@ -22,13 +20,6 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaFlujo
         initComponents();
     }
     private static RegTurnoFr instancia = null;
-    public static RegTurnoFr getInstancia() {
-        if (instancia == null) {
-            instancia = new RegTurnoFr();
-        }
-        return instancia;
-    }
-
     public static RegTurnoFr getInstancia() {
         if (instancia == null) {
             instancia = new RegTurnoFr();

@@ -14,10 +14,6 @@ import ubp.doo.tp.vista.InterfazVistaSelAgenda;
  */
 public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelAgenda{
 
-    public static SelAgendaFr getInstancia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     /**
      * Creates new form SelAgendaFr
      */
