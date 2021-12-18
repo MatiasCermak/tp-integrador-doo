@@ -29,8 +29,8 @@ public class MVehiculo implements Modelo {
     	return vehiculo;
     }
     
-    public VehiculoDTO buscarVehiculo(String comp, int poliza) {
-    	VehiculoDTO vehiculo = vehiculoDao.buscarVehiculo(comp, poliza);
+    public VehiculoDTO buscarVehiculo(int id_compania, int poliza) {
+    	VehiculoDTO vehiculo = vehiculoDao.buscarVehiculo(id_compania, poliza);
     	return vehiculo;
     }
     
@@ -44,8 +44,8 @@ public class MVehiculo implements Modelo {
     	return vehiculos;
     }
 
-    public List<VehiculoDTO> listarVehiculos(String compania) {
-    	List<VehiculoDTO> vehiculos = vehiculoDao.listarVehiculos(compania);
+    public List<VehiculoDTO> listarVehiculos(int id_compania) {
+    	List<VehiculoDTO> vehiculos = vehiculoDao.listarVehiculos(id_compania);
     	return vehiculos;
     }
 
