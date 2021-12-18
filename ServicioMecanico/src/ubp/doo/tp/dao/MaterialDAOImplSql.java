@@ -44,10 +44,10 @@ public class MaterialDAOImplSql implements MaterialDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "SELECT m.nombre, t.tipo_material, m.precio, m.medida\n" +
-                         "FROM materiales m\n" +
-                         "JOIN tipos_mat t\n" +
-                         "ON m.id_tipo_mat = t.id_tipo_mat\n" +
+            String sql = "SELECT m.id_material, t.tipo_material, m.precio, m.medida " +
+                         "FROM materiales m " +
+                         "JOIN tipos_mat t " +
+                         "ON m.id_tipo_mat = t.id_tipo_mat " +
                          "WHERE m.nombre = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, nombre);
@@ -58,14 +58,16 @@ public class MaterialDAOImplSql implements MaterialDAO {
             String tipoMat = null;
             String medida = null;
             float precio = 0;
+            int id_material = 0;
             
-            while(rs.next()){
+            if(rs.next()){
                 nom = rs.getString("nombre");
                 tipoMat = rs.getString("tipo_material");
                 precio = rs.getFloat("precio");
                 medida = rs.getString("medida");
+                id_material = rs.getInt("id_material");
             }
-            material = new MaterialDTO(nom,tipoMat,precio,medida);
+            material = new MaterialDTO(id_material,nom,tipoMat,precio,medida);
         }
         catch (SQLException e){
             System.err.println(e);
@@ -91,10 +93,10 @@ public class MaterialDAOImplSql implements MaterialDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "SELECT m.nombre, t.tipo_material, m.precio, m.medida\n" +
-                         "FROM materiales m\n" +
-                         "JOIN tipos_mat t\n" +
-                         "ON m.id_tipo_mat = t.id_tipo_mat\n" +
+            String sql = "SELECT m.id_material, m.precio, m.medida " +
+                         "FROM materiales m " +
+                         "JOIN tipos_mat t " +
+                         "ON m.id_tipo_mat = t.id_tipo_mat " +
                          "WHERE m.nombre = ? AND t.tipo_material = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, nombre);
@@ -106,14 +108,16 @@ public class MaterialDAOImplSql implements MaterialDAO {
             String tipoMat = null;
             String medida = null;
             float precio = 0;
+            int id_material = 0;
             
             while(rs.next()){
                 nom = rs.getString("nombre");
                 tipoMat = rs.getString("tipo_material");
                 precio = rs.getFloat("precio");
                 medida = rs.getString("medida");
+                id_material = rs.getInt("id_material");
             }
-            material = new MaterialDTO(nom,tipoMat,precio,medida);
+            material = new MaterialDTO(id_material, nom,tipoMat,precio,medida);
         }
         catch (SQLException e){
             System.err.println(e);
@@ -139,10 +143,10 @@ public class MaterialDAOImplSql implements MaterialDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "SELECT m.nombre, t.tipo_material, m.precio, m.medida\n" +
-                         "FROM materiales m\n" +
-                         "JOIN tipos_mat t\n" +
-                         "ON m.id_tipo_mat = t.id_tipo_mat\n";
+            String sql = "SELECT m.id_material, m.nombre, t.tipo_material, m.precio, m.medida " +
+                         "FROM materiales m " +
+                         "JOIN tipos_mat t " +
+                         "ON m.id_tipo_mat = t.id_tipo_mat ";
             sentencia = con.prepareStatement(sql);
             
             rs = sentencia.executeQuery();
@@ -151,14 +155,16 @@ public class MaterialDAOImplSql implements MaterialDAO {
             String tipoMat = null;
             String medida = null;
             float precio = 0;
+            int id_material = 0;
             
             while (rs.next()){
                 nom = rs.getString("nombre");
                 tipoMat = rs.getString("tipo_material");
                 precio = rs.getFloat("precio");
                 medida = rs.getString("medida");
+                id_material = rs.getInt("id_material");
                 
-                materiales.add(new MaterialDTO(nom,tipoMat,precio,medida));
+                materiales.add(new MaterialDTO(id_material, nom,tipoMat,precio,medida));
             }
         }
         catch (SQLException e){
@@ -186,10 +192,10 @@ public class MaterialDAOImplSql implements MaterialDAO {
         
         try {
             con = conexion.getConnection();
-            String sql = "SELECT m.nombre, t.tipo_material, m.precio, m.medida\n" +
-                         "FROM materiales m\n" +
-                         "JOIN tipos_mat t\n" +
-                         "ON m.id_tipo_mat = t.id_tipo_mat\n" +
+            String sql = "SELECT m.id_material, m.nombre, t.tipo_material, m.precio, m.medida " +
+                         "FROM materiales m " +
+                         "JOIN tipos_mat t " +
+                         "ON m.id_tipo_mat = t.id_tipo_mat " +
                          "WHERE m.nombre LIKE '%"+filtro+"%'";
             sentencia = con.prepareStatement(sql);
             
@@ -199,14 +205,16 @@ public class MaterialDAOImplSql implements MaterialDAO {
             String tipoMat = null;
             String medida = null;
             float precio = 0;
+            int id_material = 0;
             
             while (rs.next()){
                 nom = rs.getString("nombre");
                 tipoMat = rs.getString("tipo_material");
                 precio = rs.getFloat("precio");
                 medida = rs.getString("medida");
+                id_material = rs.getInt("id_material");
                 
-                materiales.add(new MaterialDTO(nom,tipoMat,precio,medida));
+                materiales.add(new MaterialDTO(id_material,nom,tipoMat,precio,medida));
             }
         }
         catch (SQLException e){
@@ -261,7 +269,7 @@ public class MaterialDAOImplSql implements MaterialDAO {
     }
     
     @Override
-    public boolean modificarMaterial(MaterialDTO material, String nombre, String tipo){
+    public boolean modificarMaterial(MaterialDTO material){
         boolean result = false;
         Connection con = null;
         PreparedStatement sentencia = null;
@@ -269,16 +277,16 @@ public class MaterialDAOImplSql implements MaterialDAO {
         try {
             con = conexion.getConnection();
             String sql = "UPDATE TABLE materiales "
-                       + "SET nombre = ?, id_tipo_mat = (SELECT id_tipo_mat FROM tipos_mat WHERE material = ? LIMIT 1), precio = ?, medida = ?"
-                       + "WHERE nombre = ? ADN "
-                    + "id_tipo_mat = (SELECT FIRST tm.id_tipo_mat FROM tipos_mat tm WHERE tm.tipo_material = ?)";
+                       + "SET nombre = ?, "
+                       + "id_tipo_mat = (SELECT id_tipo_mat FROM tipos_mat WHERE material = ? LIMIT 1), "
+                       + "precio = ?, medida = ? "
+                       + "WHERE id_material = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, material.getNombre());
             sentencia.setString(2, material.getTipo());
             sentencia.setFloat(3, material.getPrecio());
             sentencia.setString(4, material.getMedida());
-            sentencia.setString(5, nombre);
-            sentencia.setString(6, tipo);
+            sentencia.setInt(5, material.getId_material());
             
             int r = sentencia.executeUpdate();
             
@@ -307,11 +315,9 @@ public class MaterialDAOImplSql implements MaterialDAO {
         
         try{
             con = conexion.getConnection();
-            String sql = "DELETE materiales WHERE nombre = ? AND id_tipo_mat = "
-                    + "(SELECT FIRST tm.id_tipo_mat FROM tipos_mat tm WHERE tipo_material = ?)";
+            String sql = "DELETE materiales WHERE id_material = ?";
             sentencia = con.prepareStatement(sql);
-            sentencia.setString(1, material.getNombre());
-            sentencia.setString(2, material.getTipo());
+            sentencia.setInt(1, material.getId_material());
             
             int r = sentencia.executeUpdate();
             

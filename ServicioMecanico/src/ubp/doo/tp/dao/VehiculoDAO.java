@@ -15,13 +15,13 @@ public interface VehiculoDAO {
     
     VehiculoDTO buscarVehiculo(String matricula);
     
-    VehiculoDTO buscarVehiculo(String comp, int poliza);
+    VehiculoDTO buscarVehiculo(int id_comp_seguros, int poliza);
     
     List<VehiculoDTO> listarVehiculos();
 
     List<VehiculoDTO> listarVehiculos(String dniTipo, int dni);
 
-    List<VehiculoDTO> listarVehiculos(String compania);
+    List<VehiculoDTO> listarVehiculos(int id_comp_seguros);
 
     boolean insertarVehiculo(VehiculoDTO vehiculo);
 

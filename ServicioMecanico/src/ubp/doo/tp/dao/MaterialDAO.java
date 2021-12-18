@@ -26,7 +26,7 @@ public interface MaterialDAO {
     
     boolean insertarMaterial(MaterialDTO material);
     
-    boolean modificarMaterial(MaterialDTO material, String nombre, String tipo);
+    boolean modificarMaterial(MaterialDTO material);
     
     boolean borrarMaterial(MaterialDTO material);
 }

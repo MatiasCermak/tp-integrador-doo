@@ -25,12 +25,12 @@ public class MFactura implements Modelo {
     	facturaDao = fabricaDao.getFacturaDao();
     }
     
-    public FacturaDTO buscarFactura(String comp, float costo, float pago, Date fecha) {
+    public FacturaDTO buscarFactura(int comp, float costo, float pago, Date fecha) {
     	FacturaDTO factura = facturaDao.buscarFactura(comp, costo, pago, fecha);
     	return factura;
     }
     
-    public List<FacturaDTO> filtrarFacturas(String comp) {
+    public List<FacturaDTO> filtrarFacturas(int comp) {
     	List<FacturaDTO> facturas = facturaDao.filtrarFacturas(comp);
     	return facturas;
     }
