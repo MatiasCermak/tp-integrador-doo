@@ -210,7 +210,6 @@ public class FacturaDAOImplSql implements FacturaDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        FacturaDTO factura = null;
         
         try{
             con = conexion.getConnection();

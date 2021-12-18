@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
-
 import ubp.doo.tp.dto.VehiculoDTO;
 import ubp.doo.tp.dto.CompSegurosDTO;
 import ubp.doo.tp.dto.ClienteDTO;
@@ -38,7 +37,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
         try {
             con = conexion.getConnection();
             String sql = "SELECT v.matricula, v.poliza, v.marca, v.modelo, c.nombre AS compania, "
-                        + "cl.nombre, cl.apellido, v.dni, dt.tipo "
+                        + "cl.nombre, cl.apellido, v.dni, dt.tipo, c.id_comp_seguro"
                         + "FROM vehiculos v "
                         + "JOIN comp_seguros c ON v.id_comp_seguro = c.id_com_seguro "
                         + "JOIN clientes cl ON v.dni = cl.dni ADN v.id_dni_tipo = cl.id_dni_tipo "
@@ -67,8 +66,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
                 aCliente = rs.getString("apellido");
                 dni = rs.getInt("dni");
                 dniTipo = rs.getString("tipo");
-                vehiculo = new VehiculoDTO(new CompSegurosDTO(comp),new ClienteDTO(nCliente,aCliente,dniTipo,dni),
-                        poliza,matricula,modelo,marca);
+                vehiculo = new VehiculoDTO(rs.getInt("id_comp_seguro"), dni, dniTipo, poliza, matricula, modelo, marca);
                 break;
             }
         } catch (SQLException e){
