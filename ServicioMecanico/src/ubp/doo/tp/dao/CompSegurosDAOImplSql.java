@@ -50,8 +50,8 @@ public class CompSegurosDAOImplSql implements CompSegurosDAO{
         }
         finally{
             try {
-                rs.close();
-                sentencia.close();
+                    sentencia.close();
+                    rs.close();                         
             }
             catch (SQLException ex){
                 System.err.println(ex);
@@ -86,7 +86,7 @@ public class CompSegurosDAOImplSql implements CompSegurosDAO{
         }finally{
             try{
                 sentencia.close();
-                rs.close();
+                rs.close(); 
             }catch(SQLException ex){
                 System.err.println(ex);
             }
@@ -118,7 +118,7 @@ public class CompSegurosDAOImplSql implements CompSegurosDAO{
         }finally{
             try{
                 sentencia.close();
-                rs.close();
+                rs.close(); 
             }catch(SQLException ex){
                 System.err.println(ex);
             }

@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import ubp.doo.tp.controlador.Controlador;
 import ubp.doo.tp.vista.InterfazVistaSelAgenda;
+import java.util.Date;
+import java.util.List;
 /**
  *
  * @author jeresabelox
@@ -45,7 +47,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
         btnCancelar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cmbMecanico = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateTurno = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +55,11 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
         jLabel1.setText("Seleccion F. de Turno");
 
         cmbHorario.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
+        cmbHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbHorarioActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Fecha de Turno");
 
@@ -69,11 +76,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
 
         cmbMecanico.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
 
-        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jDateChooser1PropertyChange(evt);
-            }
-        });
+        jDateTurno.setDateFormatString("yyyy/mm/dd");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,28 +87,25 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jLabel1)
-                        .addGap(0, 30, Short.MAX_VALUE))
+                        .addGap(0, 34, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(cmbMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(cmbMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(121, 121, 121))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(19, 19, 19)))
+                                    .addComponent(btnAceptar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnCancelar))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jDateTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3))
+                                    .addGap(19, 19, 19)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel4)
-                                        .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)))))
+                                        .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
@@ -113,32 +113,31 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cmbHorario)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cmbMecanico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                    .addComponent(jDateTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
-        if("date".equals(evt.getPropertyName())){
-        }
-    }//GEN-LAST:event_jDateChooser1PropertyChange
+    private void cmbHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHorarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbHorarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,7 +179,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbHorario;
     private javax.swing.JComboBox<String> cmbMecanico;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateTurno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -210,7 +209,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
     public void limpiar(){
         this.cmbHorario.removeAllItems();
         this.cmbMecanico.removeAllItems();
-        this.jDateChooser1.cleanup();
+        this.jDateTurno.cleanup();
     }
     
     @Override
@@ -220,5 +219,17 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
         }else {
             JOptionPane.showMessageDialog(this, "Operación ejecutada con exito", "Información", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+    
+    public Date getFechaTurno(){
+        return jDateTurno.getDate();
+    }
+    
+    public int getHoraTurno(){
+        return (int)cmbHorario.getSelectedItem();
+    }
+    
+    public javax.swing.JComboBox getCmbHorario(){
+        return this.cmbHorario;
     }
 }
