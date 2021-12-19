@@ -44,6 +44,8 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1,especialidad);
             
+            rs = sentencia.executeQuery();
+            
             while (rs.next()){
                 r = new EspecialidadDTO(rs.getInt("id_especialidad"), especialidad);
                 break;
@@ -54,6 +56,7 @@ public class EspecialidadDAOImplSql implements EspecialidadDAO {
         }
         finally{
             try {
+                
                 rs.close();
                 sentencia.close();
             } catch (SQLException ex) {

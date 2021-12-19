@@ -20,28 +20,22 @@ public class SeleccionarClienteTest {
     @Test
     public void testSeleccionarCliente1()
     {
-        ClienteDTO cliente = new ClienteDTO();
-        ClienteDTO clienteEsperado = new ClienteDTO();
-        
+        ClienteDTO cliente = new ClienteDTO("Test", "Client1", "DNI", 15151515);
         Modelo mod = new MCliente();
-        clienteEsperado.setDniNumero(12345687);
-        clienteEsperado.setDniTipo("DNI");
-        clienteEsperado.setNombre("Armando Barreda");
         
-        cliente=((MCliente)mod).buscarCliente("DNI",12345687);
+        ClienteDTO result=((MCliente)mod).buscarCliente("DNI",15151515);
         
-        assertEquals(clienteEsperado.getNombre(),cliente.getNombre());
-        assertEquals(clienteEsperado.getDniTipo(),cliente.getDniTipo());
-        assertEquals(clienteEsperado.getDniNumero(),cliente.getDniNumero());
+        assertEquals(cliente.getNombre(),result.getNombre());
+        assertEquals(cliente.getApellido(),result.getApellido());
+        assertEquals(cliente.getDniTipo(),result.getDniTipo());
+        assertEquals(cliente.getDniNumero(),result.getDniNumero());
     }
     
     @Test
     public void testSeleccionarCliente2()
     {
-        ClienteDTO cliente = new ClienteDTO();  
         Modelo mod = new MCliente();
-
-        cliente=((MCliente)mod).buscarCliente("DNI",22345687);
+        ClienteDTO cliente=((MCliente)mod).buscarCliente("DNI",22345687);
         
         assertNull(cliente);
     }

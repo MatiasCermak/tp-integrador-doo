@@ -239,7 +239,9 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     else{
                         String velSel = (String)((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getSelectedItem();
                         vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(velSel.substring(0, velSel.indexOf(":")));
+                        System.out.println(vehiculo.getModelo());
                         especialidad = ((MEspecialidad)this.MESPECIALIDADES).buscarEspecialidad((String)((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().getSelectedItem());
+                        System.out.println(especialidad.getNombre());
                         ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
                         ((SelAgendaFr)this.VISTASELAGENDA).iniciaVista();
                     }

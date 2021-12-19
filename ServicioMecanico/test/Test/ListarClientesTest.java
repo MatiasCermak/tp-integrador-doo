@@ -20,15 +20,13 @@ public class ListarClientesTest {
     @Test
     public void testListarClientes1()
     {
-        ClienteDTO cliente = new ClienteDTO();
+        ClienteDTO cliente = new ClienteDTO("Test", "Client1", "DNI", 15151515);
         Modelo mod = new MCliente();
-        cliente.setDniNumero(40000005);
-        cliente.setDniTipo("DNI");
-        cliente.setNombre("juan cho");
         
-        List<ClienteDTO>result=((MCliente)mod).listarClientes("juan cho");
+        List<ClienteDTO>result=((MCliente)mod).listarClientes("Test Client1");
         
         assertEquals(cliente.getNombre(),result.get(0).getNombre());
+        assertEquals(cliente.getApellido(),result.get(0).getApellido());
         assertEquals(cliente.getDniTipo(),result.get(0).getDniTipo());
         assertEquals(cliente.getDniNumero(),result.get(0).getDniNumero());
     }
@@ -48,8 +46,7 @@ public class ListarClientesTest {
     public void testListarClientes3()
     {
         Modelo mod = new MCliente();
-        List<ClienteDTO>result=((MCliente)mod).listarClientes("juan");
-        
-        assertEquals(5,result.size());
+        List<ClienteDTO>result=((MCliente)mod).listarClientes("Test");
+        assertEquals(2,result.size());
     }
 }
