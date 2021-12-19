@@ -2,37 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/modelo/Modelo.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/DetalleDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/FacturaDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/VehiculoDAO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/VehiculoDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/FichaDAO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/ClienteDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/MaterialDAO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/RegClienteFr.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/main/Main.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/SqlFabricaDAO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/AgendaDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/RegTurnoFr.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/MaterialDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/FichaDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/MecanicoDAO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/CompSegurosDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/TurnoDTO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/UsuarioDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/EspecialidadDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/SelAgendaFr.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/AgendaDTO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/MecanicoDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/SelClienteFr.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/TurnoDAO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/EmpleadoDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/TurnoDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/controlador/Controlador.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/InterfazVistaRegCliente.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/UsuarioDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
