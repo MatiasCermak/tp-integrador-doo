@@ -10,5 +10,5 @@ import ubp.doo.tp.controlador.Controlador;
  * @author chino
  */
 public interface InterfazVistaSelCliente extends InterfazVistaFlujoRegTurno{
-    void actualizaTabla(Controlador c);
+    
 }

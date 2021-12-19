@@ -63,20 +63,25 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         textSearch.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         textSearch.setToolTipText("Escriba un nombre para filtrar la lista");
         textSearch.setActionCommand("");
+        textSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textSearchKeyReleased(evt);
+            }
+        });
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "DNI", "Tipo", "Seleccionado"
+                "Nombre", "Apellido", "DNI", "Tipo", "Seleccionado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -100,6 +105,14 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
             }
         });
         jScrollPane1.setViewportView(tblClientes);
+        if (tblClientes.getColumnModel().getColumnCount() > 0) {
+            tblClientes.getColumnModel().getColumn(2).setResizable(false);
+            tblClientes.getColumnModel().getColumn(2).setPreferredWidth(30);
+            tblClientes.getColumnModel().getColumn(3).setResizable(false);
+            tblClientes.getColumnModel().getColumn(3).setPreferredWidth(15);
+            tblClientes.getColumnModel().getColumn(4).setResizable(false);
+            tblClientes.getColumnModel().getColumn(4).setPreferredWidth(5);
+        }
 
         btnSeleccionar.setText("Seleccionar");
         btnSeleccionar.setActionCommand("SCSELCLI");
@@ -179,20 +192,24 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
         if (tblClientes.getSelectedRow() >= 0){
             for (int i=0; i<tblClientes.getRowCount();i++){
-                tblClientes.getModel().setValueAt(false,i,3);
+                tblClientes.getModel().setValueAt(false,i,4);
             }
-            tblClientes.getModel().setValueAt(true,tblClientes.getSelectedRow(),3);
+            tblClientes.getModel().setValueAt(true,tblClientes.getSelectedRow(),4);
         }
     }//GEN-LAST:event_tblClientesMouseClicked
 
     private void tblClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblClientesKeyReleased
         if (tblClientes.getSelectedRow() >= 0){
             for (int i=0; i<tblClientes.getRowCount();i++){
-                tblClientes.getModel().setValueAt(false,i,3);
+                tblClientes.getModel().setValueAt(false,i,4);
             }
-            tblClientes.getModel().setValueAt(true,tblClientes.getSelectedRow(),3);
+            tblClientes.getModel().setValueAt(true,tblClientes.getSelectedRow(),4);
         }
     }//GEN-LAST:event_tblClientesKeyReleased
+
+    private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
+        textSearch.getActionListeners()[0].actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.SCFILTCLI.toString()));
+    }//GEN-LAST:event_textSearchKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -219,6 +236,7 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         this.btnCancelar.addActionListener(c);
         this.btnNuevo.addActionListener(c);
         this.textSearch.addKeyListener(c);
+        this.textSearch.addActionListener(c);
         c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.SCCARGAR.toString()));    
     }
     
@@ -226,6 +244,18 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
     public void iniciaVista() {
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+    
+    @Override
+    public void cierraVista(){
+        setVisible(false);
+        limpiar();
+        dispose();
+    }
+    
+    @Override
+    public void limpiar(){
+        this.textSearch.setText("");
     }
     
     @Override
@@ -237,25 +267,8 @@ public class SelClienteFr extends javax.swing.JFrame implements InterfazVistaSel
         }
     }
     
-    @Override
-    public void actualizaTabla(Controlador c){
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.SCCARGAR.toString()));
-    }
-    
     public javax.swing.JTable getTblClientes() {
         return tblClientes;
-    }
-    
-    public void setTblClientes(javax.swing.JTable tblClientes){
-        this.tblClientes = tblClientes;
-    }
-    
-    public javax.swing.JTextField getTxtBuscar(){
-        return textSearch;
-    }
-    
-    public void setTxtBuscar(javax.swing.JTextField txtSearch){
-        this.textSearch = txtSearch;
     }
 }
 

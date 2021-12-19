@@ -14,17 +14,20 @@ import ubp.doo.tp.controlador.Controlador;
 public interface InterfazVistaFlujoRegTurno extends Vista {
     
     public static enum Operacion {
-        RCNUEVOVEHI, RCCANCELAR, RCCARGAR, 
-        SCCARGAR, CARGARREGCLI, SCNUEVOCLI, 
-        SCSELCLI, SCFILTCLI, SCCANCELAR, 
-        RTCANCELAR, RTSIGUIENTE, RTEXAMCLI, 
-        RTNUEVOVEHI, SAACEPTAR, SACANCELAR,
-        RVREGISTRAR, RVCANCELAR;
+        RCNUEVOVEHI, RCCANCELAR, RCCARGAR,  
+        SCNUEVOCLI, SCCARGAR, SCSELCLI, SCFILTCLI, SCCANCELAR, 
+        RTCARGAR, RTCANCELAR, RTSIGUIENTE, RTEXAMCLI, RTNUEVOVEHI, 
+        SACARGAR, SAACEPTAR, SACANCELAR,
+        RVREGISTRAR, RVCANCELAR, RVCARGAR;
     }
     
     void setControlador(Controlador c);
     
     void iniciaVista();
+    
+    void cierraVista();
+    
+    void limpiar();
     
     void imprimeMensaje(Exception... e);
     
