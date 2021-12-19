@@ -10,6 +10,8 @@ import java.util.List;
 import ubp.doo.tp.dao.AgendaDAO;
 import ubp.doo.tp.dao.FabricaDAO;
 import ubp.doo.tp.dto.AgendaDTO;
+import java.util.List;
+import java.util.Date;
 
 /**
  *
@@ -24,10 +26,7 @@ public class MAgenda implements Modelo {
     	agendaDao = fabricaDao.getAgendaDao();
     }
     
-    public List<Integer> listarHorasDisponibles(int id_empleado, Date fecha){
-        return agendaDao.listarHorasDisponibles(id_empleado, fecha);
-    }
-    
+
     public AgendaDTO buscarAgenda(int id_empleado) {
     	AgendaDTO agenda = agendaDao.buscarAgenda(id_empleado);
     	return agenda;
@@ -45,4 +44,8 @@ public class MAgenda implements Modelo {
     	agendaDao.cerrarConexion();
     }
     
+    
+    public List<Integer> listarHorasDisponibles(int id_empleado, Date fecha){
+        return agendaDao.listarHorasDisponibles(id_empleado, fecha);
+    }
 }

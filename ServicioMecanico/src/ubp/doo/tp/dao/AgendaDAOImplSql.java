@@ -219,7 +219,6 @@ public class AgendaDAOImplSql implements AgendaDAO{
                     + "WHERE id_agenda = ? AND fecha = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1, id_agenda);
-            //sentencia.setDate(2, new java.sql.Date(fecha.getTime()));
             sentencia.setString(2, new java.sql.Date(fecha.getTime()).toString());
 
             rs = sentencia.executeQuery();
