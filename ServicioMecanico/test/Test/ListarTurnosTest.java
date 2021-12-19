@@ -5,8 +5,15 @@
 package Test;
 
 
+import java.text.ParseException;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import ubp.doo.tp.modelo.MAgenda;
+import ubp.doo.tp.modelo.MCliente;
+import ubp.doo.tp.modelo.Modelo;
+import java.util.Date;
+import java.text.SimpleDateFormat;  
 
 /**
  *
@@ -15,8 +22,16 @@ import static org.junit.Assert.*;
 public class ListarTurnosTest {
     
     @Test
-    public static void testListarTurnos1() {
+    public void testListarTurnos1() throws ParseException {
+        Modelo mod = new MAgenda();
         
+        String sDate="2021/12/20";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = formatter.parse(sDate);  
+
+        
+        List<Integer> result = ((MAgenda)mod).listarHorasDisponibles(1,date);
+        assertEquals(7,result.size());
     }
 
 }
