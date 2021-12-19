@@ -9,11 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import ubp.doo.tp.dto.VehiculoDTO;
-import ubp.doo.tp.dto.CompSegurosDTO;
-import ubp.doo.tp.dto.ClienteDTO;
 
 /**
  *
@@ -37,7 +36,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
         try {
             con = conexion.getConnection();
             String sql = "SELECT v.poliza, v.marca, v.modelo, "
-                        + "v.dni, dt.tipo, v.id_comp_seguro"
+                        + "v.dni, dt.tipo, v.id_comp_seguro "
                         + "FROM vehiculos v "
                         + "JOIN dni_tipos dt ON v.id_dni_tipo = dt.id_dni_tipo "
                         + "WHERE v.matricula = ?";
@@ -52,7 +51,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             int dni;
             String dniTipo;
 
-            while (rs.next()){
+            if (rs.next()){
                 poliza = rs.getInt("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
@@ -60,7 +59,6 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
                 dniTipo = rs.getString("tipo");
                 
                 vehiculo = new VehiculoDTO(rs.getInt("id_comp_seguro"), dni, dniTipo, poliza, matricula, modelo, marca);
-                break;
             }
         } catch (SQLException e){
             System.err.println(e);
@@ -102,7 +100,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             int dni;
             String dniTipo;
 
-            while (rs.next()){
+            if (rs.next()){
                 matr = rs.getString("matricula");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
@@ -110,13 +108,13 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
                 dniTipo = rs.getString("tipo");
                 
                 vehiculo = new VehiculoDTO(id_comp_seguros, dni, dniTipo, poliza, matr, modelo, marca);
-                break;
             }
         } catch (SQLException e){
             System.err.println(e);
         } finally {
             try {
-                rs.close();
+                if (rs != null)
+                    rs.close();
                 sentencia.close();
             } catch (SQLException ex){
                 System.err.println(ex);
@@ -131,7 +129,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        List<VehiculoDTO> vehiculos = null;
+        List<VehiculoDTO> vehiculos = new ArrayList<VehiculoDTO>();
 
         try {
             con = conexion.getConnection();
@@ -180,7 +178,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        List<VehiculoDTO> vehiculos = null;
+        List<VehiculoDTO> vehiculos = new ArrayList<VehiculoDTO>();
 
         try {
             con = conexion.getConnection();
@@ -228,7 +226,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        List<VehiculoDTO> vehiculos = null;
+        List<VehiculoDTO> vehiculos = new ArrayList<VehiculoDTO>();
 
         try {
             con = conexion.getConnection();
@@ -281,9 +279,9 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
         
         try{
             con = conexion.getConnection();
-            String sql = "INSERT INTO vehiculos (matricula, poliza, marca, modelo, id_comp_seguro, dni, id_dni_tipo)"
+            String sql = "INSERT INTO vehiculos (matricula, poliza, marca, modelo, id_comp_seguro, dni, id_dni_tipo) "
                     + "VALUES (?,?,?,?,?,?,"
-                    + "(SELECT FIRST dt.id_dni_tipo FROM dni_tipos dt WHERE dt.tipo = ?))";
+                    + "(SELECT dt.id_dni_tipo FROM dni_tipos dt WHERE dt.tipo = ? LIMIT 1))";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, vehiculo.getMatricula());
             sentencia.setInt(2, vehiculo.getPoliza());

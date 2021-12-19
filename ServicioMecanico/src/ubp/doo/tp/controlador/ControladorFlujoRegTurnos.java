@@ -156,17 +156,8 @@ public class ControladorFlujoRegTurnos extends Controlador {
                                 +", "+cliente.getDniTipo()
                                 +"= "+cliente.getDniNumero());
                         ((SelClienteFr)this.VISTASELCLI).cierraVista();
-                        
+                        this.actionPerformed(new ActionEvent((SelClienteFr)this.VISTASELCLI,0,InterfazVistaFlujoRegTurno.Operacion.RTCARGAR.toString()));
                         ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
-                        List<VehiculoDTO> vehiculos = ((MVehiculo)this.MVEHICULOS).listarVehiculos(tipo_dni, dni);
-                        if (vehiculos == null){
-                            ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().addItem("El cliente no tiene vehículo registrado");
-                        }
-                        else {
-                            for (VehiculoDTO v : vehiculos){
-                                ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().addItem(v.getMatricula()+":"+v.getMarca()+", "+v.getModelo());
-                            }
-                        }
                     }
                     break;
                 case SCFILTCLI:
@@ -213,14 +204,25 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     break;
                 case RCCANCELAR:
                     ((RegClienteFr)this.VISTAREGCLI).cierraVista();
-                    System.out.println(cliente.getApellido());
                     this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
                     ((SelClienteFr)this.VISTASELCLI).iniciaVista();
                     break;
                 case RTCARGAR:
+                    ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().removeAllItems();
                     List<EspecialidadDTO> especialidades = ((MEspecialidad)this.MESPECIALIDADES).listarEspecialidades();
                     for (EspecialidadDTO esp : especialidades){
                         ((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().addItem(esp.getNombre());
+                    }
+                    if (cliente != null){
+                        List<VehiculoDTO> vehiculos = ((MVehiculo)this.MVEHICULOS).listarVehiculos(cliente.getDniTipo(), cliente.getDniNumero());
+                        if (vehiculos == null || vehiculos.isEmpty()){
+                            ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().addItem("El cliente no tiene vehículo registrado");
+                        }
+                        else {
+                            for (VehiculoDTO v : vehiculos){
+                                ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().addItem(v.getMatricula()+":"+v.getMarca()+", "+v.getModelo());
+                            }
+                        }
                     }
                     break;
                 case RTCANCELAR:
@@ -248,7 +250,8 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((SelClienteFr)this.VISTASELCLI).iniciaVista();
                     break;
                 case RTNUEVOVEHI:
-                    ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
+                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setTxtCliente(cliente.getDniTipo()+":"+cliente.getDniNumero()+" - "+cliente.getNombre()+","+cliente.getApellido());
                     ((RegVehiculoFr)this.VISTAREGVEHICULO).setPrevious((RegTurnoFr)this.VISTAREGTURNO);
                     ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
                     break;
@@ -263,12 +266,45 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
                     break;
                 case RVREGISTRAR:
-                    
-                    ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
-                    ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
+                    String matr = ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula();
+                    vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(matr);
+                    if (((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMarca().isBlank() &&
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula().isBlank() &&
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtModelo().isBlank() &&
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getIntPoliza() == 0){
+                        JOptionPane.showMessageDialog(((RegVehiculoFr)this.VISTAREGVEHICULO), 
+                                "Debe completar todos los campos para continuar", "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+                    else if (vehiculo != null){
+                        JOptionPane.showMessageDialog(((RegVehiculoFr)this.VISTAREGVEHICULO),
+                                "La matrícula ingresada ya se encuentra registrada en otro vehículo",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == ((RegClienteFr)this.VISTAREGCLI)){
+                            ((MCliente)this.MCLIENTES).insertarCliente(cliente);
+                        }
+                        int id_comp_seguros = ((MCompSeguros)this.MCOMPSEGUROS).buscarComp(
+                            (String)((RegVehiculoFr)this.VISTAREGVEHICULO).getCmbCompanias().getSelectedItem()).getId_comp_seguros();
+                        vehiculo = new VehiculoDTO(id_comp_seguros, 
+                            cliente.getDniNumero(), cliente.getDniTipo(), 
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getIntPoliza(), 
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula(),
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtModelo(),
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMarca());
+                        ((MVehiculo)this.MVEHICULOS).insertarVehiculo(vehiculo);
+                        
+                        ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
+                        if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == (RegTurnoFr)this.VISTAREGTURNO)
+                            this.actionPerformed(new ActionEvent((RegVehiculoFr)this.VISTAREGVEHICULO,0,InterfazVistaFlujoRegTurno.Operacion.RTCARGAR.toString()));
+                        ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
+                    }
                     break;
                 case RVCANCELAR:
                     ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
+                    if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == (RegTurnoFr)this.VISTAREGTURNO)
+                            this.actionPerformed(new ActionEvent((RegVehiculoFr)this.VISTAREGVEHICULO,0,InterfazVistaFlujoRegTurno.Operacion.RTCARGAR.toString()));
                     ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
                     break;
                 case RVCARGAR:
@@ -301,13 +337,11 @@ public class ControladorFlujoRegTurnos extends Controlador {
 
     public void verificarInputTxt(KeyEvent e) {
         char c = e.getKeyChar();
-
         if (!((c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
                 || (c == KeyEvent.VK_ENTER) || (c == KeyEvent.VK_TAB)
                 || (Character.isDigit(c)))&&(!(e.getSource() instanceof JTextField))) {
             e.consume();
         }
-        
         
     }
     

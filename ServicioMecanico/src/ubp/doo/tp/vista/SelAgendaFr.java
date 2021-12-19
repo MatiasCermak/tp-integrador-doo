@@ -55,11 +55,6 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
         jLabel1.setText("Seleccion F. de Turno");
 
         cmbHorario.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
-        cmbHorario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbHorarioActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Fecha de Turno");
 
@@ -77,6 +72,11 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
         cmbMecanico.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
 
         jDateTurno.setDateFormatString("yyyy/mm/dd");
+        jDateTurno.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateTurnoPropertyChange(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,9 +135,11 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbHorarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbHorarioActionPerformed
+    private void jDateTurnoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateTurnoPropertyChange
+        if ("date".equals(evt.getPropertyName())){
+            this.btnAceptar.getActionListeners()[0].actionPerformed(new ActionEvent(this,0,InterfazVistaSelAgenda.Operacion.SALISTARHORAS.toString()));
+        }
+    }//GEN-LAST:event_jDateTurnoPropertyChange
 
     /**
      * @param args the command line arguments
@@ -190,6 +192,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
     public void setControlador(Controlador c) {
         this.btnCancelar.addActionListener(c);
         this.btnAceptar.addActionListener(c);
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelAgenda.Operacion.SACARGAR.toString()));
     }
     
     @Override

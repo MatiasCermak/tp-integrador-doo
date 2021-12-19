@@ -5,6 +5,7 @@
  */
 package ubp.doo.tp.vista;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import ubp.doo.tp.controlador.Controlador;
 /**
@@ -83,14 +84,19 @@ public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRe
 
         txtNumPoliza1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         txtNumPoliza1.setToolTipText("");
-
-        jLabel5.setText("Modelo");
-
-        cmbCompSeguros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCompSegurosActionPerformed(evt);
+        txtNumPoliza1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumPoliza1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNumPoliza1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumPoliza1KeyTyped(evt);
             }
         });
+
+        jLabel5.setText("Modelo");
 
         jLabel6.setText("Marca");
 
@@ -99,11 +105,6 @@ public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRe
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.setActionCommand("RVREGISTRAR");
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
-            }
-        });
 
         txtMarca.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         txtMarca.setToolTipText("");
@@ -191,13 +192,32 @@ public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRe
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbCompSegurosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCompSegurosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbCompSegurosActionPerformed
+    private void txtNumPoliza1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPoliza1KeyPressed
+        char c = evt.getKeyChar();
+        if (!((c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_ENTER) || (c == KeyEvent.VK_TAB)
+                || (Character.isDigit(c)))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumPoliza1KeyPressed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+    private void txtNumPoliza1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPoliza1KeyReleased
+        char c = evt.getKeyChar();
+        if (!((c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_ENTER) || (c == KeyEvent.VK_TAB)
+                || (Character.isDigit(c)))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumPoliza1KeyReleased
+
+    private void txtNumPoliza1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumPoliza1KeyTyped
+        char c = evt.getKeyChar();
+        if (!((c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_ENTER) || (c == KeyEvent.VK_TAB)
+                || (Character.isDigit(c)))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumPoliza1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -296,5 +316,22 @@ public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRe
     
     public javax.swing.JComboBox getCmbCompanias(){
         return this.cmbCompSeguros;
+    }
+    
+    public String getTxtMatricula(){
+        return this.txtMatricula.getText();
+    }
+    
+    public String getTxtMarca(){
+        return this.txtMarca.getText();
+    }
+    
+    public String getTxtModelo(){
+        return this.txtModelo.getText();
+    }
+    
+    public int getIntPoliza(){
+        int r = 0;
+        return Integer.parseInt(this.txtNumPoliza1.getText());
     }
 }

@@ -7,6 +7,7 @@ package ubp.doo.tp.vista;
 
 import ubp.doo.tp.controlador.Controlador;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 /**
  *
@@ -70,6 +71,17 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
 
         txtDni.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         txtDni.setToolTipText("");
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDniKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDniKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("DNI");
 
@@ -145,6 +157,33 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtDniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyTyped
+        char c = evt.getKeyChar();
+        if (!((c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_ENTER) || (c == KeyEvent.VK_TAB)
+                || (Character.isDigit(c)))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDniKeyTyped
+
+    private void txtDniKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyReleased
+        char c = evt.getKeyChar();
+        if (!((c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_ENTER) || (c == KeyEvent.VK_TAB)
+                || (Character.isDigit(c)))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDniKeyReleased
+
+    private void txtDniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyPressed
+        char c = evt.getKeyChar();
+        if (!((c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE)
+                || (c == KeyEvent.VK_ENTER) || (c == KeyEvent.VK_TAB)
+                || (Character.isDigit(c)))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDniKeyPressed
 
     /**
      * @param args the command line arguments
