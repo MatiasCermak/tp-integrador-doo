@@ -132,7 +132,7 @@ public class ClienteDAOImplSql implements ClienteDAO {
                     + "from clientes c "
                     + "join dni_tipos dt "
                     + "on dt.id_dni_tipo = c.id_dni_tipo "
-                    + "where c.nombre like '%"+filtro+"%' or c.apellido like '%"+filtro+"%' "
+                    + "where c.nombre || ' ' || c.apellido like '%"+filtro+"%' "
                     + "order by c.apellido";
             sentencia = con.prepareStatement(sql);
             
