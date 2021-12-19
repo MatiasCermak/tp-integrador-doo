@@ -22,6 +22,10 @@ public class MecanicoDAOImplSql implements MecanicoDAO {
     
     private ConexionSql conexion = null;
 
+    public MecanicoDAOImplSql(){
+        conexion = ConexionSql.getInstancia();
+    }
+    
     @Override
     public MecanicoDTO buscarMecanico(int id_empleado) {
         PreparedStatement sentencia = null;

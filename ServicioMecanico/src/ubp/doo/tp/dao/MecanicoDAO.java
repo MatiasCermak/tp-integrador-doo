@@ -18,7 +18,7 @@ public interface MecanicoDAO {
     
     MecanicoDTO buscarMecanico(int dni, String dni_tipo);
     
-    MecanicoDTO buscarMecanico(String nombre, String Apellido);
+    MecanicoDTO buscarMecanico(String nombre, String apellido);
     
     List<MecanicoDTO> listarMecanicos();
     
