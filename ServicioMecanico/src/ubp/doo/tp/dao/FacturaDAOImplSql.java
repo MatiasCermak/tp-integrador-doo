@@ -31,7 +31,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
     }
 
     @Override
-    public FacturaDTO buscarFactura(String comp, float costo, float pago, Date fecha) {
+    public FacturaDTO buscarFactura(int comp, float costo, float pago, Date fecha) {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
@@ -56,11 +56,11 @@ public class FacturaDAOImplSql implements FacturaDAO {
     }
 
     @Override
-    public List<FacturaDTO> filtrarFacturas(String comp) {
+    public List<FacturaDTO> filtrarFacturas(int comp) {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        FacturaDTO factura = null;
+        List<FacturaDTO> facturas = null;
         
         try{
             con = conexion.getConnection();
@@ -77,7 +77,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
             }
         }
         
-        return factura;
+        return facturas;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        FacturaDTO factura = null;
+        List<FacturaDTO> facturas = null;
         
         try{
             con = conexion.getConnection();
@@ -102,7 +102,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
             }
         }
         
-        return factura;
+        return facturas;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        FacturaDTO factura = null;
+        List<FacturaDTO> facturas = null;
         
         try{
             con = conexion.getConnection();
@@ -127,7 +127,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
             }
         }
         
-        return factura;
+        return facturas;
     }
 
     @Override
@@ -135,7 +135,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        FacturaDTO factura = null;
+        List<FacturaDTO> facturas = null;
         
         try{
             con = conexion.getConnection();
@@ -152,7 +152,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
             }
         }
         
-        return factura;
+        return facturas;
     }
 
     @Override
@@ -160,7 +160,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        FacturaDTO factura = null;
+        boolean result = false;
         
         try{
             con = conexion.getConnection();
@@ -177,7 +177,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
             }
         }
         
-        return factura;
+        return result;
     }
 
     @Override
@@ -185,7 +185,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        FacturaDTO factura = null;
+        boolean result = false;
         
         try{
             con = conexion.getConnection();
@@ -202,7 +202,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
             }
         }
         
-        return factura;
+        return result;
     }
 
     @Override
@@ -210,7 +210,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
-        FacturaDTO factura = null;
+        boolean result = false;
         
         try{
             con = conexion.getConnection();
@@ -227,7 +227,7 @@ public class FacturaDAOImplSql implements FacturaDAO {
             }
         }
         
-        return factura;
+        return result;
     }
     
 }

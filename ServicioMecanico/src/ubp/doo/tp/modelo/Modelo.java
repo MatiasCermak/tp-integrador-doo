@@ -8,6 +8,6 @@ package ubp.doo.tp.modelo;
  *
  * @author chino
  */
-public abstract interface Modelo {
+public interface Modelo {
     
 }

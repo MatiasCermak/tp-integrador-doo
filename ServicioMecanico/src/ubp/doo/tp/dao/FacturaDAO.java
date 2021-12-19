@@ -16,9 +16,9 @@ public interface FacturaDAO {
     
     void cerrarConexion();
     
-    FacturaDTO buscarFactura(String comp, float costo, float pago, Date fecha);
+    FacturaDTO buscarFactura(int comp, float costo, float pago, Date fecha);
     
-    List<FacturaDTO> filtrarFacturas(String comp);
+    List<FacturaDTO> filtrarFacturas(int comp);
     
     List<FacturaDTO> filtrarFacturas(float costo, float pago);
     

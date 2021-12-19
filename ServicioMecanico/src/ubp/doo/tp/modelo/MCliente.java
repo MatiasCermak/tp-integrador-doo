@@ -63,8 +63,8 @@ public class MCliente implements Modelo {
         return cliente.getNombre()+" "+cliente.getApellido()+", "+cliente.getDniTipo()+"= "+cliente.getDniNumero();
     }
     
-    @Override
+    /**@Override
     protected void finalize() throws Throwable {
         clienteDao.cerrarConexion();
-    }
+    }**/
 }

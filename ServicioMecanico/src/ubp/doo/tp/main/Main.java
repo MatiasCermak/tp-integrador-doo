@@ -6,6 +6,7 @@
 package ubp.doo.tp.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import ubp.doo.tp.facade.FacadeInitOpciones;
 import ubp.doo.tp.controlador.ControladorFlujoRegTurnos;
 import ubp.doo.tp.controlador.Controlador;
 import ubp.doo.tp.modelo.MCliente;
@@ -14,6 +15,7 @@ import ubp.doo.tp.vista.SelClienteFr;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import ubp.doo.tp.facade.Facade;
 import ubp.doo.tp.vista.InterfazVistaSelCliente;
 import ubp.doo.tp.vista.RegClienteFr;
 import ubp.doo.tp.vista.RegTurnoFr;
@@ -43,27 +45,8 @@ public class Main {
                     System.err.println("Failed to initialize LaF");
                 }
                 
-                Modelo modelo = new MCliente();
-                
-                InterfazVistaFlujoRegTurno vistaSelCli = SelClienteFr.getInstancia();
-                InterfazVistaFlujoRegTurno vistaRegCli = RegClienteFr.getInstancia();
-                InterfazVistaFlujoRegTurno vistaRegTurno = RegTurnoFr.getInstancia();
-                InterfazVistaFlujoRegTurno vistaRegVehi = RegVehiculoFr.getInstancia();
-                InterfazVistaFlujoRegTurno vistaSelAgen = SelAgendaFr.getInstancia();
-                
-                Controlador control = new ControladorFlujoRegTurnos(vistaSelAgen,vistaRegVehi,vistaSelCli,vistaRegCli,vistaRegTurno,modelo);
-                
-                vistaSelCli.setControlador(control);
-                
-                vistaRegCli.setControlador(control);
-                
-                vistaRegTurno.setControlador(control);
-                
-                vistaRegVehi.setControlador(control);
-                
-                vistaSelAgen.setControlador(control);
-                
-                vistaRegTurno.iniciaVista();
+                FacadeInitOpciones facadeOpciones = new FacadeInitOpciones();
+                facadeOpciones.execFlujo("RegistrarTurno");
             }
         });
     }

@@ -8,7 +8,6 @@ package ubp.doo.tp.vista;
 import ubp.doo.tp.controlador.Controlador;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-import ubp.doo.tp.vista.InterfazVistaRegCliente;
 /**
  *
  * @author tomas
@@ -177,6 +176,13 @@ public class RegClienteFr extends javax.swing.JFrame implements InterfazVistaReg
     public void iniciaVista() {
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+    
+    @Override
+    public void cierraVista(){
+        setVisible(false);
+        limpiar();
+        dispose();
     }
     
     @Override

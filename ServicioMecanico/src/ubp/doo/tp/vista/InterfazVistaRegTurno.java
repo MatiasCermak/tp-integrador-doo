@@ -10,4 +10,6 @@ import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
  */
 public interface InterfazVistaRegTurno extends InterfazVistaFlujoRegTurno {
     
+    void limpiar();
+    
 }

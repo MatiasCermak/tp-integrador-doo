@@ -189,6 +189,20 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
     }
     
     @Override
+    public void cierraVista(){
+        setVisible(false);
+        limpiar();
+        dispose();
+    }
+    
+    @Override
+    public void limpiar(){
+        this.cmbHorario.removeAllItems();
+        this.cmbMecanico.removeAllItems();
+        this.jDateChooser1.cleanup();
+    }
+    
+    @Override
     public void imprimeMensaje(Exception... e){
         if(e.length>0){
             JOptionPane.showMessageDialog(this, "Error: " + e[0].getMessage(), "Información", JOptionPane.ERROR_MESSAGE);

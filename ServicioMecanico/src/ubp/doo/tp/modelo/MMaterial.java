@@ -52,8 +52,8 @@ public class MMaterial implements Modelo {
     	return materialDao.insertarMaterial(material);
     }
     
-    public boolean modificarMaterial(MaterialDTO material, String nombre, String tipo) {
-    	return materialDao.modificarMaterial(material, nombre, tipo);
+    public boolean modificarMaterial(MaterialDTO material) {
+    	return materialDao.modificarMaterial(material);
     }
     
     public boolean borrarMaterial(MaterialDTO material) {

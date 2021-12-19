@@ -5,29 +5,34 @@
  */
 package ubp.doo.tp.controlador;
 
+//Importar DTOs a utilizar
 import ubp.doo.tp.dto.ClienteDTO;
+import ubp.doo.tp.dto.EspecialidadDTO;
+import ubp.doo.tp.dto.VehiculoDTO;
+import ubp.doo.tp.dto.AgendaDTO;
+import ubp.doo.tp.dto.CompSegurosDTO;
+//Importar modelos a utilizar
 import ubp.doo.tp.modelo.MCliente;
+import ubp.doo.tp.modelo.MEspecialidad;
 import ubp.doo.tp.modelo.Modelo;
+import ubp.doo.tp.modelo.MVehiculo;
+import ubp.doo.tp.modelo.MCompSeguros;
+//Importar vistas (frames) a itilizar
 import ubp.doo.tp.vista.SelClienteFr;
 import ubp.doo.tp.vista.RegClienteFr;
 import ubp.doo.tp.vista.RegTurnoFr;
 import ubp.doo.tp.vista.SelAgendaFr;
 import ubp.doo.tp.vista.RegVehiculoFr;
+//Importar interfaces de vistas
+import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
+//importar librerías auxiliares
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import ubp.doo.tp.vista.InterfazVistaSelCliente;
-import ubp.doo.tp.vista.InterfazVistaRegCliente;
-import ubp.doo.tp.vista.InterfazVistaRegTurno;
-import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
-import ubp.doo.tp.vista.InterfazVistaRegVehiculo;
-import ubp.doo.tp.vista.InterfazVistaSelAgenda;
+import java.util.Date;
 /**
  *
  * @author tomas
@@ -39,7 +44,23 @@ public class ControladorFlujoRegTurnos extends Controlador {
     private InterfazVistaFlujoRegTurno VISTAREGTURNO = null;
     private InterfazVistaFlujoRegTurno VISTAREGVEHICULO = null;
     private InterfazVistaFlujoRegTurno VISTASELAGENDA = null;
-    private Modelo MODELO = null;
+    private Modelo MCLIENTES = null;
+    private Modelo MAGENDAS = null;
+    private Modelo MCOMPSEGUROS = null;
+    private Modelo MESPECIALIDADES = null;
+    private Modelo MMECANICOS = null;
+    private Modelo MTURNOS = null;
+    private Modelo MVEHICULOS = null;
+    //Variables internas para el seguimiento y continuidad del flujo
+    private ClienteDTO cliente;
+    private VehiculoDTO vehiculo;
+    private Date fecha;
+    private int hora;
+    private AgendaDTO agenda;
+    private EspecialidadDTO especialidad;
+    
+    
+    public ControladorFlujoRegTurnos(){}
     
     public ControladorFlujoRegTurnos(InterfazVistaFlujoRegTurno vistaSelAge, InterfazVistaFlujoRegTurno vistaRegVeh,InterfazVistaFlujoRegTurno vistaSelCli, InterfazVistaFlujoRegTurno vistaRegCli, InterfazVistaFlujoRegTurno vistaRegTur, Modelo modelo){
         VISTASELCLI = vistaSelCli;
@@ -47,22 +68,120 @@ public class ControladorFlujoRegTurnos extends Controlador {
         VISTAREGTURNO = vistaRegTur;
         VISTAREGVEHICULO = vistaRegVeh;
         VISTASELAGENDA = vistaSelAge;
-        MODELO = modelo;
+        MCLIENTES = modelo;
+    }
+    
+    public void setVistaSelCli(InterfazVistaFlujoRegTurno vista){
+        this.VISTASELCLI = vista;
+    }
+    
+    public void setVistaRegCli(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGCLI = vista;
+    }
+    
+    public void setVistaRegTurno(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGTURNO = vista;
+    }
+    
+    public void setVistaRegVehiculo(InterfazVistaFlujoRegTurno vista){
+        this.VISTAREGVEHICULO = vista;
+    }
+    
+    public void setVistaSelAgenda(InterfazVistaFlujoRegTurno vista){
+        this.VISTASELAGENDA = vista;
+    }
+    
+    public void setMClientes(Modelo modelo){
+        this.MCLIENTES = modelo;
+    }
+    
+    public void setMAgendas(Modelo modelo){
+        this.MAGENDAS = modelo;
+    }
+    
+    public void setMCompSeguros(Modelo modelo){
+        this.MCOMPSEGUROS = modelo;
+    }
+    
+    public void setMEspecialidades(Modelo modelo){
+        this.MESPECIALIDADES = modelo;
+    }
+    
+    public void setMMecanicos(Modelo modelo){
+        this.MMECANICOS = modelo;
+    }
+    
+    public void setMTurnos(Modelo modelo){
+        this.MTURNOS = modelo;
+    }
+    
+    public void setMVehiculos(Modelo modelo){
+        this.MVEHICULOS = modelo;
     }
     
     @Override
     public void actionPerformed(ActionEvent e){
-        DefaultTableModel modeloTabla = (DefaultTableModel)((SelClienteFr)this.VISTASELCLI).getModeloTblClientes();
+        
+        DefaultTableModel mTablaCli = (DefaultTableModel)((SelClienteFr)this.VISTASELCLI).getModeloTblClientes();
         String filtro;
         boolean resultado = false;
-        String nombre;
+        String nombre, apellido;
         int dni;
-        int tipo_dni;
-        ClienteDTO cliente;
+        String tipo_dni;
         List<ClienteDTO> listadoClientes;
         List<String> tipos;
+        
         try {
             switch (InterfazVistaFlujoRegTurno.Operacion.valueOf(e.getActionCommand())){
+                case SCNUEVOCLI:
+                    ((SelClienteFr)this.VISTASELCLI).cierraVista();
+                    ((RegClienteFr)this.VISTAREGCLI).iniciaVista();
+                    break;
+                case SCCARGAR:
+                    mTablaCli.setRowCount(0);
+                    mTablaCli.fireTableDataChanged();
+                    listadoClientes = ((MCliente)this.MCLIENTES).listarClientes();
+                    for (ClienteDTO cli : listadoClientes){
+                        mTablaCli.addRow(new Object[]{cli.getNombre(),cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
+                    }
+                    break; 
+                case SCSELCLI:
+                    if (((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow() >= 0){
+                        int row = ((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow();
+                        dni = (int)mTablaCli.getValueAt(row, 2);
+                        tipo_dni = (String)mTablaCli.getValueAt(row, 3);
+                        cliente = ((MCliente)this.MCLIENTES).buscarCliente(tipo_dni, dni);
+                        ((RegTurnoFr)this.VISTAREGTURNO).setCliente(cliente.getNombre()
+                                +" "+cliente.getApellido()
+                                +", "+cliente.getDniTipo()
+                                +"= "+cliente.getDniNumero());
+                        ((SelClienteFr)this.VISTASELCLI).cierraVista();
+                        
+                        ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                        List<VehiculoDTO> vehiculos = ((MVehiculo)this.MVEHICULOS).listarVehiculos(tipo_dni, dni);
+                        if (vehiculos == null){
+                            ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().addItem("El cliente no tiene vehículo registrado");
+                        }
+                        else {
+                            for (VehiculoDTO v : vehiculos){
+                                ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().addItem(v.getMatricula()+":"+v.getMarca()+", "+v.getModelo());
+                            }
+                        }
+                    }
+                    break;
+                case SCFILTCLI:
+                    mTablaCli.setRowCount(0);
+                    mTablaCli.fireTableDataChanged();
+                    filtro = (String)((SelClienteFr)this.VISTASELCLI).getFiltro();
+                    listadoClientes = ((MCliente)this.MCLIENTES).listarClientes(filtro);
+                    for (ClienteDTO cli : listadoClientes){
+                        mTablaCli.addRow(new Object[]{cli.getNombre(),cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
+                    }
+                    break;
+                case SCCANCELAR:
+                    ((SelClienteFr)this.VISTASELCLI).cierraVista();
+                    ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    break;
                 case RCNUEVOVEHI:
                     if ((((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText().length() <= 0)
                         || (((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText().length() <= 0)
@@ -70,113 +189,93 @@ public class ControladorFlujoRegTurnos extends Controlador {
                         JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"Complete los campos para continuar","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else {
-                        cliente = new ClienteDTO(((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText(),((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText(),
-                                   ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().getSelectedItem().toString() ,Integer.valueOf(((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()));
-                        ((MCliente)this.MODELO).insertarCliente(cliente);
-                        System.out.println(cliente.getNombre()+" "+cliente.getApellido());
-                        JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"El siguiente formulario corresponderá a la carga de vehículo","Flujo de sistema",JOptionPane.INFORMATION_MESSAGE);
-                        ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
-                        ((RegClienteFr)this.VISTAREGCLI).limpiar();
-                        ((RegClienteFr)this.VISTAREGCLI).dispose();
-                        this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
+                        dni = Integer.valueOf(((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText());
+                        tipo_dni = ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().getSelectedItem().toString() ;
+                        nombre = ((RegClienteFr)this.VISTAREGCLI).getTxtNombre().getText();
+                        apellido = ((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText();
+                        cliente = new ClienteDTO(nombre, apellido, tipo_dni, dni);
+                        if (((MCliente)this.MCLIENTES).buscarCliente(tipo_dni, dni) != null){
+                            JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"El "+tipo_dni+" ingresado ya se encuentra registrado","Error",JOptionPane.ERROR_MESSAGE);
+                        }
+                        else {
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).setTxtCliente(tipo_dni+":"+((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()+" - "+nombre+","+apellido);
+                            ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).setPrevious((RegClienteFr)this.VISTAREGCLI);
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
+                        }
                     }
-                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(true);
                     break;
                 case RCCARGAR:
-                    tipos = ((MCliente)this.MODELO).listadoDniTipos();
+                    tipos = ((MCliente)this.MCLIENTES).listadoDniTipos();
                     for (String tipo : tipos){
                         ((RegClienteFr)this.VISTAREGCLI).getCbDniTipo().addItem(tipo);
                     }
                     break;
                 case RCCANCELAR:
-                    ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
-                    ((RegClienteFr)this.VISTAREGCLI).dispose();
+                    ((RegClienteFr)this.VISTAREGCLI).cierraVista();
+                    System.out.println(cliente.getApellido());
                     this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
-                    ((SelClienteFr)this.VISTASELCLI).setVisible(true);
+                    ((SelClienteFr)this.VISTASELCLI).iniciaVista();
                     break;
-                case SCCARGAR:
-                    modeloTabla.setRowCount(0);
-                    modeloTabla.fireTableDataChanged();
-                    listadoClientes = ((MCliente)this.MODELO).listarClientes();
-                    for (ClienteDTO cli : listadoClientes){
-                        modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
+                case RTCARGAR:
+                    List<EspecialidadDTO> especialidades = ((MEspecialidad)this.MESPECIALIDADES).listarEspecialidades();
+                    for (EspecialidadDTO esp : especialidades){
+                        ((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().addItem(esp.getNombre());
                     }
-                    //((SelClienteFr)this.VISTASELCLI).setVisible(true);
-                    break; 
-                case SCNUEVOCLI:
-                    ((SelClienteFr)this.VISTASELCLI).setVisible(false);
-                    ((SelClienteFr)this.VISTASELCLI).dispose();
-                    ((RegClienteFr)this.VISTAREGCLI).iniciaVista();
-                    break;
-                case SCSELCLI:
-                    if (((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow() >= 0){
-                        int row = ((SelClienteFr)this.VISTASELCLI).getTblClientes().getSelectedRow();
-                        int numDni = (int)modeloTabla.getValueAt(row, 1);
-                        String tipo = (String)modeloTabla.getValueAt(row, 2);
-                        cliente = ((MCliente)this.MODELO).buscarCliente(tipo, numDni);
-                        ((RegTurnoFr)this.VISTAREGTURNO).setCliente(cliente.getNombre()
-                                +" "+cliente.getApellido()
-                                +", "+cliente.getDniTipo()
-                                +"= "+cliente.getDniNumero());
-                        ((SelClienteFr)this.VISTASELCLI).setVisible(false);
-                        ((SelClienteFr)this.VISTASELCLI).dispose();
-                        
-                        ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
-                    }
-                    break;
-                case SCFILTCLI:
-                    modeloTabla.setRowCount(0);
-                    modeloTabla.fireTableDataChanged();
-                    filtro = (String)((SelClienteFr)this.VISTASELCLI).getFiltro();
-                    listadoClientes = ((MCliente)this.MODELO).listarClientes(filtro);
-                    for (ClienteDTO cli : listadoClientes){
-                        modeloTabla.addRow(new Object[]{cli.getNombre()+" "+cli.getApellido(), cli.getDniNumero(),cli.getDniTipo()});
-                    }
-                    break;
-                case SCCANCELAR:
-                    ((SelClienteFr)this.VISTASELCLI).setVisible(false);
-                    ((SelClienteFr)this.VISTASELCLI).dispose();
-                    ((RegClienteFr)this.VISTAREGCLI).dispose();
                     break;
                 case RTCANCELAR:
-                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
-                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCANCELAR.toString()));
-                    ((RegTurnoFr)this.VISTAREGTURNO).dispose();
+                    ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
+                    System.exit(0);
                     break;
                 case RTSIGUIENTE:
-                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
-                    ((RegTurnoFr)this.VISTAREGTURNO).dispose();
-                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(true);
+                    if (!(((RegTurnoFr)this.VISTAREGTURNO)).clienteSeleccionado()){
+                        JOptionPane.showMessageDialog(((RegTurnoFr)this.VISTAREGTURNO),"Debe seleccionar un cliente para continuar","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    else if (((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getItemAt(0) == "El cliente no tiene vehículo registrado"){
+                        JOptionPane.showMessageDialog(((RegTurnoFr)this.VISTAREGTURNO),"Debe seleccionar un vehículo para continuar","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    else{
+                        String velSel = (String)((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getSelectedItem();
+                        vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(velSel.substring(0, velSel.indexOf(":")));
+                        especialidad = ((MEspecialidad)this.MESPECIALIDADES).buscarEspecialidad((String)((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().getSelectedItem());
+                        ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
+                        ((SelAgendaFr)this.VISTASELAGENDA).iniciaVista();
+                    }
                     break;
                 case RTEXAMCLI:
-                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
+                    ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
                     this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
-                    ((SelClienteFr)this.VISTASELCLI).setVisible(true);
+                    ((SelClienteFr)this.VISTASELCLI).iniciaVista();
                     break;
                 case RTNUEVOVEHI:
-                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(false);
-                    ((RegTurnoFr)this.VISTAREGTURNO).dispose();
-                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(true);
+                    ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setPrevious((RegTurnoFr)this.VISTAREGTURNO);
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
+                    break;
+                case SACARGAR:
                     break;
                 case SAACEPTAR:
-                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
-                    ((SelAgendaFr)this.VISTASELAGENDA).dispose();
-                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
+                    ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
+                    ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
                     break;
                 case SACANCELAR:
-                    ((SelAgendaFr)this.VISTASELAGENDA).setVisible(false);
-                    ((SelAgendaFr)this.VISTASELAGENDA).dispose();
-                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
+                    ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
+                    ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
                     break;
                 case RVREGISTRAR:
-                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(false);
-                    ((RegVehiculoFr)this.VISTAREGVEHICULO).dispose();
-                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
+                    
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
                     break;
                 case RVCANCELAR:
-                    ((RegVehiculoFr)this.VISTAREGVEHICULO).setVisible(false);
-                    ((RegVehiculoFr)this.VISTAREGVEHICULO).dispose();
-                    ((RegTurnoFr)this.VISTAREGTURNO).setVisible(true);
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
+                    ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
+                    break;
+                case RVCARGAR:
+                    List<CompSegurosDTO> companias = ((MCompSeguros)this.MCOMPSEGUROS).listarComp();
+                    for (CompSegurosDTO comp : companias){
+                        ((RegVehiculoFr)this.VISTAREGVEHICULO).getCmbCompanias().addItem(comp.getNombre());
+                    }
                     break;
             }
             
@@ -197,12 +296,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getSource() instanceof JTextField){
-            this.actionPerformed(new ActionEvent(this,0,InterfazVistaSelCliente.Operacion.SCFILTCLI.toString()));
-        }
-        else { 
-            verificarInputTxt(e);
-        }
+        verificarInputTxt(e);
     }
 
     public void verificarInputTxt(KeyEvent e) {

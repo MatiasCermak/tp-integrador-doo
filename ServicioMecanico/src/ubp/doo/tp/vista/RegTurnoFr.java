@@ -7,13 +7,11 @@ package ubp.doo.tp.vista;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import ubp.doo.tp.controlador.Controlador;
-import ubp.doo.tp.vista.InterfazVistaFlujoRegTurno;
 /**
  *
  * @author chino
  */
 public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTurno{
-
     /**
      * Creates new form NewJFrame
      */
@@ -27,7 +25,7 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         }
         return instancia;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +51,7 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         setMinimumSize(null);
         setResizable(false);
 
+        tfCliente.setEditable(false);
         tfCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfClienteActionPerformed(evt);
@@ -88,11 +87,7 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         btnNuevo.setText("Nuevo");
         btnNuevo.setActionCommand("RTNUEVOVEHI");
 
-        cmbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Especialidad");
-
-        cmbVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,12 +192,20 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
         this.btnSiguiente.addActionListener(c);
         this.btnNuevo.addActionListener(c);
         this.btnExaminar.addActionListener(c);
+        c.actionPerformed(new ActionEvent(this,0,InterfazVistaRegTurno.Operacion.RTCARGAR.toString()));
     }
     
     @Override
     public void iniciaVista() {
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+    
+    @Override
+    public void cierraVista(){
+        setVisible(false);
+        limpiar();
+        dispose();
     }
     
     @Override
@@ -216,5 +219,23 @@ public class RegTurnoFr extends javax.swing.JFrame implements InterfazVistaRegTu
     
     public void setCliente(String cliente){
         this.tfCliente.setText(cliente);
+    }
+
+    public javax.swing.JComboBox getCmbEspecialidad() {
+        return this.cmbEspecialidad;
+    }
+    
+    public javax.swing.JComboBox getCmbVehiculos(){
+        return this.cmbVehiculo;
+    }
+    
+    public boolean clienteSeleccionado(){
+        return (!this.tfCliente.getText().isBlank());
+    }
+    
+    @Override
+    public void limpiar(){
+        this.tfCliente.setText("");
+        this.cmbVehiculo.removeAllItems();
     }
 }
