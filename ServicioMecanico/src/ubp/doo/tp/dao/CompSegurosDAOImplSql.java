@@ -22,7 +22,7 @@ public class CompSegurosDAOImplSql implements CompSegurosDAO{
 
     private ConexionSql conexion = null;
     
-    public void CompSegurosDAO(){
+    public CompSegurosDAOImplSql(){
         conexion = ConexionSql.getInstancia();
     }
     
@@ -108,7 +108,6 @@ public class CompSegurosDAOImplSql implements CompSegurosDAO{
                     + "FROM comp_seguros c "
                     + "ORDER BY c.nombre";
             sentencia = con.prepareStatement(sql);
-            
             rs = sentencia.executeQuery();
             
             while (rs.next()){
