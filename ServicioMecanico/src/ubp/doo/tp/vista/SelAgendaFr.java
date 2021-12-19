@@ -192,7 +192,6 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
     public void setControlador(Controlador c) {
         this.btnCancelar.addActionListener(c);
         this.btnAceptar.addActionListener(c);
-        c.actionPerformed(new ActionEvent(this,0,InterfazVistaSelAgenda.Operacion.SACARGAR.toString()));
     }
     
     @Override
@@ -234,5 +233,9 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
     
     public javax.swing.JComboBox getCmbHorario(){
         return this.cmbHorario;
+    }
+    
+    public javax.swing.JComboBox getCmbMecanicos(){
+        return this.cmbMecanico;
     }
 }

@@ -11,12 +11,17 @@ import ubp.doo.tp.dto.EspecialidadDTO;
 import ubp.doo.tp.dto.VehiculoDTO;
 import ubp.doo.tp.dto.AgendaDTO;
 import ubp.doo.tp.dto.CompSegurosDTO;
+import ubp.doo.tp.dto.MecanicoDTO;
+import ubp.doo.tp.dto.TurnoDTO;
 //Importar modelos a utilizar
 import ubp.doo.tp.modelo.MCliente;
 import ubp.doo.tp.modelo.MEspecialidad;
 import ubp.doo.tp.modelo.Modelo;
 import ubp.doo.tp.modelo.MVehiculo;
 import ubp.doo.tp.modelo.MCompSeguros;
+import ubp.doo.tp.modelo.MMecanico;
+import ubp.doo.tp.modelo.MAgenda;
+import ubp.doo.tp.modelo.MTurno;
 //Importar vistas (frames) a itilizar
 import ubp.doo.tp.vista.SelClienteFr;
 import ubp.doo.tp.vista.RegClienteFr;
@@ -58,6 +63,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
     private int hora;
     private AgendaDTO agenda;
     private EspecialidadDTO especialidad;
+    private TurnoDTO turno;
     
     
     public ControladorFlujoRegTurnos(){}
@@ -237,8 +243,8 @@ public class ControladorFlujoRegTurnos extends Controlador {
                         JOptionPane.showMessageDialog(((RegTurnoFr)this.VISTAREGTURNO),"Debe seleccionar un vehículo para continuar","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else{
-                        String velSel = (String)((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getSelectedItem();
-                        vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(velSel.substring(0, velSel.indexOf(":")));
+                        String vehSel = (String)((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getSelectedItem();
+                        vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(vehSel.substring(0, vehSel.indexOf(":")));
                         System.out.println(vehiculo.getModelo());
                         especialidad = ((MEspecialidad)this.MESPECIALIDADES).buscarEspecialidad((String)((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().getSelectedItem());
                         System.out.println(especialidad.getNombre());
@@ -258,14 +264,45 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
                     break;
                 case SACARGAR:
+                    List<MecanicoDTO> mecanicos = ((MMecanico)this.MMECANICOS).listarMecanicos(especialidad.getId_especialidad());
+                    if (mecanicos == null || mecanicos.isEmpty()){
+                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,"No hay mecánicos cargados para esta especialidad","Error", JOptionPane.ERROR_MESSAGE);
+                        ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
+                        this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.RTCARGAR.toString()));
+                        ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    }
+                    else{
+                        for (MecanicoDTO m : mecanicos){
+                            ((SelAgendaFr)this.VISTASELAGENDA).getCmbMecanicos().addItem(Integer.toString(m.getId_empleado())+":"+m.getNombre()+", "+m.getApellido());
+                        }
+                    }
                     break;
                 case SAACEPTAR:
+                    hora = ((SelAgendaFr)this.VISTASELAGENDA).getHoraTurno();
+                    fecha = ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno();
+                    //turno = new TurnoDTO();
                     ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
                     ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
                     break;
                 case SACANCELAR:
                     ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
                     ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    break;
+                case SALISTARHORAS:
+                    String mSel = (String)((SelAgendaFr)this.VISTASELAGENDA).getCmbMecanicos().getSelectedItem();
+                    int id_empleado = Integer.parseInt(mSel.substring(0, mSel.indexOf(":")));
+                    List<Integer> horas = ((MAgenda)this.MAGENDAS).listarHorasDisponibles(id_empleado, ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno());
+                    agenda = ((MAgenda)this.MAGENDAS).buscarAgenda(id_empleado);
+                    if (horas == null || horas.isEmpty()){
+                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,
+                                "El empleado seleccionado no tiene turnos disponibles en la fecha elegida.",
+                                "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        for (int h : horas){
+                            ((SelAgendaFr)this.VISTASELAGENDA).getCmbMecanicos().addItem(h);
+                        }
+                    }
                     break;
                 case RVREGISTRAR:
                     String matr = ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula();
