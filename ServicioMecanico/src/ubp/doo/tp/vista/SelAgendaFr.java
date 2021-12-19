@@ -69,6 +69,12 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
 
         cmbMecanico.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
 
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,7 +106,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
                                         .addComponent(jLabel4)
                                         .addComponent(cmbHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addGap(56, 56, 56))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,6 +134,11 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+        if("date".equals(evt.getPropertyName())){
+        }
+    }//GEN-LAST:event_jDateChooser1PropertyChange
 
     /**
      * @param args the command line arguments

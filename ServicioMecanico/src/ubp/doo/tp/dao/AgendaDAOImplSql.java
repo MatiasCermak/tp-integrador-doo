@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import ubp.doo.tp.dto.AgendaDTO;
 
@@ -184,6 +187,62 @@ public class AgendaDAOImplSql implements AgendaDAO{
     @Override
     public void cerrarConexion() {
         conexion.desconectar();
+    }
+    
+    @Override
+    public List<Integer> listarHorasDisponibles(int id_empleado, Date fecha){
+        List<Integer> resultado = new ArrayList<Integer>();
+        PreparedStatement sentencia = null;
+        ResultSet rs = null;
+        Connection con = null;
+        
+        try{
+            con = conexion.getConnection();
+            String sql = "SELECT id_agenda, hora_inicio, hora_fin "
+                    + "FROM agendas "
+                    + "WHERE id_empleado = ?";
+            sentencia = con.prepareStatement(sql);
+            sentencia.setInt(1, id_empleado);
+            
+            rs = sentencia.executeQuery();
+            int horaI = 0, horaF = 0, id_agenda = 0;
+            List<Integer> ocupadas = new ArrayList<Integer>();
+            if (rs.next()){
+                horaI = rs.getInt("hora_inicio");
+                horaF = rs.getInt("hora_fin");
+                id_agenda = rs.getInt("id_agenda");
+            }
+            
+            sql = "SELECT hora "
+                    + "FROM turnos "
+                    + "WHERE id_agenda = ? AND fecha = ?";
+            sentencia = con.prepareStatement(sql);
+            sentencia.setInt(1, id_agenda);
+            sentencia.setDate(2, new java.sql.Date(fecha.getTime()));
+            
+            rs = sentencia.executeQuery();
+            
+            while(rs.next()){
+                ocupadas.add(rs.getInt("hora"));
+            }
+            int hora = horaI;
+            while (hora < horaF){
+                if (!ocupadas.contains(hora)){
+                    resultado.add(hora);
+                }
+                hora++;
+            }
+        }catch (SQLException e){
+            System.err.println(e);
+        }finally{
+            try{
+                sentencia.close();
+                rs.close();
+            }catch(SQLException ex){
+                System.err.println(ex);
+            }
+        }
+        return resultado;
     }
     
 }
