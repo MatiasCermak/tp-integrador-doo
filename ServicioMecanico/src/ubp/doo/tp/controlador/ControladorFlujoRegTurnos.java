@@ -296,9 +296,13 @@ public class ControladorFlujoRegTurnos extends Controlador {
                         ((MVehiculo)this.MVEHICULOS).insertarVehiculo(vehiculo);
                         
                         ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
-                        if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == (RegTurnoFr)this.VISTAREGTURNO)
+                        if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == (RegTurnoFr)this.VISTAREGTURNO){
                             this.actionPerformed(new ActionEvent((RegVehiculoFr)this.VISTAREGVEHICULO,0,InterfazVistaFlujoRegTurno.Operacion.RTCARGAR.toString()));
-                        ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
+                        }
+                        else{
+                            ((SelClienteFr)this.VISTASELCLI).iniciaVista();
+                        }
                     }
                     break;
                 case RVCANCELAR:
