@@ -5,6 +5,8 @@
  */
 package ubp.doo.tp.modelo;
 
+import java.util.Date;
+import java.util.List;
 import ubp.doo.tp.dao.AgendaDAO;
 import ubp.doo.tp.dao.FabricaDAO;
 import ubp.doo.tp.dto.AgendaDTO;
@@ -24,6 +26,7 @@ public class MAgenda implements Modelo {
     	agendaDao = fabricaDao.getAgendaDao();
     }
     
+
     public AgendaDTO buscarAgenda(int id_empleado) {
     	AgendaDTO agenda = agendaDao.buscarAgenda(id_empleado);
     	return agenda;

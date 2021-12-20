@@ -205,6 +205,7 @@ public class AgendaDAOImplSql implements AgendaDAO{
             sentencia.setInt(1, id_empleado);
             
             rs = sentencia.executeQuery();
+            
             int horaI = 0, horaF = 0, id_agenda = 0;
             List<Integer> ocupadas = new ArrayList<Integer>();
             if (rs.next()){
@@ -219,12 +220,14 @@ public class AgendaDAOImplSql implements AgendaDAO{
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1, id_agenda);
             sentencia.setString(2, new java.sql.Date(fecha.getTime()).toString());
-            
+
             rs = sentencia.executeQuery();
-            
+
             while(rs.next()){
                 ocupadas.add(rs.getInt("hora"));
+                
             }
+            System.out.println(id_agenda);
             int hora = horaI;
             while (hora < horaF){
                 if (!ocupadas.contains(hora)){

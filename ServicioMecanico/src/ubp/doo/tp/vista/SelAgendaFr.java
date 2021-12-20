@@ -72,7 +72,7 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
 
         cmbMecanico.setFont(new java.awt.Font("Ubuntu", 0, 20)); // NOI18N
 
-        jDateTurno.setDateFormatString("yyyy/mm/dd");
+        jDateTurno.setDateFormatString("yyyy/MM/dd");
         jDateTurno.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jDateTurnoPropertyChange(evt);
