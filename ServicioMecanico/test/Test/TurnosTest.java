@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
+import org.junit.After;
 import ubp.doo.tp.dto.TurnoDTO;
 import ubp.doo.tp.modelo.Modelo;
 import ubp.doo.tp.modelo.MTurno;
@@ -55,6 +55,13 @@ public class TurnosTest {
         assertTrue(result);
     }
     
+    @After
+    public void tearDown() throws ParseException{
+        String sDate="2021/12/20";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        turno2.setFecha(formatter.parse(sDate));
+        boolean result = ((MTurno)mod).modificarTurno(turno2);
+    }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
