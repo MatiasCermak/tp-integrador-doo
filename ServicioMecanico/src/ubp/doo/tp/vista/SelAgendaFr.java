@@ -10,6 +10,7 @@ import ubp.doo.tp.controlador.Controlador;
 import ubp.doo.tp.vista.InterfazVistaSelAgenda;
 import java.util.Date;
 import java.util.List;
+import com.toedter.calendar.JDateChooser;
 /**
  *
  * @author jeresabelox
@@ -237,5 +238,9 @@ public class SelAgendaFr extends javax.swing.JFrame implements InterfazVistaSelA
     
     public javax.swing.JComboBox getCmbMecanicos(){
         return this.cmbMecanico;
+    }
+    
+    public JDateChooser getDateChooser(){
+        return this.jDateTurno;
     }
 }

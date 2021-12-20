@@ -38,6 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.util.Date;
+import com.toedter.calendar.JDateChooser;
 /**
  *
  * @author tomas
@@ -215,6 +216,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     break;
                 case RTCARGAR:
                     ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().removeAllItems();
+                    ((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().removeAllItems();
                     List<EspecialidadDTO> especialidades = ((MEspecialidad)this.MESPECIALIDADES).listarEspecialidades();
                     for (EspecialidadDTO esp : especialidades){
                         ((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().addItem(esp.getNombre());
@@ -245,9 +247,8 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     else{
                         String vehSel = (String)((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getSelectedItem();
                         vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(vehSel.substring(0, vehSel.indexOf(":")));
-                        System.out.println(vehiculo.getModelo());
                         especialidad = ((MEspecialidad)this.MESPECIALIDADES).buscarEspecialidad((String)((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().getSelectedItem());
-                        System.out.println(especialidad.getNombre());
+                        this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SACARGAR.toString()));
                         ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
                         ((SelAgendaFr)this.VISTASELAGENDA).iniciaVista();
                     }
@@ -264,6 +265,9 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
                     break;
                 case SACARGAR:
+                    ((SelAgendaFr)this.VISTASELAGENDA).getCmbMecanicos().removeAllItems();
+                    ((SelAgendaFr)this.VISTASELAGENDA).getCmbHorario().removeAllItems();
+                    ((SelAgendaFr)this.VISTASELAGENDA).getDateChooser().setDate(null);
                     List<MecanicoDTO> mecanicos = ((MMecanico)this.MMECANICOS).listarMecanicos(especialidad.getId_especialidad());
                     if (mecanicos == null || mecanicos.isEmpty()){
                         JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,"No hay mecánicos cargados para esta especialidad","Error", JOptionPane.ERROR_MESSAGE);
@@ -289,18 +293,21 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
                     break;
                 case SALISTARHORAS:
+                    ((SelAgendaFr)this.VISTASELAGENDA).getCmbHorario().removeAllItems();
                     String mSel = (String)((SelAgendaFr)this.VISTASELAGENDA).getCmbMecanicos().getSelectedItem();
-                    int id_empleado = Integer.parseInt(mSel.substring(0, mSel.indexOf(":")));
-                    List<Integer> horas = ((MAgenda)this.MAGENDAS).listarHorasDisponibles(id_empleado, ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno());
-                    agenda = ((MAgenda)this.MAGENDAS).buscarAgenda(id_empleado);
-                    if (horas == null || horas.isEmpty()){
-                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,
-                                "El empleado seleccionado no tiene turnos disponibles en la fecha elegida.",
-                                "Advertencia", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    else{
-                        for (int h : horas){
-                            ((SelAgendaFr)this.VISTASELAGENDA).getCmbMecanicos().addItem(h);
+                    if (mSel != null) {
+                        int id_empleado = Integer.parseInt(mSel.substring(0, mSel.indexOf(":")));
+                        List<Integer> horas = ((MAgenda)this.MAGENDAS).listarHorasDisponibles(id_empleado, ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno());
+                        agenda = ((MAgenda)this.MAGENDAS).buscarAgenda(id_empleado);
+                        if (horas == null || horas.isEmpty()){
+                            JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,
+                                    "El empleado seleccionado no tiene turnos disponibles en la fecha elegida.",
+                                    "Advertencia", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        else{
+                            for (int h : horas){
+                                ((SelAgendaFr)this.VISTASELAGENDA).getCmbHorario().addItem(h);
+                            }
                         }
                     }
                     break;

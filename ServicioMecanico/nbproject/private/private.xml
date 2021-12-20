@@ -3,22 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/test/Test/ListarClientesTest.java</file>
-=======
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/AgendaDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/modelo/MMecanico.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/MecanicoDAOImplSql.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/ClienteDAO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dto/MecanicoDTO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/modelo/MCliente.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/MecanicoDAO.java</file>
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/dao/ClienteDAOImplSql.java</file>
->>>>>>> bettic
-            <file>file:/media/tomas/Datos/FACULTAD/4º%20-%20DOO/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/SelAgendaFr.java</file>
->>>>>>> 7b16c3c6d84fb22e99e04d33a5e9d8e00f093dea
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/vista/SelAgendaFr.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/facade/FacadeInitOpciones.java</file>
+            <file>file:/home/chino/Documentos/Java/tp-integrador-doo/ServicioMecanico/src/ubp/doo/tp/controlador/ControladorFlujoRegTurnos.java</file>
         </group>
     </open-files>
 </project-private>
