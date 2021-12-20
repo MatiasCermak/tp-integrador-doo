@@ -360,7 +360,6 @@ public class TurnoDAOImplSql implements TurnoDAO {
         ResultSet rs = null;
         Connection con = null;
         boolean result = false;
-        
         try{
             con = conexion.getConnection();
             String sql = "SELECT id_ficha FROM fichas WHERE id_turno = ?";

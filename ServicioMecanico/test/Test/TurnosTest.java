@@ -26,17 +26,15 @@ public class TurnosTest {
             
     @Test
     public void testCreateTurno() throws ParseException {
-        Modelo mod = new MTurno();  
+        Modelo mod = new MTurno();
         boolean result = ((MTurno)mod).insertarTurno(turno);
-        
-        System.out.println(this.turno.getId_turno());
         assertTrue(result);
     }
     
     @Test
     public void testUpdateTurno() throws ParseException {
         Modelo mod = new MTurno();
-        
+        turno = ((MTurno)mod).buscarTurno(turno.getId_agenda(), turno.getFecha(), turno.getHora());
         String sDate="2021/12/22";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         this.turno.setFecha(formatter.parse(sDate));
@@ -46,7 +44,8 @@ public class TurnosTest {
     
     @Test
     public void testDeleteTurno() throws ParseException {
-        Modelo mod = new MTurno();  
+        Modelo mod = new MTurno();
+        turno = ((MTurno)mod).buscarTurno(turno.getId_agenda(), turno.getFecha(), turno.getHora());
         boolean result = ((MTurno)mod).eliminarTurno(turno);
         
         assertTrue(result);
