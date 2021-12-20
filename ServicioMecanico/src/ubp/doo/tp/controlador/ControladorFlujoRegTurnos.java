@@ -133,7 +133,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
         String filtro;
         boolean resultado = false;
         String nombre, apellido;
-        int dni;
+        int dni, opc = -1;
         String tipo_dni;
         List<ClienteDTO> listadoClientes;
         List<String> tipos;
@@ -177,8 +177,15 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     }
                     break;
                 case SCCANCELAR:
-                    ((SelClienteFr)this.VISTASELCLI).cierraVista();
-                    ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    opc = JOptionPane.showConfirmDialog((SelClienteFr)this.VISTASELCLI, 
+                            "No ha seleccionado ningún cliente.\n"
+                                    + "Si cancela no podrá registrar un turno hasta que seleccione un cliente.\n"
+                                    + "Desea continuar?", "Advertencia", 
+                                    JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (opc == 0){
+                        ((SelClienteFr)this.VISTASELCLI).cierraVista();
+                        ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    }
                     break;
                 case RCNUEVOVEHI:
                     if ((((RegClienteFr)this.VISTAREGCLI).getTxtApellido().getText().length() <= 0)
@@ -212,9 +219,14 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     }
                     break;
                 case RCCANCELAR:
-                    ((RegClienteFr)this.VISTAREGCLI).cierraVista();
-                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
-                    ((SelClienteFr)this.VISTASELCLI).iniciaVista();
+                    opc = JOptionPane.showConfirmDialog((RegClienteFr)this.VISTAREGCLI,
+                            "Está seguro que desea volver atrás?", "Confirmación", 
+                            JOptionPane.YES_NO_OPTION);
+                    if (opc == 0){
+                        ((RegClienteFr)this.VISTAREGCLI).cierraVista();
+                        this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
+                        ((SelClienteFr)this.VISTASELCLI).iniciaVista();
+                    }
                     break;
                 case RTCARGAR:
                     ((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().removeAllItems();
@@ -236,23 +248,37 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     }
                     break;
                 case RTCANCELAR:
-                    ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
-                    System.exit(0);
+                    opc = JOptionPane.showConfirmDialog((RegTurnoFr)this.VISTAREGTURNO, 
+                            "Está seguro que desea salir de esta opción?", 
+                            "Confirmación", JOptionPane.YES_NO_OPTION);
+                    if (opc == 0){
+                        ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
+                        JOptionPane.showMessageDialog((RegTurnoFr)this.VISTAREGTURNO, 
+                                "Saliendo del sistema.", "Saliendo...", JOptionPane.INFORMATION_MESSAGE);
+                        System.exit(0);
+                    }
                     break;
                 case RTSIGUIENTE:
                     if (!(((RegTurnoFr)this.VISTAREGTURNO)).clienteSeleccionado()){
-                        JOptionPane.showMessageDialog(((RegTurnoFr)this.VISTAREGTURNO),"Debe seleccionar un cliente para continuar","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(((RegTurnoFr)this.VISTAREGTURNO),
+                                "Debe seleccionar un cliente para continuar","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else if (((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getItemAt(0) == "El cliente no tiene vehículo registrado"){
-                        JOptionPane.showMessageDialog(((RegTurnoFr)this.VISTAREGTURNO),"Debe seleccionar un vehículo para continuar","Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(((RegTurnoFr)this.VISTAREGTURNO),
+                                "Debe seleccionar un vehículo para continuar","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     else{
-                        String vehSel = (String)((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getSelectedItem();
-                        vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(vehSel.substring(0, vehSel.indexOf(":")));
-                        especialidad = ((MEspecialidad)this.MESPECIALIDADES).buscarEspecialidad((String)((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().getSelectedItem());
-                        this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SACARGAR.toString()));
-                        ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
-                        ((SelAgendaFr)this.VISTASELAGENDA).iniciaVista();
+                        opc = JOptionPane.showConfirmDialog((RegTurnoFr)this.VISTAREGTURNO, 
+                                "Confirma los datos seleccionados", "Confirmación", 
+                                JOptionPane.YES_NO_OPTION);
+                        if (opc == 0){
+                            String vehSel = (String)((RegTurnoFr)this.VISTAREGTURNO).getCmbVehiculos().getSelectedItem();
+                            vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(vehSel.substring(0, vehSel.indexOf(":")));
+                            especialidad = ((MEspecialidad)this.MESPECIALIDADES).buscarEspecialidad((String)((RegTurnoFr)this.VISTAREGTURNO).getCmbEspecialidad().getSelectedItem());
+                            this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SACARGAR.toString()));
+                            ((RegTurnoFr)this.VISTAREGTURNO).cierraVista();
+                            ((SelAgendaFr)this.VISTASELAGENDA).iniciaVista();
+                        }
                     }
                     break;
                 case RTEXAMCLI:
@@ -284,25 +310,33 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     }
                     break;
                 case SAACEPTAR:
-                    hora = ((SelAgendaFr)this.VISTASELAGENDA).getHoraTurno();
-                    fecha = ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno();
-                    turno = new TurnoDTO(-1,cliente.getDniNumero(), cliente.getDniTipo(),
-                        vehiculo.getMatricula(), fecha, hora, 1, 0, agenda.getId_agenda());
-                    if (((MTurno)this.MTURNOS).insertarTurno(turno)){
-                        ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
-                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,
-                                "Turno registrado correctamente", "Éxito",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        System.out.println(turno);
-                        ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
-                    }
-                    else{
-                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA, 
-                                "Hubo un error al intentar registrar el turno",
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                    opc = JOptionPane.showConfirmDialog((SelAgendaFr)this.VISTASELAGENDA, 
+                            "Confirma los datos seleccionados?", "Confirmación", 
+                            JOptionPane.YES_NO_OPTION);
+                    if (opc == 0){
+                        hora = ((SelAgendaFr)this.VISTASELAGENDA).getHoraTurno();
+                        fecha = ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno();
+                        turno = new TurnoDTO(-1,cliente.getDniNumero(), cliente.getDniTipo(),
+                            vehiculo.getMatricula(), fecha, hora, 1, 0, agenda.getId_agenda());
+                        if (((MTurno)this.MTURNOS).insertarTurno(turno)){
+                            ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
+                            JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,
+                                    "Turno registrado correctamente", "Éxito",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            System.out.println(turno);
+                            ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA, 
+                                    "Hubo un error al intentar registrar el turno",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                     break;
                 case SACANCELAR:
+                    opc = JOptionPane.showConfirmDialog((SelAgendaFr)this.VISTASELAGENDA, 
+                            "Está seguro que desea volver a la pantalla anterior?", 
+                            "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
                     ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
                     break;
@@ -326,43 +360,61 @@ public class ControladorFlujoRegTurnos extends Controlador {
                     }
                     break;
                 case RVREGISTRAR:
-                    String matr = ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula();
-                    vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(matr);
-                    if (((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMarca().isBlank() &&
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula().isBlank() &&
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtModelo().isBlank() &&
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getIntPoliza() == 0){
-                        JOptionPane.showMessageDialog(((RegVehiculoFr)this.VISTAREGVEHICULO), 
-                                "Debe completar todos los campos para continuar", "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                    }
-                    else if (vehiculo != null){
-                        JOptionPane.showMessageDialog(((RegVehiculoFr)this.VISTAREGVEHICULO),
-                                "La matrícula ingresada ya se encuentra registrada en otro vehículo",
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                    else{
-                        if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == ((RegClienteFr)this.VISTAREGCLI)){
-                            ((MCliente)this.MCLIENTES).insertarCliente(cliente);
+                    opc = JOptionPane.showConfirmDialog((RegVehiculoFr)this.VISTAREGVEHICULO, 
+                            "Confirma los datos ingresados?", "Confirmación", 
+                            JOptionPane.YES_NO_OPTION);
+                    if (opc == 0){
+                        String matr = ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula();
+                        vehiculo = ((MVehiculo)this.MVEHICULOS).buscarVehiculo(matr);
+                        if (((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMarca().isBlank() &&
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula().isBlank() &&
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtModelo().isBlank() &&
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getIntPoliza() == 0){
+                            JOptionPane.showMessageDialog(((RegVehiculoFr)this.VISTAREGVEHICULO), 
+                                    "Debe completar todos los campos para continuar", "Error",
+                                    JOptionPane.ERROR_MESSAGE);
                         }
-                        int id_comp_seguros = ((MCompSeguros)this.MCOMPSEGUROS).buscarComp(
-                            (String)((RegVehiculoFr)this.VISTAREGVEHICULO).getCmbCompanias().getSelectedItem()).getId_comp_seguros();
-                        vehiculo = new VehiculoDTO(id_comp_seguros, 
-                            cliente.getDniNumero(), cliente.getDniTipo(), 
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getIntPoliza(), 
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula(),
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtModelo(),
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMarca());
-                        ((MVehiculo)this.MVEHICULOS).insertarVehiculo(vehiculo);
-                        
-                        ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
-                        if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == (RegTurnoFr)this.VISTAREGTURNO){
-                            this.actionPerformed(new ActionEvent((RegVehiculoFr)this.VISTAREGVEHICULO,0,InterfazVistaFlujoRegTurno.Operacion.RTCARGAR.toString()));
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
+                        else if (vehiculo != null){
+                            JOptionPane.showMessageDialog(((RegVehiculoFr)this.VISTAREGVEHICULO),
+                                    "La matrícula ingresada ya se encuentra registrada en otro vehículo",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
                         }
                         else{
-                            this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
-                            ((SelClienteFr)this.VISTASELCLI).iniciaVista();
+                            if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == ((RegClienteFr)this.VISTAREGCLI)){
+                                boolean success = ((MCliente)this.MCLIENTES).insertarCliente(cliente);
+                                if (!success){
+                                    JOptionPane.showMessageDialog((RegVehiculoFr)this.VISTAREGVEHICULO,
+                                            "Ha ocurrido un error registrando el cliente",
+                                            "Error", JOptionPane.ERROR_MESSAGE);
+                                    ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
+                                    this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
+                                    ((SelClienteFr)this.VISTASELCLI).iniciaVista();
+                                }
+                            }
+                            int id_comp_seguros = ((MCompSeguros)this.MCOMPSEGUROS).buscarComp(
+                                (String)((RegVehiculoFr)this.VISTAREGVEHICULO).getCmbCompanias().getSelectedItem()).getId_comp_seguros();
+                            vehiculo = new VehiculoDTO(id_comp_seguros, 
+                                cliente.getDniNumero(), cliente.getDniTipo(), 
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getIntPoliza(), 
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula(),
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtModelo(),
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMarca());
+                            boolean success = ((MVehiculo)this.MVEHICULOS).insertarVehiculo(vehiculo);
+                            if (!success){
+                                JOptionPane.showMessageDialog((RegVehiculoFr)this.VISTAREGVEHICULO,
+                                            "Ha ocurrido un error registrando el vehículo",
+                                            "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+
+                            ((RegVehiculoFr)this.VISTAREGVEHICULO).cierraVista();
+                            if (((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious() == (RegTurnoFr)this.VISTAREGTURNO){
+                                this.actionPerformed(new ActionEvent((RegVehiculoFr)this.VISTAREGVEHICULO,0,InterfazVistaFlujoRegTurno.Operacion.RTCARGAR.toString()));
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
+                            }
+                            else{
+                                this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
+                                ((SelClienteFr)this.VISTASELCLI).iniciaVista();
+                            }
                         }
                     }
                     break;
