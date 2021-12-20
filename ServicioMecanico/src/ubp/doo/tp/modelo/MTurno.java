@@ -5,8 +5,11 @@
  */
 package ubp.doo.tp.modelo;
 
+import java.util.Date;
+import java.util.List;
 import ubp.doo.tp.dao.FabricaDAO;
 import ubp.doo.tp.dao.TurnoDAO;
+import ubp.doo.tp.dto.TurnoDTO;
 
 /**
  *
@@ -19,5 +22,41 @@ public class MTurno implements Modelo {
     public MTurno() {
     	fabricaDao = FabricaDAO.getFactory("SqlFabricaDAO");
     	turnoDao = fabricaDao.getTurnoDao();
+    }
+    
+    public TurnoDTO buscarTurno(int id_agenda, Date fecha, int hora){
+        return turnoDao.buscarTurno(id_agenda, fecha, hora);
+    }
+    
+    public List<TurnoDTO> listarTurnos(Date fecha){
+        return turnoDao.listarTurnos(fecha);
+    }
+    
+    public List<TurnoDTO> listarTurnos(int id_agenda){
+        return turnoDao.listarTurnos(id_agenda);
+    }
+    
+    public List<TurnoDTO> listarTurnos(int id_agenda, Date fecha){
+        return turnoDao.listarTurnos(id_agenda, fecha);
+    }
+    
+    public List<TurnoDTO> listarTurnos(Date fecha, int hora){
+        return turnoDao.listarTurnos(fecha, hora);
+    }
+    
+    public List<TurnoDTO> listarTurnos(){
+        return turnoDao.listarTurnos();
+    }
+    
+    public boolean insertarTurno(TurnoDTO turno){
+        return turnoDao.insertarTurno(turno);
+    }
+    
+    public boolean modificarTurno(TurnoDTO turno){
+        return turnoDao.modificarTurno(turno);
+    }
+    
+    public boolean eliminarTurno(TurnoDTO turno){
+        return turnoDao.eliminarTurno(turno);
     }
 }
