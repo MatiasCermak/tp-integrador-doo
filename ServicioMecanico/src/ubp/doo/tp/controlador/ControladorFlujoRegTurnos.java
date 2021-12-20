@@ -347,6 +347,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                             ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
                         }
                         else{
+                            this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
                             ((SelClienteFr)this.VISTASELCLI).iniciaVista();
                         }
                     }
