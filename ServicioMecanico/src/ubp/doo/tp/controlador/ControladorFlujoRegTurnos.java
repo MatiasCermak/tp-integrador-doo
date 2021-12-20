@@ -196,10 +196,12 @@ public class ControladorFlujoRegTurnos extends Controlador {
                             JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"El "+tipo_dni+" ingresado ya se encuentra registrado","Error",JOptionPane.ERROR_MESSAGE);
                         }
                         else {
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).setTxtCliente(tipo_dni+":"+((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()+" - "+nombre+","+apellido);
-                            ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).setPrevious((RegClienteFr)this.VISTAREGCLI);
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
+                            if (JOptionPane.showConfirmDialog((RegClienteFr)this.VISTAREGCLI, "Confirma los datos ingresados", "Confirmación", JOptionPane.YES_NO_OPTION) == 0){
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).setTxtCliente(tipo_dni+":"+((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()+" - "+nombre+","+apellido);
+                                ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).setPrevious((RegClienteFr)this.VISTAREGCLI);
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
+                            }
                         }
                     }
                     break;
