@@ -196,10 +196,12 @@ public class ControladorFlujoRegTurnos extends Controlador {
                             JOptionPane.showMessageDialog(((RegClienteFr)this.VISTAREGCLI),"El "+tipo_dni+" ingresado ya se encuentra registrado","Error",JOptionPane.ERROR_MESSAGE);
                         }
                         else {
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).setTxtCliente(tipo_dni+":"+((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()+" - "+nombre+","+apellido);
-                            ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).setPrevious((RegClienteFr)this.VISTAREGCLI);
-                            ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
+                            if (JOptionPane.showConfirmDialog((RegClienteFr)this.VISTAREGCLI, "Confirma los datos ingresados", "Confirmación", JOptionPane.YES_NO_OPTION) == 0){
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).setTxtCliente(tipo_dni+":"+((RegClienteFr)this.VISTAREGCLI).getTxtDni().getText()+" - "+nombre+","+apellido);
+                                ((RegClienteFr)this.VISTAREGCLI).setVisible(false);
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).setPrevious((RegClienteFr)this.VISTAREGCLI);
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).iniciaVista();
+                            }
                         }
                     }
                     break;
@@ -284,9 +286,21 @@ public class ControladorFlujoRegTurnos extends Controlador {
                 case SAACEPTAR:
                     hora = ((SelAgendaFr)this.VISTASELAGENDA).getHoraTurno();
                     fecha = ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno();
-                    //turno = new TurnoDTO();
-                    ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
-                    ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    turno = new TurnoDTO(-1,cliente.getDniNumero(), cliente.getDniTipo(),
+                        vehiculo.getMatricula(), fecha, hora, 1, 0, agenda.getId_agenda());
+                    if (((MTurno)this.MTURNOS).insertarTurno(turno)){
+                        ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
+                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,
+                                "Turno registrado correctamente", "Éxito",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        System.out.println(turno);
+                        ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA, 
+                                "Hubo un error al intentar registrar el turno",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case SACANCELAR:
                     ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
@@ -295,7 +309,8 @@ public class ControladorFlujoRegTurnos extends Controlador {
                 case SALISTARHORAS:
                     ((SelAgendaFr)this.VISTASELAGENDA).getCmbHorario().removeAllItems();
                     String mSel = (String)((SelAgendaFr)this.VISTASELAGENDA).getCmbMecanicos().getSelectedItem();
-                    if (mSel != null) {
+
+                    if (mSel != null){
                         int id_empleado = Integer.parseInt(mSel.substring(0, mSel.indexOf(":")));
                         List<Integer> horas = ((MAgenda)this.MAGENDAS).listarHorasDisponibles(id_empleado, ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno());
                         agenda = ((MAgenda)this.MAGENDAS).buscarAgenda(id_empleado);
@@ -347,6 +362,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                             ((RegVehiculoFr)this.VISTAREGVEHICULO).getPrevious().iniciaVista();
                         }
                         else{
+                            this.actionPerformed(new ActionEvent(this,0,InterfazVistaFlujoRegTurno.Operacion.SCCARGAR.toString()));
                             ((SelClienteFr)this.VISTASELCLI).iniciaVista();
                         }
                     }
