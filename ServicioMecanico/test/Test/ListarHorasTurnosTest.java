@@ -31,7 +31,7 @@ public class ListarHorasTurnosTest {
 
         
         List<Integer> result = ((MAgenda)mod).listarHorasDisponibles(1,date);
-        assertEquals(7,result.size());
+        assertEquals(9,result.size());
     }
     
     @Test
