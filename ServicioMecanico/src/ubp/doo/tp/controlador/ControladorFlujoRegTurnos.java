@@ -284,9 +284,21 @@ public class ControladorFlujoRegTurnos extends Controlador {
                 case SAACEPTAR:
                     hora = ((SelAgendaFr)this.VISTASELAGENDA).getHoraTurno();
                     fecha = ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno();
-                    //turno = new TurnoDTO();
-                    ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
-                    ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    turno = new TurnoDTO(-1,cliente.getDniNumero(), cliente.getDniTipo(),
+                        vehiculo.getMatricula(), fecha, hora, 1, 0, agenda.getId_agenda());
+                    if (((MTurno)this.MTURNOS).insertarTurno(turno)){
+                        ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
+                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA,
+                                "Turno registrado correctamente", "Éxito",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        System.out.println(turno);
+                        ((RegTurnoFr)this.VISTAREGTURNO).iniciaVista();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog((SelAgendaFr)this.VISTASELAGENDA, 
+                                "Hubo un error al intentar registrar el turno",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                     break;
                 case SACANCELAR:
                     ((SelAgendaFr)this.VISTASELAGENDA).cierraVista();
