@@ -227,7 +227,7 @@ public class AgendaDAOImplSql implements AgendaDAO{
                 ocupadas.add(rs.getInt("hora"));
                 
             }
-            System.out.println(id_agenda);
+
             int hora = horaI;
             while (hora < horaF){
                 if (!ocupadas.contains(hora)){

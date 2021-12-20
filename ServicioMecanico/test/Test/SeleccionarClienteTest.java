@@ -35,7 +35,7 @@ public class SeleccionarClienteTest {
     public void testSeleccionarCliente2()
     {
         Modelo mod = new MCliente();
-        ClienteDTO cliente=((MCliente)mod).buscarCliente("DNI",22345687);
+        ClienteDTO cliente=((MCliente)mod).buscarCliente("DNI",00000001);
         
         assertNull(cliente);
     }

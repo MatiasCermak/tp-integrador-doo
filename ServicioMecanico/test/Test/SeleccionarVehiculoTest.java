@@ -38,4 +38,14 @@ public class SeleccionarVehiculoTest {
     
         assertEquals(2, result.size());
     }
+    
+    @Test
+    public void testSeleccionarVehiculo3() {
+        
+        Modelo mod = new MVehiculo();
+        
+        List<VehiculoDTO> result =  ((MVehiculo)mod).listarVehiculos("DNI", 00000001);
+    
+        assertEquals(0, result.size());
+    }
 }

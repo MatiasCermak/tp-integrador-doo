@@ -343,6 +343,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                 case SALISTARHORAS:
                     ((SelAgendaFr)this.VISTASELAGENDA).getCmbHorario().removeAllItems();
                     String mSel = (String)((SelAgendaFr)this.VISTASELAGENDA).getCmbMecanicos().getSelectedItem();
+
                     if (mSel != null){
                         int id_empleado = Integer.parseInt(mSel.substring(0, mSel.indexOf(":")));
                         List<Integer> horas = ((MAgenda)this.MAGENDAS).listarHorasDisponibles(id_empleado, ((SelAgendaFr)this.VISTASELAGENDA).getFechaTurno());
