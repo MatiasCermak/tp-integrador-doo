@@ -385,7 +385,8 @@ public class TurnoDAOImplSql implements TurnoDAO {
         }finally{
             try{
                 sentencia.close();
-                rs.close();
+                if (rs!=null)
+                    rs.close();
             }catch(SQLException ex){
                 System.err.println(ex);
             }

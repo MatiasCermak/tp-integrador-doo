@@ -51,12 +51,12 @@ public class FlujoRegistrarTurnoFuncionalTest  {
         catch (FindFailed ex){
             fail(AgregarClienteButton + " no fue encontrado");
         }
-        try{
+        /*try{
             screen.find(NombreTextField);
         }
         catch (FindFailed ex){
             fail(NombreTextField + " no fue encontrado");
-        }
+        }*/
         screen.type(Nombre);
         try{
             screen.click(ApellidoTextField);
