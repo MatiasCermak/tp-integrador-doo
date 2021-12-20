@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
  *
  * @author chino
  */
-public class ListarTurnosTest {
+public class ListarHorasTurnosTest {
     
     @Test
     public void testListarTurnos1() throws ParseException {

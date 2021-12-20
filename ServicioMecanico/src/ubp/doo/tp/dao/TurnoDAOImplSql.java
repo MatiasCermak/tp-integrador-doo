@@ -13,6 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -109,7 +113,7 @@ public class TurnoDAOImplSql implements TurnoDAO {
     }
 
     @Override
-    public List<TurnoDTO> listarTurnos(int id_agenda) {
+    public List<TurnoDTO> listarTurnos(int id_agenda){
         PreparedStatement sentencia = null;
         ResultSet rs = null;
         Connection con = null;
@@ -131,11 +135,13 @@ public class TurnoDAOImplSql implements TurnoDAO {
             while (rs.next()){
                 turnos.add(new TurnoDTO(rs.getInt("id_turno"),rs.getInt("dni"),
                     rs.getString("tipo"),rs.getString("matricula"),  
-                    rs.getDate("fecha"), rs.getInt("hora"), rs.getInt("estado"), 
+                    new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha")), rs.getInt("hora"), rs.getInt("estado"), 
                     rs.getInt("asistencia"), id_agenda));
             }
         }catch(SQLException e){
             System.err.println(e);
+        } catch (ParseException ex) {
+            Logger.getLogger(TurnoDAOImplSql.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try{
                 sentencia.close();
@@ -227,9 +233,9 @@ public class TurnoDAOImplSql implements TurnoDAO {
         
         return turnos;
     }
-
+    
     @Override
-    public List<TurnoDTO> listarTurnos() {
+    public List<TurnoDTO> listarTurnos(){
         PreparedStatement sentencia = null;
         ResultSet rs = null;
         Connection con = null;
@@ -249,11 +255,13 @@ public class TurnoDAOImplSql implements TurnoDAO {
             while (rs.next()){
                 turnos.add(new TurnoDTO(rs.getInt("id_turno"),rs.getInt("dni"),
                     rs.getString("tipo"),rs.getString("matricula"), 
-                    rs.getDate("fecha"), rs.getInt("hora"), rs.getInt("estado"),
+                    new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("fecha")), rs.getInt("hora"), rs.getInt("estado"),
                     rs.getInt("asistencia"), rs.getInt("id_agenda")));
             }
         }catch(SQLException e){
             System.err.println(e);
+        } catch (ParseException ex) {
+            Logger.getLogger(TurnoDAOImplSql.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             try{
                 sentencia.close();
@@ -262,7 +270,6 @@ public class TurnoDAOImplSql implements TurnoDAO {
                 System.err.println(ex);
             }
         }
-        
         return turnos;
     }
 

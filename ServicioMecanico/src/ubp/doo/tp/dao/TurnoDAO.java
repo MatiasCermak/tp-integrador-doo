@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ubp.doo.tp.dao;
+import java.text.ParseException;
 import ubp.doo.tp.dto.TurnoDTO;
 import java.util.List;
 import java.util.Date;
