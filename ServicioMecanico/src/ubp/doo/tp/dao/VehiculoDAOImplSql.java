@@ -45,14 +45,14 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
 
             rs = sentencia.executeQuery();
 
-            int poliza;
+            String poliza;
             String marca;
             String modelo;
             int dni;
             String dniTipo;
 
             if (rs.next()){
-                poliza = rs.getInt("poliza");
+                poliza = rs.getString("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
                 dni = rs.getInt("dni");
@@ -75,7 +75,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
     }
 
     @Override
-    public VehiculoDTO buscarVehiculo(int id_comp_seguros, int poliza) {
+    public VehiculoDTO buscarVehiculo(int id_comp_seguros, String poliza) {
         Connection con = null;
         PreparedStatement sentencia = null;
         ResultSet rs = null;
@@ -90,7 +90,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
                         + "WHERE v.id_comp_seguro = ? AND v.poliza = ?";
             sentencia = con.prepareStatement(sql);
             sentencia.setInt(1, id_comp_seguros);
-            sentencia.setInt(2, poliza);
+            sentencia.setString(2, poliza);
 
             rs = sentencia.executeQuery();
 
@@ -142,7 +142,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             rs = sentencia.executeQuery();
 
             String matr;
-            int poliza;
+            String poliza;
             String marca;
             String modelo;
             int dni, id_comp_seguro;
@@ -150,7 +150,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
 
             while (rs.next()){
                 matr = rs.getString("matricula");
-                poliza = rs.getInt("poliza");
+                poliza = rs.getString("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
                 dni = rs.getInt("dni");
@@ -194,13 +194,14 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             rs = sentencia.executeQuery();
 
             String matr;
-            int poliza, id_comp_seguro;
+            int id_comp_seguro;
             String marca;
             String modelo;
+            String poliza;
 
             while (rs.next()){
                 matr = rs.getString("matricula");
-                poliza = rs.getInt("poliza");
+                poliza = rs.getString("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
                 id_comp_seguro = rs.getInt("id_comp_seguro");
@@ -241,7 +242,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
             rs = sentencia.executeQuery();
 
             String matr;
-            int poliza;
+            String poliza;
             String marca;
             String modelo;
             String dniTipo;
@@ -249,7 +250,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
 
             while (rs.next()){
                 matr = rs.getString("matricula");
-                poliza = rs.getInt("poliza");
+                poliza = rs.getString("poliza");
                 marca = rs.getString("marca");
                 modelo = rs.getString("modelo");
                 dniTipo = rs.getString("tipo");
@@ -284,7 +285,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
                     + "(SELECT dt.id_dni_tipo FROM dni_tipos dt WHERE dt.tipo = ? LIMIT 1))";
             sentencia = con.prepareStatement(sql);
             sentencia.setString(1, vehiculo.getMatricula());
-            sentencia.setInt(2, vehiculo.getPoliza());
+            sentencia.setString(2, vehiculo.getPoliza());
             sentencia.setString(3, vehiculo.getMarca());
             sentencia.setString(4, vehiculo.getModelo());
             sentencia.setInt(5, vehiculo.getId_comp_seguros());
@@ -324,7 +325,7 @@ public class VehiculoDAOImplSql implements VehiculoDAO {
                     + "id_dni_tipo = (SELECT FIRST dt.id_dni_tipo FROM dni_tipos dt WHERE dt.tipo = ?) "
                     + "WHERE matricula = ?";
             sentencia = con.prepareStatement(sql);
-            sentencia.setInt(1, vehiculo.getPoliza());
+            sentencia.setString(1, vehiculo.getPoliza());
             sentencia.setString(2, vehiculo.getMarca());
             sentencia.setString(3, vehiculo.getModelo());
             sentencia.setInt(4, vehiculo.getId_comp_seguros());

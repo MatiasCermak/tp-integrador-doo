@@ -330,8 +330,7 @@ public class RegVehiculoFr extends javax.swing.JFrame implements InterfazVistaRe
         return this.txtModelo.getText();
     }
     
-    public int getIntPoliza(){
-        int r = 0;
-        return Integer.parseInt(this.txtNumPoliza1.getText());
+    public String getTxtPoliza(){
+        return this.txtNumPoliza1.getText();
     }
 }

@@ -29,7 +29,7 @@ public class MVehiculo implements Modelo {
     	return vehiculo;
     }
     
-    public VehiculoDTO buscarVehiculo(int id_compania, int poliza) {
+    public VehiculoDTO buscarVehiculo(int id_compania, String poliza) {
     	VehiculoDTO vehiculo = vehiculoDao.buscarVehiculo(id_compania, poliza);
     	return vehiculo;
     }

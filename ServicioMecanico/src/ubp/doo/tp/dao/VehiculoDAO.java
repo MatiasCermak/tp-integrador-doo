@@ -15,7 +15,7 @@ public interface VehiculoDAO {
     
     VehiculoDTO buscarVehiculo(String matricula);
     
-    VehiculoDTO buscarVehiculo(int id_comp_seguros, int poliza);
+    VehiculoDTO buscarVehiculo(int id_comp_seguros, String poliza);
     
     List<VehiculoDTO> listarVehiculos();
 

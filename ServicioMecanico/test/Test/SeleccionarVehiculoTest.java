@@ -19,7 +19,7 @@ public class SeleccionarVehiculoTest {
     
     @Test
     public void testSeleccionarVehiculo1() {
-        VehiculoDTO vehiculo = new VehiculoDTO(3,15151515, "DNI", 1515151515, "TEST1", "TestModel", "TestV");
+        VehiculoDTO vehiculo = new VehiculoDTO(3,15151515, "DNI", "1515151515", "TEST1", "TestModel", "TestV");
         Modelo mod = new MVehiculo();
         
         VehiculoDTO result =  ((MVehiculo)mod).buscarVehiculo("TEST1");

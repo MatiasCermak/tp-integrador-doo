@@ -369,7 +369,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                         if (((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMarca().isBlank() &&
                                 ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula().isBlank() &&
                                 ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtModelo().isBlank() &&
-                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getIntPoliza() == 0){
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtPoliza().isBlank()){
                             JOptionPane.showMessageDialog(((RegVehiculoFr)this.VISTAREGVEHICULO), 
                                     "Debe completar todos los campos para continuar", "Error",
                                     JOptionPane.ERROR_MESSAGE);
@@ -395,7 +395,7 @@ public class ControladorFlujoRegTurnos extends Controlador {
                                 (String)((RegVehiculoFr)this.VISTAREGVEHICULO).getCmbCompanias().getSelectedItem()).getId_comp_seguros();
                             vehiculo = new VehiculoDTO(id_comp_seguros, 
                                 cliente.getDniNumero(), cliente.getDniTipo(), 
-                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getIntPoliza(), 
+                                ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtPoliza(), 
                                 ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMatricula(),
                                 ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtModelo(),
                                 ((RegVehiculoFr)this.VISTAREGVEHICULO).getTxtMarca());

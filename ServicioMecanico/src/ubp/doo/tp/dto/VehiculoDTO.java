@@ -20,7 +20,7 @@ public class VehiculoDTO {
     
     private String dniTipo_cliente;
     
-    private int poliza;
+    private String poliza;
     
     private String matricula;
     
@@ -31,7 +31,7 @@ public class VehiculoDTO {
     public VehiculoDTO() {
     }
 
-    public VehiculoDTO(int id_comp_seguros, int dni_cliente, String dniTipo_cliente, int poliza, String matricula, String modelo, String marca) {
+    public VehiculoDTO(int id_comp_seguros, int dni_cliente, String dniTipo_cliente, String poliza, String matricula, String modelo, String marca) {
         this.id_comp_seguros = id_comp_seguros;
         this.dni_cliente = dni_cliente;
         this.dniTipo_cliente = dniTipo_cliente;
@@ -65,11 +65,11 @@ public class VehiculoDTO {
         this.dniTipo_cliente = dniTipo_cliente;
     }
 
-    public int getPoliza() {
+    public String getPoliza() {
         return poliza;
     }
 
-    public void setPoliza(int poliza) {
+    public void setPoliza(String poliza) {
         this.poliza = poliza;
     }
 
