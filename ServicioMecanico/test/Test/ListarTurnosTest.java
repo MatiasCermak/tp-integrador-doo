@@ -33,5 +33,18 @@ public class ListarTurnosTest {
         List<Integer> result = ((MAgenda)mod).listarHorasDisponibles(1,date);
         assertEquals(7,result.size());
     }
+    
+    @Test
+    public void testListarTurnos2() throws ParseException {
+        Modelo mod = new MAgenda();
+        
+        String sDate="2021/12/21";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = formatter.parse(sDate);  
+
+        
+        List<Integer> result = ((MAgenda)mod).listarHorasDisponibles(1,date);
+        assertEquals(10,result.size());
+    }
 
 }
